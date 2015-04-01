@@ -1,0 +1,187 @@
+---
+title: Nantucket Sound Sea Ducks
+author: Adam D. Smith, Benjamin Hofner, Jason E. Osenkowski, Taber Allison, Scott R. McWilliams, and Peter W. C. Paton
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+header-includes:
+  - \usepackage[utf8]{inputenc} 
+  - \usepackage[parfill]{parskip}
+#  - \usepackage{amsmath}
+#  - \usepackage{soul}
+#  - \usepackage{graphicx}
+#  - \usepackage{caption}
+#  - \captionsetup[figure]{labelfont=bf}
+output: 
+  pdf_document:
+#    pandoc_args: [
+#      "--filter", "pandoc-fignos"
+#    ]
+#    toc: true
+#    toc_depth: 3
+#  word_document:  
+fontsize: 12pt
+geometry: margin=1in
+number_sections: true
+documentclass: article
+bibliography: NantucketMS.bib
+csl: ecology.csl
+---
+
+```{r chunk-opts, echo=FALSE}
+# Set some knitr chunk options
+options(width = 250)
+knitr::opts_chunk$set(dev="png", 
+               dev.args=list(type="cairo"),
+               dpi=96,
+               message=FALSE, warning=FALSE, echo=FALSE, 
+               fig.path="./Rpubs/figs/", 
+               cache.path="./Rpubs/cache/")
+```
+
+```{r load-options-data}
+# Aliases and functions
+devtools::source_gist(9216051) # Rprofile.R
+devtools::source_gist(9216061) # various.R
+
+# Necessary packages; other packages will be loaded when other files are sourced
+toLoad = c("Hmisc", "ggplot2", "grid", "gridExtra", "rgdal", 
+           "reshape", "plyr", "dplyr", "gamlss.tr", "gamboostLSS")
+instant_pkgs(toLoad); rm(toLoad)
+
+# Load sea duck data sets
+# This includes:
+#   env.segs - environmental data from all (504) segments on all (30) survey dates; includes
+#              field (length) that indicates the amount of survey effort (if any) on a given
+#              date
+            
+#   obs.final - segment level count summaries for each species/group
+load("../Data/ducks&environment.RData")
+
+# For each group, load/create data sets for various analyses
+# This creates the (1) final survey data set (e.g., coei), (2) zero-truncated
+#   data set (i.e., at least 1 duck observed; e.g., coei_zerotrunc), and 
+#   (3) presence/absence data set (e.g., coei_zero) 
+source("../R/load_sea_duck_data.R")
+```
+
+```{r get_predictions, cache=TRUE, eval=FALSE}
+# For each group, create data for prediction
+# This does two important things: (1) creates the final data set over which 
+#   model predictions are desired (e.g., coei_pred) and (2) calculates the average
+#   of relevant variables (covar_avgs) so that partial effect plots can be placed
+#   on their original scale for easier interpretation
+source("../R/generate_predicted_data_sets.R")
+```
+
+```{r load_rename_models, eval=FALSE}
+# Loading the sea duck occupancy and hurdle models
+source("../R/load_sea_duck_models.R")
+```
+
+Biophysical features at multiple spatial and temporal scales affect the distribution and abundance of vertebrates and their prey (**general citations**). Nonetheless, these key environmental factors have not been revealed for many species that inhabit marine ecosystems despite increasing anthropogenic impacts on these systems (**citations**). The distribution and abundance of top consumers in marine ecosystems, such as sea ducks (Tribe Mergini), are notably understudied. Moreover, current evidence suggests that populations of most species of North American sea ducks are below historic levels with negative or unknown population trends [@Merkel2004; @Cameron2014; @SDJV2014; @Bowman2015].  Thus there exists considerable interest in identifying the biophysical characteristics of the marine environment that influence the distribution and abundance of sea ducks.
+
+At broad spatial scales, the North Atlantic Oscillation can have a major influence on the distribution of sea ducks [@Zipkin2010], and regime shifts in oceanic conditions can also affect sea duck population trends [@Flint2013].  At more localized spatial scales, food availability and quality (Stott and Olson 1973; Guillemette et al. 1993, 1996; Zydelis and Ruskyte 2005, Kirk et al. 2008), preferred food types and foraging strategies (from next paragraph?), substrate characteristics (Zydelis et al. 2006, Loring et al. 2013), ocean depth (Guillemette et al. 1993; Winiarski et al. In press), and anthropogenic disturbances (ferry; shipping activity; Kaiser et al. 2006, SF Bay) can dictate sea duck distribution and abundance.
+
+Although there are many single-species or single-season studies of sea duck distribution and abundance, some of which identify important key env factors, no previous study has used a consistent quantitative approach applied to survey data that evaluates the importance of key env factors in affecting distribution and abundance at multiple spatial and temporal scales ... and maybe bring up the offshore wind energy stuff...??]
+
+Sea ducks forage primarily on benthic invertebrates, with dietary and habitat segregation among species apparently related to differences in body size; smaller species (e.g., Long-tailed Duck *Clangula hyemalis*) tend to have higher energy density diets than larger species (e.g., Black Scoters Melanitta americana, White-winged Scoter (M. fusca), and Common Eider (Somateria mollissima)  (Goudie and Ankney 1986).  
+
+The highest densities of Common Eider occur relatively close to shore over steep slopes (e.g. rocky shallow reefs) where they primarily forage on blue mussels (Mytilus edulis) and sea urchins (Nilsson 1972; Stott and Olson 1973; Goudie and Ankney 1986; Guillemette et al. 1993, 1996; Bustness 1998), although they do exhibit dietary plasticity for a variety of soft-bottomed species at some locations (Merkel et al. 2007). These autoecology studies of various sea duck species during the nonbreeding period suggest that there should be spatial and perhaps temporal segregation in a given area during winter, although . [remainder of the sentence points out what is not known .. And that we will address in this study.]
+
+##Methods
+
+*Aerial transect surveys.*---We conducted aerial surveys throughout an 1,100 km^2^ study area in Nantucket Sound, Massachusetts, USA (Figure 1).  Nantucket Sound is an important wintering area for sea ducks in southern New England [@White2009; @Silverman2013; @Loring2014].  Wind energy development has been fully permitted on 62 km^2^ of Horseshoe Shoal in the northwest portion of the study area (Figure 1). During the winters (late October to mid-April) of 2003-2005, we conducted 30 (2003/2004: 13, 2004/2005: 10, 2005/2006: 7) aerial strip-transect surveys [e.g.,@Pollock2006; @Certain2008] to evaluate sea duck distribution and relative abundance; surveys occurred primarily from mid-November - late March (n = 27), with an occasional October (n = 1) or April (n = 2) survey.  During each survey, we flew along 15 parallel (ca. 2.3 km apart), roughly north-south transects (Figure 1) using a high-wing, twin-engine aircraft (Cessna Skymaster 337) at an average altitude of 152 m (500 ft) and speed of 167 kmh^-1^ (90 kts). This altitude allowed us to identify most birds at the sea surface and reduced the possibility of flushing birds to another part of the study area (i.e., double counting). The airspeed was the slowest at which the aircraft could safely fly. Surveys occurred only on days with wind speeds $\leq$ 15 kts and good visibility (>15 km). All surveys occurred from 0900 to 1600 h (average duration of ~ 2.5 h) to ensure that birds had completed their post-dawn movements but had yet to initiate pre-sunset movements from feeding to roosting areas; this time window also reduced glares due to low sun angles.
+
+On each survey flight, two observers used their unaided eyes to continuously detect individuals or flocks, identifying sea ducks to species with the aid of binoculars as needed. Observers monitored the sea surface on their side of the plane in a ~ 90 m wide transect between ~ 56 - 147 m from the plane; observers could not see beneath the plane out to 56 m on each side of the plane. Our narrow strip width ensured birds were detectable and identifiable with the naked eye and allowed us to avoid situations in which ducks were too abundant or spread over too wide an area to count accurately. This last point was especially relevant because sea ducks occasionally congregated in extremely large flocks or rafts. Moreover, our flight altitude and narrow transect width increased the likelihood that we met that the assumption of homogeneous detection [at least with regards to survey parameters; e.g., @Certain2008] within the strip transect [@Buckland2012].
+
+Observers verbally communicated duck sightings to a recorder, who entered the number of ducks, species, behavior (i.e., on the water or flying), and geographic location into a laptop computer linked to the plane's onboard GPS; we report results only from those ducks observed sitting on the water, not flying. Sea duck species of interest included Common Eider (*Somateria  mollissima*), White-winged Scoter (*Melanitta deglandi*), Surf Scoter (*M. perspicillata*), Black Scoter (*M. americana*), and Long-tailed Duck (*Clangula hyemalis*). However, we considered all scoter species collectively, as it was regularly difficult to identify scoters to species. We excluded from consideration individuals that we could not assign to species (Common Eider and Long-tailed Ducks) or species group (scoters). We subsequently consolidated counts for each species or species group into 2.25km^2^ segments (Figure 1); this resolution (1.5 km x 1.5 km) corresponded approximately to the coarsest level of resolution of biophysical covariates (see below).
+
+```{r studyarea, eval=FALSE}
+# Figure 1 was created using the following script, although for nice formatting
+# in the pdf and Word output we simply link to the final PNG file, below
+source("../R/create_study_area_figure.R")
+```
+
+![Nantucket Sound study area](./Figures/Nantucket_study_area_reduced.png)  
+**Figure 1.** Nantucket Sound, Massachusetts, US study area. The grid indicates the extent of the study area and its division into 504 2.25km^2^ segments. Gray lines indicate all aerial transects flown over the 30 surveys comprising the study. The red polygon in the northwest corner of Nantucket Sound indicates the location of permitted wind energy development on Horseshoe Shoal.
+
+*Covariates.*---We evaluated biophysical covariates expected to influence the distribution and availability of benthic prey or the distribution, abundance, and movements of sea ducks (see Appendix 1). Biophysical covariates could be characterized as strictly spatial or temporal effects (i.e., varying only among segments or within or among winters, respectively) or spatiotemporal effect (i.e., varying among segments and within or among winters; see Appendix 1 **which, though not yet completed, will be a table defining covariates and their abbreviations as used in the model specification**). Additionally, we included three interactions that allowed the effects of three covariates, identified *a priori*, to vary over time within a given winter (see Appendix 1).
+
+*Modeling approach.*---We related spatiotemporal variation in sea duck occupancy (i.e., probability of presence) and abundance to potentially relevant biophysical and spatiotemporal covariates. **Probably should mention and cite the formal framework here -- functional component-wise gradient descent boosting?**  To do so, we applied a negative binomial hurdle model that separately modeled (1) the probability of occurrence of at least one individual (hereafter referred to as the *occupancy model*) in a given segment using an additive logistic regression model) and (2) the abundance of sea ducks in that segment conditional on their presence (hereafter *count model*) using a truncated negative binomial model. The prevalence of zero counts (e.g., `r round(100 * nrow(coei[coei$count == 0,])/nrow(coei))`% of Common Eider segment observations) prompted our use of a hurdle model. We generated separate hurdle models for each sea duck group [i.e., Common Eider, scoters, and Long-tailed Duck; @Zipkin2010].
+
+**The rest of this description is quite important.  We should take great care to explain the relevance of GAMLSS, boosting, early stopping, and stability selection and their relevance, application and benefits.  We can of course reference the appropriate citations for those seeking greatear detail, but we should nonetheless provide a clear account of why this approach was appropriate and prescribed.**
+
+**GAMLSS FIRST:** We used GAMLSS methods [@Rigby2005] to model the zero-truncated negative binomial count models.  GAMLSS methods allowed us to model the mean and the overdispersion parameters of the negative binomial distribution as a function of covariates. The occupancy models in GAMLSS reduced to generalized (logistic) additive models since the binomial distribution contains only a single parameter.
+
+**THEN FUNCTIONAL COMPONENT-WISE BOOSTING:** including what it is (?), our choice to decompose continuous variables into linear baselearners and penalized nonlinear deviations from the linear function [@Kneib2009; @Hofner2011].  Include a sentence about giving all variables the same degrees of freedom.  Mention centering of variables? See [@Hofner2014] for a detailed description of base learners??
+ 
+**THEN EARLY STOPPING:** To prevent overfitting and to minimize the (out-of-bag) prediction error (measured by the negative loglikelihood of each model), we used 25-fold subsampling to determine the optimal stopping iteration for each model (i.e., early stopping). Specifically, we randomly drew (without replacement) 25 samples of size $n/2$ from the original data set. We used these samples to estimate the model and balance of the data in each sample to determine the out-of-bag prediction accuracy (risk).  
+
+**THEN STABILITY SELECTION:** Boosting methods typically produce 'rich' models with many selected variables/baselearners [@Hofner2014a].  Thus, we additionally applied stability selection [@Meinshausen2010; @Shah2013] to identify those variables most commonly selected in each model (i.e., selected on the majority of 100 random subsamples of the data). We set the number of selected variables per boosting model (*q*) to 35 and established an upper bound for the per-family error rate to two [@Meinshausen2010; @Shah2013; see also @Hofner2014a for details in the context of boosting] which, given the 48 baselearners in the occupancy and count models (see equation 1 below), corresponded to an upper bound of $alpha$ = 0.042 for the per-comparison error rate.  Worth mentioning unimodal and r-concavity assumptions?  Probably not... 
+
+The occupancy and count models had the following structure:
+
+\begin{equation}
+\begin{aligned}
+g(\cdot) =  & int + time + f(time) + SSTw + f(SSTw) + SSTm + f(SSTm) + SSTrel +\\
+     & f(SSTrel) + SSTrel \cdot time + f(SSTrel, time) + SBT + f(SBT) + NAOw + \\
+     & depth + f(depth) + depth \cdot time + f(depth, time) + d2land + f(d2land) +\\
+     & chla + f(chla) + cdom + f(cdom) + f(cdom, chla) + meanphi + f(meanphi) +\\
+     & SAR + f(SAR) + tidebmean + f(tidebmean) + tidesd + f(tidesd) + strat +\\
+     & f(strat) + ferry + y2004 + y2005 + xkm + ykm + xkm \cdot ykm +\\
+     &  f(xkm, ykm) + xkm \cdot sTime + ykm \cdot sTime + xkm \cdot ykm \cdot sTime +\\
+     &  f(xkm, ykm) \cdot sTime + obs\_window + f(obs\_window).  
+\end{aligned}
+\end{equation}
+
+In our occupancy models, $g(\cdot)$ is $g(\pi_{\text{sea ducks}})$, the (conditional) occupancy probability of a given duck species or group in a segment and $g$ is the logit link.  In our count models, $g(\cdot)$ took two forms within the GAMLSS framework -- the (conditional) mean count of sea ducks, $g(\mu_{\text{sea ducks}})$, and the (conditional) overdispersion in sea duck counts, $g(\sigma_{\text{sea ducks}})$; $g$ is the log link in both cases.  Baselearners denoted as $f(\cdot)$ (e.g., $f(time)$) indicate the penalized nonlinear deviations from the corresponding linear baselearner (e.g., *time*). An explicit intercept (*int*) was included as a necessary byproduct of our decomposition of baselearners [@Kneib2009; @Hofner2011].  We note that small values in some segments for the *obs_window* variable, our measure of survey effort (see Appendix 1), impaired the estimability of models including *obs_window* as an offset; we thus included it as a covariate.
+
+All analyses were conducted in R [Version 3.1.2; @RCoreTeam2014] with the add-on packages gamboostLSS [@Hofner2014b], mboost [@Hothorn2015], and stabs [@Hofner2015].  The data and code for reproducing this manuscript and analyses is given as an electronic supplement at *TBD*.
+
+## Results
+
+**I'm not sure what is the best way to open the results section.  Benjamin - I welcome any ideas or suggestions**
+
+Occupancy models for all species failed to stop early (see Appendix 2), thus converging on the maximum likelihood estimate.  **brief statement of the implications of convergence/not stopping early.  We won't mention this beyond here**  Conversely, cross-validation prescribed early stopping for both parameters in all count models.  Refer here to Appendix 2 that shows the cross-validation results used to identify the optimal stopping iterations for all models.  Final occupancy models generally contained more covariates than did count models, particularly among stably selected covariates.  Talk about variable selection resulting from component-wise boosting? 
+
+```{r evaluate_models, eval=FALSE, cache=TRUE}
+source("../R/fitted_gamlssHurdle.R")
+COEI_eval <- fitted_gamlssHurdle(COEIocc, COEIcc, coei)
+SCOT_eval <- fitted_gamlssHurdle(SCOTocc, SCOTcc, scot)
+LTDU_eval <- fitted_gamlssHurdle(LTDUocc, LTDUcc, ltdu)
+COEI_r2 <- round(100 * with(COEI_eval, cor(log(obs_count + 1), add_pred)^2))
+SCOT_r2 <- round(100 * with(SCOT_eval, cor(log(obs_count + 1), add_pred)^2))
+LTDU_r2 <- round(100 * with(LTDU_eval, cor(log(obs_count + 1), add_pred)^2))
+#`r COEI_r2`%, `r SCOT_r2`%, and `r LTDU_r2`%
+```
+
+**I also think here is the best place to mention model appropriateness/approximate explanatory power.  For example:** To evaluate the explanatory power of our models for each species group, we calculated the square of the correlation coefficient between the additive predictor from the combined occupancy and conditional count models [see Equation 6 in @Zeileis2008] against the $log$(observed count + 1).  This gives us an approximation of the amount of variation in sea ducks counts accounted for by our models (**CITATION?**).  The Common Eider, scoter, and Long-tailed Duck models explained approximately 15%, 23%, and 18% of the variation in observed (log) sea duck counts, respectively.
+
+*Sea duck occupancy.*---Occupancy models were consistently 'richer' than conditional count models (Figure 2; see below).  The suite of stably-selected covariates associated with occupancy was relatively consistent among sea duck species, despite variation in the form of those associations (Figure 2).  **How much do we want to go on here describing variables and what forms their associations with occupancy take?**  For example, X-Y location of segments, distance to land, within-winter time effects (noting that water depth, SSTrel, and XY position all interact with time), and the survey effort in a given segment are important (non-biophysical) predictors.  Primary movers among biophysical variables included water depth, sediment grain size, SSTrel, and tidal characteristics.  Other effects are less consistent among species.   
+
+**THEN DISCUSS SIMILARITIES/DIFFERENCES SPECIES MAPS, BRIEFLY:** Common Eider were  
+
+```{r covariate_plot, eval=FALSE}
+# Figure 2 was created using the following script, although some manual editing
+# was required to add model column headings.  For nice formatting in the pdf and Word
+# output we simply link to the final PNG file, below.
+source("../R/assemble_covariate_plot.R")
+```
+![Covariate effect plot](./Figures/Covariate_effects.png)  
+**Figure 2.** Partial effects (i.e., covariate effect with all others at their mean) for stably selected covariates in the occupancy (probability of presence) and conditional abundance (mean and overdispersion parameters) of Common Eider (COEI), scoters (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during winters (late October - mid April) 2002 - 2005. Within a model, the magnitude of an effect is comparable among species as the Y-axis (additive predictor) is the same for all univariate plots. The effects of different covariates are not directly comparable because covariates were not standardized. For bivariate plots, the Y-axis reflects the first variable listed in the interaction while the X-axis represents the second variable; color indicates the direction and magnitude of the linear predictor (blacks = negative, reds = positive; darker colors = larger effect). Northing by easting effects are given only at a single time point although these spatial effects occasionally changed over time. For factor variables, only the general association (i.e., positive or negative) with the additive predictor is given.
+
+*Sea duck conditional abundance.*---In contrast to occupancy, fewer covariates associated consistently with the abundance of sea ducks, conditional on their presence, and the suite of stably-selected effects varied markedly among sea duck species (Figure 2).  Among stably-selected effects, only water depth and time (within-winter) showed up as in multiple species.  However, selected variables tended to fall within the suite of those selected in occupancy models.  
+
+Overdispersion in conditional sea duck abundance also varied with biophysical variable in eider and scoter (Figure 2).  Don't need to belabor this other than to point out that sea duck count variability (i.e., overdispersion) varied over the study area and, occasionally, time (but not always; e.g., Long-tailed Ducks).  **Benjamin, what is the ultimate take-home message here?  That the assumption typically made -- overdispersion is fixed -- doesn't always hold in practice and that it can be useful to consider that evariability (overdispersion), not simply the conditional mean, also depends (on some occasions) on covariates?**
+
+```{r occupancy_maps, eval=FALSE}
+# Figures 3 was created using the following code.  However, for nice formatting in the 
+# pdf and Word output we simply link to the final PNG files, below.
+source("../R/NanSound_plot.R")
+```
+![Sea duck occupancy](./Figures/occupancy_maps_reduced.png)  
+**Figure 3.** Predicted occupancy (first row) and conditional abundance (second row) of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) averaged over the 30 survey dates during winters 2002 - 2006. The predicted values were categorized by dividing at the 25th, 50th, and 75th percentiles, with an additional "hot spot" category (darkest color) that identifies the segments containing the top 5th percentile of predictions (i.e., >= 95th percentile). Displayed values represent the average predicted probability of sea duck presence (occupancy) or conditional abundance in a 1.5 km x ca. 180 m transect.
+
+
+
+## Literature cited
+
