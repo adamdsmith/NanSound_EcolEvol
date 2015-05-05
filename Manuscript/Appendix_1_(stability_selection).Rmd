@@ -1,0 +1,78 @@
+---
+header-includes:
+  - \usepackage{lscape}
+  - \newcommand{\blscape}{\begin{landscape}}
+  - \newcommand{\elscape}{\end{landscape}}
+output: 
+  pdf_document:
+fontsize: 12pt
+geometry: margin=1in
+number_sections: true
+documentclass: article
+bibliography: NantucketMS.bib
+csl: ecology.csl
+---
+```{r occ_stabsel_results, echo=FALSE, message=FALSE, warning=FALSE}
+load("../Results_coei/stabs_zero_q35.Rda")
+stabs_zero_q35 <- stabsel(stabs_zero_q35, PFER = 2, assumption = "unimodal")
+coei_stabs_zero <- stabs_zero_q35
+
+load("../Results_scot/stabs_zero_q35.Rda")
+stabs_zero_q35 <- stabsel(stabs_zero_q35, PFER = 2, assumption = "unimodal")
+scot_stabs_zero <- stabs_zero_q35
+
+load("../Results_ltdu/stabs_zero_q35.Rda")
+stabs_zero_q35 <- stabsel(stabs_zero_q35, PFER = 2, assumption = "unimodal")
+ltdu_stabs_zero <- stabs_zero_q35
+```
+
+```{r count_stabsel_results, echo=FALSE}
+load("../Results_coei/stabs_hurdle_q35.Rda")
+stabs_hurdle_q35 <- stabsel(stabs_hurdle_q35, PFER = 2, assumption = "r-concave")
+coei_stabs_hurdle <- stabs_hurdle_q35
+
+load("../Results_scot/stabs_hurdle_q35.Rda")
+stabs_hurdle_q35 <- stabsel(stabs_hurdle_q35, PFER = 2, assumption = "r-concave")
+scot_stabs_hurdle <- stabs_hurdle_q35
+
+load("../Results_ltdu/stabs_hurdle_q35.Rda")
+stabs_hurdle_q35 <- stabsel(stabs_hurdle_q35, PFER = 2, assumption = "r-concave")
+ltdu_stabs_hurdle <- stabs_hurdle_q35
+```
+
+# Appendix 1. Stability selection
+
+## Methods
+
+We applied stability selection [@Meinshausen2010; @Shah2013] to identify base-learners, and thus covariates, that were commonly selected in the majority of 100 random subsamples of the data.  We set the number of selected base-learners per boosting model (*q*) to 35 and established an upper bound of two for the per-family error rate [PFER; @Meinshausen2010; @Shah2013; see also @Hofner2015a for details in the context of boosting] which, given the 48 base-learners in the occupancy and count models (see Equation 1 in manuscript), corresponded to an upper bound of $\alpha$ = `r round(2/48, 3)` for the per-comparison error rate.  **Can you check my calculation?  Also, should we explain why we chose *q* = 35, or describe complementary pairs subsampling and our choice of unimodal vs. r-concavity assumptions for the two model type (occupancy vs. count)?  Any other relevant details to include?**
+
+## Results
+
+### Occupancy models
+
+Given our specifications (*q* = 35; PFER upper-bound = 2), only base-learners selected in all 100 subsamples (i.e., $\hat{\pi}$ = 1) were identified as stable (Figure 1.1).
+
+### Count models
+Given our specifications (*q* = 35; PFER upper-bound = 2), only base-learners selected in at least 90 of the 100 subsamples (i.e., $\hat{\pi}$ = 0.9) were identified as stable; this threshold applies to the selection of base-learners for the conditional mean ($\mu$) and conditional overdispersion ($\sigma$).
+\newpage
+\blscape
+```{r occ_stabsel_plot, echo=FALSE, eval=FALSE}
+# Figure 1.1 was created using the following script, although for nice formatting
+# (and time considerations) we simply link to the final PNG file, below
+source("../R/stability_selection_occupancy_plot.R")
+```
+![Occupancy stability selection](./Figures/stability_selection_occupancy.png)  
+**Figure 1.1** Stability selection using complementary pairs subsampling and unimodality assumption for sea duck occupancy models. The number of selected base-learners in each model run was set to *q* = 35.  Base-learners with selection frequencies above the threshold ($\hat{\pi}$; vertical gray line) were considered stable with upper bound PFER = 2.   
+
+\newpage
+```{r count_stabsel_plot, echo=FALSE, eval=FALSE}
+# Figures 1.2 and 1.3 were created using the following script, although for nice formatting
+# (and time considerations) we simply link to the final PNG file, below
+source("../R/stability_selection_count_plot.R")
+```
+![Count stability selection](./Figures/stability_selection_count.png)  
+**Figure 1.2** Stability selection using complementary pairs subsampling and r-concavity assumption for sea duck conditional count models. The number of selected base-learners in each model run was set to *q* = 35.  Base-learners with selection frequencies above the threshold ($\hat{\pi}$; vertical gray line) were considered stable with upper bound PFER = 2.  Only the top 48 base-learners are illustrated. Brackets indicate the parameter (conditional mean, *mu*, or overdispersion, *sigma*) to which the base-learner applies.
+
+\elscape
+
+## Literature cited
