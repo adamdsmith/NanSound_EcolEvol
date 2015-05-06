@@ -218,7 +218,7 @@ source("../R/map_conditional_abundance.R")
 source("../R/map_overall_abundance.R")
 ```
 ![Sea duck overall abundance](./Figures/overall_abundance_maps_reduced.png)  
-**Figure 5.** Median (first row) and median absolute deviation (MAD; second row) of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) overall abundance (i.e., a function of expected sea duck occupancy and conditional abundance) predicted at 10 dates evenly-spaced from 15 November and 1 April in three winters (2003 - 2005) of aerial surveys in Nantucket Sound.  Predicted values are categorized based on their quartiles; segments with predictions $\geq$ 98th percentile are outlined. Conditional abundance values represent the expected number of sea ducks in a 1.5 km x ca. 180 m transect through the segment.
+**Figure 5.** Median (first row) and median absolute deviation (MAD; second row) of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) overall abundance (i.e., a function of expected sea duck occupancy and conditional abundance) predicted at 10 dates evenly-spaced from 15 November and 1 April in three winters (2003 - 2005) of aerial surveys in Nantucket Sound.  Predicted values are categorized based on their quartiles; segments with predictions $\geq$ 98th percentile are outlined. Conditional abundance values represent the expected number of sea ducks in a 1.5 km x ca. 180 m transect through the segment.  The polygon in the northwest corner of Nantucket Sound indicates the location of permitted wind energy development on Horseshoe Shoal.
 
 \pagebreak
 
