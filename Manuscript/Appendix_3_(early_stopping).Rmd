@@ -27,7 +27,7 @@ source("../R/early_stopping_occupancy_plot.R")
 
 ## Count models
 
-In contrast to occupancy model, bootstrapping prescribed early stopping for both parameters in all count models (Figure 3.2).  **Again, why so many more iterations for the scoter model?**
+In contrast to occupancy model, bootstrapping prescribed early stopping for both parameters in all count models (Figure 3.2).  **Elaborate on** **_why we need more iterations for the scoter model is simply a result from the fact that the scoter model is more complex or at least takes longer to "converge"_**
 
 ```{r early_stopping_count, echo=FALSE, eval=FALSE}
 # Figure 3.2 was created using the following script, although for nice formatting
