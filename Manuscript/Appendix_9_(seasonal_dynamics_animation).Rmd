@@ -1,0 +1,32 @@
+---
+header-includes:
+  - \usepackage{animate}
+output: 
+  pdf_document:
+    keep_tex: true
+fontsize: 12pt
+geometry: margin=1in
+number_sections: true
+documentclass: article
+---
+
+# Appendix 9. Seasonal animation of predicted scoter abundance
+
+To provide an example of the seasonal dynamics that can characterize sea duck abundance in Nantucket Sound, we produce an animation of predicted overall scoter abundance for every other day between 1 November 2005 and 31 March 2006.
+
+```{r, echo=FALSE, eval=FALSE} 
+# Generate the semi-daily data for the animation
+source("../R/create_SCOT_animation_data.R")
+
+# Compose the animation
+source("../R/create_SCOT_animation_data.R")
+```
+
+The code associated with this .Rmd file produces `SCOT_2005_animation.pdf` which contains the final animation.  However, here we manually appended it to this Appendix by incorporating the following code into the associated .tex file and recompiling (see `Appendix_9__seasonal_dynamics_animation_.tex`)
+```{r, echo=TRUE}
+# \begin{figure}
+# \begin{center}
+# \animategraphics[controls, width=0.825\linewidth]{2}{Rplot}{}{}
+# \end{center}
+# \end{figure}
+```
