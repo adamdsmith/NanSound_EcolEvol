@@ -5,21 +5,21 @@ blank_plots <- ggplot_effects(data=0, vars=rep("blank", 2), varTypes = rep("blan
 ## Species conditional overdispersion plots
 # COEI
 coei_c_overd <- NanSound_plot(data=coei_final, z = "c_overd", type = "count", hotspot=2,
-                             label = "COEI", legend.title = "Conditional\nabundance\n(median)")
+                             label = "COEI", legend.title = "Conditional\noverdispersion\n(median)")
 coei_c_overd_mad <- NanSound_plot(data=coei_final, z = "c_overd_mad", type = "count", hotspot=2,
-                                 legend.title = "Conditional\nabundance\n(MAD)")
+                                 legend.title = "Conditional\noverdispersion\n(MAD)")
 
 # SCOT
 scot_c_overd <- NanSound_plot(data=scot_final, z = "c_overd", type = "count", hotspot=2,
-                             label = "SCOT", legend.title = "Conditional\nabundance\n(median)")
+                             label = "SCOT", legend.title = "Conditional\noverdispersion\n(median)")
 scot_c_overd_mad <- NanSound_plot(data=scot_final, z = "c_overd_mad", type = "count", hotspot=2,
-                                 legend.title = "Conditional\nabundance\n(MAD)")
+                                 legend.title = "Conditional\noverdispersion\n(MAD)")
 
 # LTDU
 ltdu_c_overd <- NanSound_plot(data=ltdu_final, z = "c_overd", hotspot=2, type = "count", 
-                             label = "LTDU", legend.title = "Conditional\nabundance\n(median)")
+                             label = "LTDU", legend.title = "Conditional\noverdispersion\n(median)")
 ltdu_c_overd_mad <- NanSound_plot(data=ltdu_final, z = "c_overd_mad", type = "count", hotspot=2,
-                                 legend.title = "Conditional\nabundance\n(MAD)")
+                                 legend.title = "Conditional\noverdispersion\n(MAD)")
 
 # Assemble them
 png(file = "./Figures/conditional_overdispersion_maps.png", width = 18.5, height = 10, 
