@@ -1,0 +1,73 @@
+---
+header-includes:
+  - \usepackage{lscape}
+  - \newcommand{\blscape}{\begin{landscape}}
+  - \newcommand{\elscape}{\end{landscape}}
+output: 
+  pdf_document:
+fontsize: 12pt
+geometry: margin=1in
+number_sections: true
+documentclass: article
+csl: ecology.csl
+---
+```{r load_necessaries, echo=FALSE, message=FALSE, warning=FALSE}
+# Aliases and functions
+devtools::source_gist(9216051) # Rprofile.R
+devtools::source_gist(9216061) # various.R
+
+# Environmental data
+if (!exists("env.segs")) load("../Data/ducks&environment.RData")
+
+# Plotting function
+source("../R/plot_covariate.R")
+```
+
+# Appendix 3. Visualizing covariate distribution
+
+We illustrate the visualization of biophysical covariates used in the construction of sea duck distribution and abundance models in Nantucket Sound.  A custom function (`plot_covariate`) plots, as applicable, the spatial distribution and temporal dynamics of these covariates in the study area.  
+
+The arguments of the `plot_covariate` function allow some flexibility in manipulating the plotted output:
+```{r arguments, echo=FALSE, eval=TRUE}
+args(plot_covariate)
+```
+
+Only a few arguments are likely to be modified in the current context: `z` defines the covariate of interest, and can take any of the following values (see Appendix 2 for definitions): `r paste(paste(names(env.segs)[10:24], collapse = ", "), names(env.segs)[7], sep = ", or ")`.  `plotwind` and `segs` are logicals indicating whether the user would like to plot the permitted wind energy development area or segment boundaries (see Figure 1 in manuscript), respectively.  `agg.seg` allows temporally dynamic (i.e., varying within a winter or among winters) covariate values to be summarized (e.g., average, sum) within each segment; the default is to plot their dynamics, and not summarize, within the study area.  `legend.title` and `legend.size` permit the modification of the legend title and legend size, respectively.  The `scale` option standardizes `z` prior to plotting, and the `diverge` option changes the legend of a continuous covariate to divergent colors on either size of zero, a useful modification for visualizing standardized covariates.
+
+## Spatial covariates
+
+The bathymetry of Nantucket Sound varied only in space, and can be visualized with the default options (Figure 3.1, left panel).  More informatively, perhaps, the standardized depth values can be plotted with a legend scale diverging around zero, as well as a custom legend title and the wind development area indicating (Figure 3.1, right panel), using:
+```{r bathymetry, echo=TRUE, eval=TRUE, message=FALSE, fig.height=3.25, fig.width=3.25, fig.show='hold'}
+plot_covariate("depth") # Figure 3.1, left
+# Figure 3.1, right
+plot_covariate("depth", legend.title = "Scaled\ndepth (m)", 
+               plotwind = TRUE, scale = TRUE, diverge = TRUE)
+```
+Figure 3.1.  Nantucket Sound bathymetry (left) and standardized with a diverging legend scale, custom legend title, and delineated wind development area (right).
+
+## Spatiotemporal covariates
+
+Certain covariates varied spatially within Nantucket Sound but also monthly and/or annually; `plot_covariate` identifies these temporal changes and divides the plot accordingly.  For example, the average sea surface temperature from November through March (SSTw) varied among segments in Nantucket Sound, as well as on an annual basis (Figure 3.2).  Sea surface temperature relative to other segments in a given month (SSTrel) varied spatially, annually, and monthly (Figure 3.3).
+
+\newpage
+\blscape
+```{r SSTw, echo=TRUE, eval=TRUE, message=FALSE, fig.height=3, fig.width=9}
+plot_covariate("SSTw", scale = TRUE, diverge = TRUE) # Figure 3.2
+```
+Figure 3.2.  Spatial and annual variation in standardized sea surface temperature from Novemeber through March (SSTw) in Nantucket Sound. 
+
+\newpage
+```{r SSTrel, echo=TRUE, eval=TRUE, message=FALSE, fig.height=4.5, fig.width=9}
+plot_covariate("SSTrel", segs = FALSE, scale = TRUE, diverge = TRUE) # Figure 3.3
+```
+Figure 3.3.  Spatial, monthly, and annual variation in standardized sea surface temperature relative to other segments (SSTrel) in Nantucket Sound. 
+\elscape
+\newpage
+
+Lastly, it can be useful to aggregate temporally-dynamic covariate values within segments.  For example, the total length of transect surveyed in each segment over the course of this study is obtained with:
+```{r effort, echo=TRUE, eval=TRUE, message=FALSE, fig.height=3.25, fig.width=4.25}
+plot_covariate("length", agg.seg = "sum", 
+               legend.title = "Survey effort\n(km transect)") # Figure 3.4
+```
+
+Figure 3.4.  Total length (km) of strip transects surveyed in 504 2.25km^2^ segments during 30 aerial sea duck surveys in Nantucket Sound.

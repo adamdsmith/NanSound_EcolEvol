@@ -5,15 +5,17 @@ instant_pkgs(toLoad); rm(toLoad)
 
 # Requires raster
 # Load required shapefiles
-if (!exists("seg_poly")) seg_poly <- readOGR("../GIS/Ancillary", "seg_poly")
-if (!exists("MA")) MA <- readOGR("../GIS/Ancillary", "MA_bg")
-if (!exists("wind")) wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundary"), raster:::crs(MA))
+if (!exists("seg_poly")) seg_poly <- readOGR("../GIS/Ancillary", "seg_poly", verbose=FALSE)
+if (!exists("MA")) MA <- readOGR("../GIS/Ancillary", "MA_bg", verbose=FALSE)
+if (!exists("wind")) wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundary", verbose=FALSE),
+                                         raster:::crs(MA))
 
 plot_covariate <- function(z = "depth", data = env.segs, x = "x", y = "y", 
-                           plotwind = FALSE, segs = TRUE, winter = "winter", 
-                           month = "date") {
+                           plotwind = FALSE, segs = TRUE, agg.seg = c(NA, "mean", "sum"),
+                           winter = "winter", month = "date", legend.title = NULL,
+                           legend.size = 10, scale = FALSE, diverge = FALSE) {
   
-  theme_set(theme_bw(base_size = 15))
+  theme_set(theme_bw(base_size = legend.size))
   theme_update(plot.margin = unit(c(0, 0.05, -0.85, -0.85),"line"),
                panel.grid.minor = element_blank(),
                panel.grid.major= element_blank(),
@@ -26,22 +28,31 @@ plot_covariate <- function(z = "depth", data = env.segs, x = "x", y = "y",
                axis.text.y=element_blank(),
                legend.position = 'none')
   
+  agg.seg <- match.arg(agg.seg)
+  
   ## Create data frame
-  tmpDat <- data.frame(x = data[, x], y = data[, y], z = data[, z],
+  tmpDat <- data.frame(x = data[, x], y = data[, y], z = data[, z], seg = data[, "seg"],
                        winter = data[, winter], 
                        month = factor(month(data[, month]),
                                       levels = c(10:12, 1:4),
                                       labels = c(month.abb[10:12], month.abb[1:4])))
+  if (scale) tmpDat$z <- as.numeric(scale(tmpDat$z))
   
   # Check to see if the variable is dynamic and stop if not requested to display
   varybymonth <- any((tmpDat %>% group_by(x, y, winter) %>% summarise(sdev = sd(z)))$sdev > 0, na.rm=TRUE)
   varybywinter <- any((tmpDat %>% group_by(x, y, month) %>% summarise(sdev = sd(z)))$sdev > 0, na.rm=TRUE)
   if(any(varybymonth, varybywinter)) {
     dynamic = TRUE
-  } else {
-    dynamic = FALSE
+    } else {
+      dynamic = FALSE
+    }
+  
+  if (dynamic & !is.na(agg.seg)) {
+    tmpDat <- arrange(unique(data[, c("seg", x, y, z)]), seg); names(tmpDat)[2:4] <- c("x", "y", "z")
+    tmpDat <- ddply(tmpDat, .(x, y, seg), summarise,
+                    z = do.call(agg.seg, list(z)))
   }
-
+       
   # Set map x and y limits
   xlims <- c(374500, 429700)
   ylims <- c(4569125, 4615125)
@@ -55,10 +66,24 @@ plot_covariate <- function(z = "depth", data = env.segs, x = "x", y = "y",
     theme(legend.justification=c(0,0.5), 
           legend.position=c((416000 - xlims[1])/diff(xlims), 0.5)) # enter where legend should start
   
-  if(is.factor(tmpDat[, "z"])) {
-    p <- p + scale_fill_brewer(z, palette = "OrRd") 
+  if (is.null(legend.title)) {
+      if(is.na(agg.seg)) {
+        legend.title <- Cap(z)
+      } else {
+        legend.title <- paste0(Cap(z), "(", agg.seg, ")")
+      }
   } else {
-    p <- p + scale_fill_gradient(z, low = "#fef0d9", high = "#d7301f") 
+    legend.title <- legend.title
+  }
+  
+  if(is.factor(data[, z])) {
+    p <- p + scale_fill_brewer(legend.title, palette = "OrRd") 
+  } else {
+    if (diverge) {
+      p <- p + scale_fill_gradient2(legend.title, low = "black", high = "red")
+    } else {
+      p <- p + scale_fill_gradient(legend.title, low = "#fef0d9", high = "#d7301f") 
+    }
   }
   
   if (segs) p <- p + geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", alpha=0)
@@ -66,7 +91,7 @@ plot_covariate <- function(z = "depth", data = env.segs, x = "x", y = "y",
   if (plotwind) p <- p + geom_polygon(data=wind, aes(long, lat, group=group), 
                                       colour="black", size = 1.5, alpha=0)
   
-  if(dynamic) {
+  if(dynamic & is.na(agg.seg)) {
     if(varybywinter) {
       if(varybymonth) {
         p <- p + facet_grid(winter ~ month) + theme(legend.position = "right")
