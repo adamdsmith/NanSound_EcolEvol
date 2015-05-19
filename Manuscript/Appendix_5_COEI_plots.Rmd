@@ -1,0 +1,114 @@
+---
+output: 
+  pdf_document:
+fontsize: 12pt
+geometry: margin=1in
+number_sections: true
+documentclass: article
+csl: ecology.csl
+---
+
+```{r load, echo=FALSE, message=FALSE, warning=FALSE}
+# Aliases and functions
+devtools::source_gist(9216051) # Rprofile.R
+devtools::source_gist(9216061) # various.R
+
+require(dplyr); require(ggplot2)
+
+## load plotting function
+source("../R/full_effect_plot.R")
+
+## Get covariate means and SDs
+source("../R/create_new_data.R")
+
+## Load sea duck data and relevant models
+source("../R/load_sea_duck_data.R")
+load("C:/Users/Graduate_Student/Documents/Adam's_Stuff/NanSound/Results_coei/zero.rda")
+#load("../Results_coei/zero.Rda")
+COEIocc <- zero
+
+load("C:/Users/Graduate_Student/Documents/Adam's_Stuff/NanSound/Results_coei/hurdle.rda")
+#load("../Results_coei/hurdle.Rda")
+COEIcc <- hurdle
+
+## Set some graphic parameters
+theme_set(theme_bw(base_size = 18))
+theme_update(panel.grid.minor = element_blank(),
+  panel.grid.major= element_blank(),
+  panel.border=element_rect(fill=NA),
+  panel.background= element_blank(),
+  legend.position = 'none')
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
+                      fig.width = 6.5, fig.height=6.5)
+```
+
+# Appendix 5. Common Eider stable covariate effects
+
+Covariate relationships with the occupancy, conditional mean abundance, and conditional
+
+overdispersion of abundance of Common Eiders in Nantucket Sound, Massachusetts, USA.  
+
+Covariate plots are ordered roughly in descending order of the magnitude of their influence
+
+on the additive predictor in each model (or model parameter for count models).  Covariates 
+
+(and any abbreviations) are defined in detail in Appendix 2.
+
+## Occupancy
+```{r occ, out.extra=sprintf('angle=%d', c(90, rep(0, 7)))}
+# xkm, ykm
+full_effect_plot(COEIocc, coei, var = "xkm, ykm", varType = "st", xlab = "Easting (km from center)",
+                 ylab = "Northing (km from center")
+
+vars <- c("SSTm", "meanphi", "obs_window", "cdom", "SAR", "d2land", "y2005")
+xlabs <- c(expression(paste(SST, ", ", monthly~average~(degree*C))),
+           "Sediment grain size (phi)", expression(Survey~effort~(transect~km^2)), 
+           "Chromomorphic dissolved organic matter",
+           "Sea floor surface area:planimetric area", "Distance to land (km)",
+           "Winter (2005)")
+types <- c(rep("uni", 6), "fac")
+
+for (i in 1:length(vars)) {
+  var <- vars[i]
+  xlab <- xlabs[i]
+  type <- types[i]
+  print(full_effect_plot(COEIocc, coei, var, type, xlab = xlab))
+}
+```
+
+## Conditional mean
+```{r mu}
+vars <- c("cdom", "SSTrel", "meanphi", "SAR", "depth", "ferry")
+xlabs <- c("Chromomorphic dissolved organic matter", 
+            expression(paste(SST, ", ", relative~to~other~segments~(degree*C))),
+            "Sediment grain size (phi)", "Sea floor surface area:planimetric area", 
+            "Depth relative to mean sea level (m)","Ferry route within 1 km")
+types <- c(rep("uni", 5), "fac")
+for (i in 1:length(vars)) {
+  var <- vars[i]
+  xlab <- xlabs[i]
+  type <- types[i]
+  print(full_effect_plot(COEIcc, parameter = "mu", var = var, varType = type, xlab = xlab))
+}
+```
+
+## Conditional overdispersion
+```{r sigma, out.extra=sprintf('angle=%d', c(90, rep(0, 5)))}
+full_effect_plot(COEIcc, parameter="sigma", var = "xkm, ykm", varType="bi", 
+                 xlab = "Easting (km from center)",
+                 ylab = "Northing (km from center)")
+
+vars <- c("tidebmean", "depth", "tidesd", "SSTm", "y2004")
+xlabs <- c("Epibenthic tidal velocity (mean; m/s)", "Depth relative to mean sea level (m)",
+            "Epibenthic tidal velocity (standard deviation; m/s)", 
+            expression(paste(SST, ", ", monthly~average~(degree*C))), 
+            "Winter (2004)")
+types <- c(rep("uni", 4), "fac")
+for (i in 1:length(vars)) {
+  var <- vars[i]
+  xlab <- xlabs[i]
+  type <- types[i]
+  print(full_effect_plot(COEIcc, parameter = "sigma", var = var, varType = type, xlab = xlab))
+}
+```
