@@ -19,7 +19,7 @@ To provide an example of the seasonal dynamics that can characterize sea duck ab
 source("../R/create_SCOT_animation_data.R")
 
 # Compose the animation
-source("../R/create_SCOT_animation_data.R")
+source("../R/create_SCOT_animation.R")
 ```
 
 The code associated with this .Rmd file produces `SCOT_2005_animation.pdf` which contains the final animation.  However, here we manually appended it to this Appendix by incorporating the following code into the associated .tex file and recompiling (see `Appendix_9__seasonal_dynamics_animation_.tex`)
