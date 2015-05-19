@@ -21,7 +21,7 @@ drop <- which(!(vars %in% keep))
 varTypes_coei <- varTypes
 varTypes_coei[drop] <- ""
 coei_occ_plot <- ggplot_effects(COEIocc, data = coei, vars = vars, varTypes = varTypes_coei,
-                                ylims=c(-2.5, 2.5))
+                                ylims=c(-2.4, 1.7))
 
 # SCOT
 keep <- c("time", "SSTw", "SSTm", "depth", "d2land", "cdom", "meanphi", "SAR", "xkm, ykm", "obs_window")
@@ -29,7 +29,7 @@ drop <- which(!(vars %in% keep))
 varTypes_scot <- varTypes
 varTypes_scot[drop] <- ""
 scot_occ_plot <- ggplot_effects(SCOTocc, data = scot, vars = vars, varTypes = varTypes_scot,
-                                ylims=c(-2.5, 2.5))
+                                ylims=c(-2.4, 1.7))
 
 # LTDU
 keep <- c("time", "time, depth", "SSTm", "d2land", "tidesd", "y2004", "xkm, ykm", "obs_window")
@@ -37,7 +37,7 @@ drop <- which(!(vars %in% keep))
 varTypes_ltdu <- varTypes
 varTypes_ltdu[drop] <- ""
 ltdu_occ_plot <- ggplot_effects(LTDUocc, data = ltdu, vars = vars, varTypes = varTypes_ltdu, 
-                                ylims=c(-2.5, 2.5))
+                                ylims=c(-2.4, 1.7))
 
 ## CONDITIONAL COUNT - MU & SIGMA FOR EACH SPECIES
 # COEI
@@ -46,14 +46,14 @@ drop <- which(!(vars %in% keep))
 varTypes_coei <- varTypes
 varTypes_coei[drop] <- ""
 coei_mu_plot <- ggplot_effects(COEIcc, parameter = "mu", vars = vars, varTypes = varTypes_coei, 
-                               ylims = c(-1.45, 1.45))
+                               ylims = c(-1, 1.5))
 
 keep <- c("SSTm", "depth", "tidebmean", "tidesd", "y2004", "xkm, ykm")
 drop <- which(!(vars %in% keep))
 varTypes_coei <- varTypes
 varTypes_coei[drop] <- ""
 coei_sigma_plot <- ggplot_effects(COEIcc, parameter = "sigma", vars = vars, varTypes = varTypes_coei, 
-                                  ylims = c(-1.35, 1.35))
+                                  ylims = c(-1.1, 1.35))
 
 #SCOT
 keep <- c("time", "SSTrel", "d2land", "meanphi", "xkm, ykm")
@@ -61,14 +61,14 @@ drop <- which(!(vars %in% keep))
 varTypes_scot <- varTypes
 varTypes_scot[drop] <- ""
 scot_mu_plot <- ggplot_effects(SCOTcc, parameter = "mu", vars = vars, varTypes = varTypes_scot,
-                               ylims = c(-1.45, 1.45))
+                               ylims = c(-1, 1.5))
 
 keep <- c("SSTrel", "meanphi", "SAR", "tidesd", "y2004", "y2005")
 drop <- which(!(vars %in% keep))
 varTypes_scot <- varTypes
 varTypes_scot[drop] <- ""
 scot_sigma_plot <- ggplot_effects(SCOTcc, parameter = "sigma", vars = vars, varTypes = varTypes_scot, 
-                                  ylims = c(-1.35, 1.35))
+                                  ylims = c(-1.1, 1.35))
 
 #LTDU
 keep <- c("SSTm", "time, depth", "xkm, ykm")
@@ -76,14 +76,14 @@ drop <- which(!(vars %in% keep))
 varTypes_ltdu <- varTypes
 varTypes_ltdu[drop] <- ""
 ltdu_mu_plot <- ggplot_effects(LTDUcc, parameter = "mu", vars = vars, varTypes = varTypes_ltdu, 
-                               ylims = c(-1.45, 1.45))
+                               ylims = c(-1, 1.5))
 
 keep <- c("strat")
 drop <- which(!(vars %in% keep))
 varTypes_ltdu <- varTypes
 varTypes_ltdu[drop] <- ""
 ltdu_sigma_plot <- ggplot_effects(LTDUcc, parameter = "sigma", vars = vars, varTypes = varTypes_ltdu, 
-                                  ylims = c(-1.35, 1.35))
+                                  ylims = c(-1.1, 1.35))
 
 ## CREATE "PLOTS" WITH ROW LABELS
 labels <- c("North Atlantic Oscillation (Dec - Mar)", "Time (day of season)", "Water depth", 
