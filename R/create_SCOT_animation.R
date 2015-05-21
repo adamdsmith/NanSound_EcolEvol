@@ -23,7 +23,36 @@ if (!exists("wind")) wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundar
 xlims <- c(374500, 425700)
 ylims <- c(4569125, 4615125)
 
-make_anim <- function(tmpDat) {
+## Animate occupancy
+anim_occup <- function(tmpDat) {
+  
+  threshold <- quantile(tmpDat$occup, probs = 0.98)
+  which_segs <- tmpDat$seg[which(tmpDat$occup >= threshold)]
+  
+  tmpDat$occup <- cut2(tmpDat$occup, cuts = c(0, 0.25, 0.5, 0.75, 1), digits = 2)
+  levels(tmpDat$occup) <- c("< 25%", "25 - 50%", "50 - 75%", "> 75%")
+  
+  p <- ggplot() + ggtitle("Scoter estimated occupancy: winter 2005-2006") +
+    geom_polygon(data=MA, aes(long, lat, group=group), colour = element_blank(), fill="gray85") +
+    geom_tile(data=tmpDat, aes(x=x, y=y, fill=occup)) +
+    coord_equal() +
+    coord_cartesian(xlim = xlims, ylim = ylims) + 
+    theme(legend.justification=c(0,0.5), 
+          legend.position=c((416000 - xlims[1])/diff(xlims), 0.5)) + # enter where legend should start
+    scale_fill_brewer("Occupancy\n(predicted %)", palette = "OrRd") +
+    geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", alpha=0) +
+    geom_polygon(data=wind, aes(long, lat, group=group),
+                 colour="black", size = 1.5, alpha=0) +
+    geom_polygon(data = subset(seg_poly, seg %in% which_segs), 
+                 aes(long, lat, group=group), colour = "gray20", size=1.25, alpha=0) +
+    annotate("text", x = xlims[1] + 0.02*diff(xlims), y = ylims[2] - 0.02*diff(ylims), 
+             label = format(unique(tmpDat$date), format = "%d %b %Y"), hjust=0, vjust=1, size=10)
+  print(p)
+  
+}
+
+## Animation of long-term abundance
+anim_abund <- function(tmpDat) {
     
     threshold <- quantile(tmpDat$ltabund, probs = 0.98)
     which_segs <- tmpDat$seg[which(tmpDat$ltabund >= threshold)]
@@ -50,12 +79,25 @@ make_anim <- function(tmpDat) {
     
 }
 
+
+# Create occupancy animation
 saveLatex({
+  
+  lapply(dlply(scot_anim, .(date)), anim_occup)
+  
+}, interval = 0.3, img.name = "occup_anim", ani.dev = "pdf", ani.type = "pdf", 
+ani.width = 9, ani.height = 8, latex.filename = "SCOT_2005_occup_animation",
+documentclass = paste("\\documentclass{article}", 
+                      "\\usepackage[margin=0.5in,landscape]{geometry}", sep = "\n"),
+ani.opts="controls, width=0.5\\linewidth")
 
-  lapply(dlply(scot_anim, .(date)), make_anim)
-
-  }, interval = 0.5, ani.dev = "pdf", ani.type = "pdf", 
-  ani.width = 8, ani.height = 7, latex.filename = "SCOT_2005_animation",
-  documentclass = paste("\\documentclass{article}", 
-                        "\\usepackage[margin=0.5in,landscape]{geometry}", sep = "\n"),
-  ani.opts="controls, width=0.825\\linewidth")
+# Create long-term abundance animation
+saveLatex({
+  
+  lapply(dlply(scot_anim, .(date)), anim_abund)
+  
+}, interval = 0.3, img.name = "abund_anim", ani.dev = "pdf", ani.type = "pdf", 
+ani.width = 9, ani.height = 8, latex.filename = "SCOT_2005_abund_animation",
+documentclass = paste("\\documentclass{article}", 
+                      "\\usepackage[margin=0.5in,landscape]{geometry}", sep = "\n"),
+ani.opts="controls, width=0.85\\linewidth")

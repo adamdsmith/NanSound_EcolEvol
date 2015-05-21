@@ -79,5 +79,6 @@ pred_data <- left_join(pred_data, yearly_vars)
 pred_data <- left_join(pred_data, all_ssts)
 scot_anim <- pred_data
 
+scot_anim$occup <- predict(SCOTocc, newdata=scot_anim, type = "response")
 scot_anim$ltabund <- exp(predict.gamlssHurdle(SCOTocc, SCOTcc, scot_anim)$add_pred)
 
