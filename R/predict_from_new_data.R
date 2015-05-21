@@ -27,32 +27,32 @@ ltdu_pred$ltabund <- exp(predict.gamlssHurdle(LTDUocc, LTDUcc, ltdu_pred)$add_pr
 # COEI
 coei_final <- ddply(coei_pred, .(seg, x, y, obs_window), summarise,
                     occup = median(occ),
-                    occup_mad = mad(occ),
+                    occup_mad_m = mad(occ)/median(occ) * 100,
                     c_abund = median(abund),
-                    c_abund_mad = mad(abund),
+                    c_abund_mad_m = mad(abund)/median(abund) * 100,
                     c_overd = median(overd),
-                    c_overd_mad = mad(overd),
+                    c_overd_mad_m = mad(overd)/median(overd) * 100,
                     lt_abund = median(ltabund),
-                    lt_abund_mad = mad(ltabund))
+                    lt_abund_mad_m = mad(ltabund)/median(ltabund) * 100)
 
 # SCOT
 scot_final <- ddply(scot_pred, .(seg, x, y, obs_window), summarise,
                     occup = median(occ),
-                    occup_mad = mad(occ),
+                    occup_mad_m = mad(occ)/median(occ) * 100,
                     c_abund = median(abund),
-                    c_abund_mad = mad(abund),
+                    c_abund_mad_m = mad(abund)/median(abund) * 100,
                     c_overd = median(overd),
-                    c_overd_mad = mad(overd),
+                    c_overd_mad_m = mad(overd)/median(overd) * 100,
                     lt_abund = median(ltabund),
-                    lt_abund_mad = mad(ltabund))
+                    lt_abund_mad_m = mad(ltabund)/median(ltabund) * 100)
 
 # LTDU
 ltdu_final <- ddply(ltdu_pred, .(seg, x, y, obs_window), summarise,
                     occup = median(occ),
-                    occup_mad = mad(occ),
+                    occup_mad_m = mad(occ)/median(occ) * 100,
                     c_abund = median(abund),
-                    c_abund_mad = mad(abund),
+                    c_abund_mad_m = mad(abund)/median(abund) * 100,
                     c_overd = median(overd),
-                    c_overd_mad = mad(overd),
+                    c_overd_mad_m = mad(overd)/median(overd) * 100,
                     lt_abund = median(ltabund),
-                    lt_abund_mad = mad(ltabund))
+                    lt_abund_mad_m = mad(ltabund)/median(ltabund) * 100)

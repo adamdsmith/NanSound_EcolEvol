@@ -1,4 +1,4 @@
-NanSound_plot <- function(data = NULL, x = "x", y = "y", z = "seg",
+NanSound_plot <- function(data = NULL, x = "x", y = "y", z = "z",
                           cut = TRUE, hotspot = NULL, effort = "obs_window",
                           segs = TRUE, plotwind = FALSE,
                           legend.title = "", label = NULL,
@@ -41,8 +41,13 @@ NanSound_plot <- function(data = NULL, x = "x", y = "y", z = "seg",
     
   if (cut) {
     breaks <- quantile(tmpDat$z, probs = c(0, 0.25, 0.5, 0.75, 1))
-    digits <- ifelse(type == "occupancy", 
-                     ifelse(min(breaks) < 0.1, 1, 2), 0) # Round counts
+    if(type == "occupancy") {
+      digits <- ifelse(min(breaks) < 0.1, 1, 2)
+    } else {
+      digits <- 0
+    }
+    if(grepl("mad_m", z)) digits <- 0 # Round MAD/median to nearest whole regardless
+    
     tmpDat$z <- cut2(tmpDat$z, cuts = breaks, digits = digits)
     levels(tmpDat$z) <- gsub(",", ", ", gsub(" ", "", levels(tmpDat$z)))
   }
