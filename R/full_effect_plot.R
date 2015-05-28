@@ -40,9 +40,9 @@ full_effect_plot <- function(mod, data = NULL, var, varType = c("uni", "bi", "st
     
     # Modify Y-axis label for count model
     if (!is.null(parameter)) {
-      p <- p + ylab(paste0("Additive predictor (", parameter, ")"))
+      p <- p + ylab(paste0("Partial contribution\nto the additive predictor (", parameter, ")"))
     } else  {
-      p <- p + ylab("Additive predictor")
+      p <- p + ylab("Partial contribution\nto the additive predictor")
     }
     
     # If standardizing y-axis for comparability
@@ -96,7 +96,7 @@ full_effect_plot <- function(mod, data = NULL, var, varType = c("uni", "bi", "st
                                           "(0.69,1.61]", "> 1.61"),
                                ordered_result = TRUE))) +
         xlab(xlab) + ylab(ylab) +
-        scale_fill_manual("Additive\npredictor",
+        scale_fill_manual("Partial contribution,\nadditive predictor",
                           values = rev(brewer.pal(n=10, "RdGy")), drop=FALSE) +
         theme(legend.position = "right")
       
@@ -142,7 +142,7 @@ full_effect_plot <- function(mod, data = NULL, var, varType = c("uni", "bi", "st
                                ordered_result = TRUE))) + coord_equal() +
         facet_wrap(~ date, nrow=2) +
         xlab(xlab) + ylab(ylab) +
-        scale_fill_manual("Additive\npredictor",
+        scale_fill_manual("Partial contribution,\nadditive predictor",
                           values = rev(brewer.pal(n=10, "RdGy")), drop=FALSE) +
         theme(legend.position = "right")  
       
@@ -163,7 +163,7 @@ full_effect_plot <- function(mod, data = NULL, var, varType = c("uni", "bi", "st
             
       p <- ggplot(tmpDat, aes(x = x, y = y)) + 
         geom_bar(colour = "black", fill = "white", stat="identity") + 
-        xlab(xlab) + ylab("Additive predictor")
+        xlab(xlab) + ylab("Partial contribution \nto the additive predictor")
       
     }
 
