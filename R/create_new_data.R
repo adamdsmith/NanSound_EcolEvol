@@ -1,5 +1,3 @@
-require("lubridate")
-
 if (!exists("env.segs")) load("../Data/ducks&environment.RData")
 
 ## Create standardized (when appropriate) environmental data on which to predict from
