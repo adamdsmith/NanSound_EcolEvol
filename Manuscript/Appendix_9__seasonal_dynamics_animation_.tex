@@ -1,10 +1,12 @@
 \documentclass[12pt,]{article}
+\usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
 \else % if luatex or xelatex
   \ifxetex
@@ -16,13 +18,8 @@
   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
   \newcommand{\euro}{€}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
 \usepackage[margin=1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -69,20 +66,8 @@
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \setcounter{secnumdepth}{0}
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
 %%% Change title format to be more compact
 \usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
 \setlength{\droptitle}{-2em}
   \title{}
   \pretitle{\vspace{\droptitle}}
@@ -91,6 +76,7 @@
   \preauthor{}\postauthor{}
   \date{}
   \predate{}\postdate{}
+
 
 \usepackage{animate}
 
@@ -105,16 +91,18 @@ and
 abundance}\label{appendix-9.-seasonal-animation-of-predicted-scoter-occupancy-and-abundance}
 
 To provide an example of the seasonal dynamics that can characterize sea
-duck occupancyabundance in Nantucket Sound, we produce an animation of
-predicted overall scoter abundance for every other day between 1
-November 2005 and 31 March 2006.
+duck occupancy and abundance in Nantucket Sound, we proovide an
+animation of predicted scoter occupancy and average abundance for every
+other day between 1 November 2005 and 31 March 2006.
 
-The code associated with this .Rmd file produces two files which contain
-the final animations: \texttt{SCOT\_2005\_occup\_animation.pdf} and
+The code associated with this appendix
+(\texttt{Appendix\_9\_(seasonal\_dynamics\_animation).Rmd}) produces two
+files which contain the final animations:
+\texttt{SCOT\_2005\_occup\_animation.pdf} and
 \texttt{SCOT\_2005\_abund\_animation.pdf}. However, here we manually
-appended them to this Appendix by incorporating the following code into
-the associated .tex file and recompiling (see
-\texttt{Appendix\_9\_\_seasonal\_dynamics\_animation\_.tex})
+appended them by incorporating the following code into the associated
+.tex file and recompiling (see
+\texttt{Appendix\_9\_\_seasonal\_dynamics\_animation\_.tex}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -133,6 +121,7 @@ the associated .tex file and recompiling (see
 \CommentTok{# \textbackslash{}end\{figure\}}
 \end{Highlighting}
 \end{Shaded}
+
 
 \begin{figure}
 \begin{center}

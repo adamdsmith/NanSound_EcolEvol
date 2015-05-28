@@ -12,7 +12,7 @@ documentclass: article
 
 # Appendix 9. Seasonal animation of predicted scoter occupancy and abundance
 
-To provide an example of the seasonal dynamics that can characterize sea duck occupancyabundance in Nantucket Sound, we produce an animation of predicted overall scoter abundance for every other day between 1 November 2005 and 31 March 2006.
+To provide an example of the seasonal dynamics that can characterize sea duck occupancy and abundance in Nantucket Sound, we proovide an animation of predicted scoter occupancy and average abundance for every other day between 1 November 2005 and 31 March 2006.
 
 ```{r, echo=FALSE, eval=FALSE} 
 # Generate the semi-daily data for the animation
@@ -22,7 +22,7 @@ source("../R/create_SCOT_animation_data.R")
 source("../R/create_SCOT_animation.R")
 ```
 
-The code associated with this .Rmd file produces two files which contain the final animations: `SCOT_2005_occup_animation.pdf` and `SCOT_2005_abund_animation.pdf`.  However, here we manually appended them to this Appendix by incorporating the following code into the associated .tex file and recompiling (see `Appendix_9__seasonal_dynamics_animation_.tex`)
+The code associated with this appendix (`Appendix_9_(seasonal_dynamics_animation).Rmd`) produces two files which contain the final animations: `SCOT_2005_occup_animation.pdf` and `SCOT_2005_abund_animation.pdf`.  However, here we manually appended them by incorporating the following code into the associated .tex file and recompiling (see `Appendix_9__seasonal_dynamics_animation_.tex`).
 ```{r, echo=TRUE}
 # \begin{figure}
 # \begin{center}
