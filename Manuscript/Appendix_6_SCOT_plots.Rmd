@@ -12,7 +12,7 @@ documentclass: article
 devtools::source_gist(9216051) # Rprofile.R
 devtools::source_gist(9216061) # various.R
 
-require(dplyr); require(ggplot2)
+require(dplyr); require(ggplot2); require(lubridate)
 
 ## load plotting function
 source("../R/full_effect_plot.R")
@@ -44,15 +44,21 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
 
 # Appendix 6. Scoter stable covariate effects
 
-Covariate relationships with the occupancy, conditional mean abundance, and conditional
+Marginal functional plots of the relationships between covariates (controlling for all other
 
-overdispersion of abundance of scoters (Black, Surf, and White-winged Scoter) in Nantucket
+variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and 
 
-Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending order of
+conditional overdispersion of abundance of scoters (Black, Surf, and White-winged Scoter) in
 
-the magnitude of their influence on the additive predictor in each model (or model 
+Nantucket Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending 
 
-parameter for count models).  Covariates (and any abbreviations) are defined in Appendix 2.  
+order of the magnitude of their influence on the additive predictor in each model (or model 
+
+parameter for count models).  Vertical lines along the *x*-axis (i.e., rug plots) indicate 
+
+observed covariate values.  Covariates (and any abbreviations) are defined in detail in 
+
+Appendix 2.
 
 ## Occupancy
 ```{r occ, out.extra=sprintf('angle=%d', c(90,rep(0, 9)))}

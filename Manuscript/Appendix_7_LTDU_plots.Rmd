@@ -14,7 +14,7 @@ graphics: yes
 devtools::source_gist(9216051) # Rprofile.R
 devtools::source_gist(9216061) # various.R
 
-require(dplyr); require(ggplot2)
+require(dplyr); require(ggplot2); require(lubridate)
 
 ## load plotting function
 source("../R/full_effect_plot.R")
@@ -46,15 +46,19 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
 
 # Appendix 7. Long-tailed Duck stable covariate effects
 
-Covariate relationships with the occupancy, conditional mean abundance, and conditional 
+Marginal functional plots of the relationships between covariates (controlling for all other
 
-overdispersion of abundance of Long-tailed Duck in Nantucket Sound, Massachusetts, USA.
+variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and 
 
-Covariate plots are ordered roughly in descending order of the magnitude of their influence
+conditional overdispersion of abundance of Long-tailed Duck in Nantucket Sound, 
 
-on the additive predictor in each model (or model parameter for count models).  Covariates
+Massachusetts, USA.  Covariate plots are ordered roughly in descending order of the magnitude 
 
-(and any abbreviations) are defined in detail in Appendix 2.
+of their influence on the additive predictor in each model (or model parameter for count 
+
+models). Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  
+
+Covariates (and any abbreviations) are defined in detail in Appendix 2.
 
 ## Occupancy
 ```{r occ, out.extra=sprintf('angle=%d', c(90,0,0,0,90,0,0,0))}
