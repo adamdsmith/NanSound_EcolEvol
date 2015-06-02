@@ -13,6 +13,7 @@ bibliography: NantucketMS.bib
 csl: ecology.csl
 ---
 ```{r occ_stabsel_results, echo=FALSE, message=FALSE, warning=FALSE}
+require(gamboostLSS)
 load("../Results_coei/stabs_zero_q35.Rda")
 stabs_zero_q35 <- stabsel(stabs_zero_q35, PFER = 2, assumption = "unimodal")
 coei_stabs_zero <- stabs_zero_q35
@@ -44,7 +45,7 @@ ltdu_stabs_hurdle <- stabs_hurdle_q35
 
 ## Methods
 
-We applied stability selection [@Meinshausen2010; @Shah2013] to identify base-learners, and thus covariates, that were commonly selected in the majority of 100 random subsamples of the data.  We set the number of selected base-learners per boosting model (*q*) to 35 and established an upper bound of two for the per-family error rate [PFER; @Meinshausen2010; @Shah2013; see also @Hofner2015a for details in the context of boosting] which, given the 48 base-learners in the occupancy and count models (see Equation 1 in manuscript), corresponded to an upper bound of $\alpha$ = `r round(2/48, 3)` for the per-comparison error rate.  **Can you check my calculation?  Also, should we explain why we chose *q* = 35, or describe complementary pairs subsampling and our choice of unimodal vs. r-concavity assumptions for the two model type (occupancy vs. count)?  Any other relevant details to include?**
+We applied stability selection [@Meinshausen2010; @Shah2013] to identify base-learners, and thus covariates, that were commonly selected in the majority of 100 random subsamples of the data.  We set the number of selected base-learners per boosting model (*q*) to 35 and established an upper bound of two for the per-family error rate [PFER; @Meinshausen2010; @Shah2013; see also @Hofner2015a for details in the context of boosting] which, given the 48 base-learners in the occupancy and count models (see Equation 1 in manuscript), corresponded to an upper bound of $\alpha$ = `r round(2/48, 3)` for the per-comparison error rate.  **Benjamin: can you check my calculation?  Also, should we explain why we chose *q* = 35, or describe complementary pairs subsampling and our choice of unimodal vs. r-concavity assumptions for the two model type (occupancy vs. count)?  Any other relevant details to include?**
 
 ## Results
 
