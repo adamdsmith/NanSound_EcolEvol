@@ -86,17 +86,29 @@ ltdu_sigma_plot <- ggplot_effects(LTDUcc, parameter = "sigma", vars = vars, varT
                                   ylims = c(-1.1, 1.35))
 
 ## CREATE "PLOTS" WITH ROW LABELS
-labels <- c("North Atlantic Oscillation (Dec - Mar)", "Time (day of season)", "Water depth", 
-            "Water depth x time", "Sediment grain size (phi)", 
-            "Sea floor surface area:planimetric area", "Epibenthic tidal velocity (mean)", 
-            "Epibenthic tidal velocity (standard deviation)", 
-            "Water column stratification potential (summer)", "Distance to land", 
-            "Chlorophyll-a (Chl-a)", "Chromomorphic dissolved organic matter (CDOM)", "Chl-a x CDOM", 
-            "Sea bottom temperature (May - Oct)",
-            "Sea surface temperature (SST; monthly)", "SST (mean; Nov - Mar)", 
-            "SST (relative to other segments)",  "SST (relative) x time", 
-            "Ferry route (within 1 km)", "Winter (2004)", "Winter (2005)",  
-            "Northing x easting", "Survey effort (transect area within segment)")
+labels <- c("North~Atlantic~Oscillation~(Dec~-~Mar*';'~italic(scriptstyle(NAO[w])))", 
+            "Day~of~season~(italic(scriptstyle(time)))",
+            "Water~depth~(italic(scriptstyle(depth)))",
+            "italic(depth)~scriptstyle(x)~italic(time)",
+            "Sediment~grain~size~(italic(scriptstyle(meanphi)))", 
+            "Sea~floor~surface~area:planimetric~area~(italic(scriptstyle(SAR)))",
+            "Epibenthic~tidal~velocity~(mean*';'~italic(scriptstyle(tidebmean)))", 
+            "Epibenthic~tidal~velocity~(standard~deviation*';'~italic(scriptstyle(tidesd)))", 
+            "Water~column~stratification~potential~(italic(scriptstyle(strat)))",
+            "Distance~to~land~(italic(scriptstyle(d2land)))",
+            "Chlorophyll-a~(italic(scriptstyle(chla)))",
+            "Chromomorphic~dissolved~organic~matter~(italic(scriptstyle(cdom)))",
+            "italic(chla)~scriptstyle(x)~italic(cdom)",
+            "Sea~bottom~temperature~(May~-~Oct*';'~italic(scriptstyle(SBT)))",
+            "Sea~surface~temperature~(monthly*';'~italic(scriptstyle(SST[m])))",
+            "Sea~surface~temperature~(Nov~-~Mar*';'~italic(scriptstyle(SST[w])))",
+            "Sea~surface~temperature~(relative*';'~italic(scriptstyle(SST[rel])))",
+            "italic(SST[rel])~scriptstyle(x)~italic(time)",
+            "Ferry~route~(within~1~km*';'~italic(scriptstyle(ferry)))",
+            "Winter~2004~(italic(scriptstyle(y[2004])))",
+            "Winter~2005~(italic(scriptstyle(y[2005])))", 
+            "Northing~(italic(scriptstyle(ykm)))~scriptstyle(x)~Easting~(italic(scriptstyle(xkm)))",
+            "Survey~effort~(scriptstyle(obs_window))")
 
 label_plots <- vector("list", length(labels))
 names(label_plots) <- vars
@@ -105,7 +117,8 @@ for (i in 1:length(labels)) {
   label <- labels[i]
   tmpDat <- data.frame()
   p <- ggplot(tmpDat) + geom_blank() + xlim(0, 1) + ylim(0, 1) + 
-    annotate("text", x = Inf, y = 0.5, label = label, hjust=1, vjust=0.5) + 
+    annotate("text", x = Inf, y = 0.5, label = label,
+             parse=T, hjust=1, vjust=0.5) + 
     theme(panel.border = element_blank())
   label_plots[[i]] <- p
 }
