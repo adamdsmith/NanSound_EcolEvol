@@ -1,15 +1,15 @@
 ## load accessory function
 source("../R/ggplot_effects.R")
 
-vars <- c("NAOw", "time", "depth", "time, depth", "meanphi", "SAR", "tidebmean", "tidesd", 
-          "strat", "d2land", "chla", "cdom", "chla, cdom", 
-          "SBT", "SSTm", "SSTw", "SSTrel", "time, SSTrel",
+vars <- c("time", "depth", "time, depth", "meanphi", "SAR", "tidebmean", "tidesd", 
+          "strat", "chla", "cdom", "chla, cdom", 
+          "SBT", "SSTm", "SSTw", "SSTrel", "time, SSTrel", "NAOw", "d2land",
           "ferry", "y2004", "y2005", 
           "xkm, ykm", 
           "obs_window")
-varTypes <- c("uni", "uni", "uni", "bi", "uni", "uni", "uni", "uni", 
-              "uni", "uni", "uni", "uni", "bi",
-              "uni", "uni", "uni", "uni", "bi",
+varTypes <- c("uni", "uni", "bi", "uni", "uni", "uni", "uni", 
+              "uni", "uni", "uni", "bi",
+              "uni", "uni", "uni", "uni", "bi", "uni", "uni",
               "fac", "fac", "fac",
               "bi", 
               "uni")
@@ -86,16 +86,14 @@ ltdu_sigma_plot <- ggplot_effects(LTDUcc, parameter = "sigma", vars = vars, varT
                                   ylims = c(-1.1, 1.35))
 
 ## CREATE "PLOTS" WITH ROW LABELS
-labels <- c("North~Atlantic~Oscillation~(Dec~-~Mar*';'~italic(scriptstyle(NAO[w])))", 
-            "Day~of~season~(italic(scriptstyle(time)))",
-            "Water~depth~(italic(scriptstyle(depth)))",
+labels <- c("Day~of~season~(italic(scriptstyle(time)))",
+            "Bathymetry~(italic(scriptstyle(depth)))",
             "italic(depth)~scriptstyle(x)~italic(time)",
             "Sediment~grain~size~(italic(scriptstyle(meanphi)))", 
             "Sea~floor~surface~area:planimetric~area~(italic(scriptstyle(SAR)))",
             "Epibenthic~tidal~velocity~(mean*';'~italic(scriptstyle(tidebmean)))", 
             "Epibenthic~tidal~velocity~(standard~deviation*';'~italic(scriptstyle(tidesd)))", 
             "Water~column~stratification~potential~(italic(scriptstyle(strat)))",
-            "Distance~to~land~(italic(scriptstyle(d2land)))",
             "Chlorophyll-a~(italic(scriptstyle(chla)))",
             "Chromomorphic~dissolved~organic~matter~(italic(scriptstyle(cdom)))",
             "italic(chla)~scriptstyle(x)~italic(cdom)",
@@ -104,6 +102,8 @@ labels <- c("North~Atlantic~Oscillation~(Dec~-~Mar*';'~italic(scriptstyle(NAO[w]
             "Sea~surface~temperature~(Nov~-~Mar*';'~italic(scriptstyle(SST[w])))",
             "Sea~surface~temperature~(relative*';'~italic(scriptstyle(SST[rel])))",
             "italic(SST[rel])~scriptstyle(x)~italic(time)",
+            "North~Atlantic~Oscillation~(Dec~-~Mar*';'~italic(scriptstyle(NAO[w])))", 
+            "Distance~to~land~(italic(scriptstyle(d2land)))",
             "Ferry~route~(within~1~km*';'~italic(scriptstyle(ferry)))",
             "Winter~2004~(italic(scriptstyle(y[2004])))",
             "Winter~2005~(italic(scriptstyle(y[2005])))", 
