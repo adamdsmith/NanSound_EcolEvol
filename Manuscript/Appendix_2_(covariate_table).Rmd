@@ -4,7 +4,7 @@ header-includes:
   - \newcommand{\blscape}{\begin{landscape}}
   - \newcommand{\elscape}{\end{landscape}}
 output: 
-  word_document:
+  pdf_document:
 fontsize: 12pt
 geometry: margin=1in
 documentclass: article
@@ -42,7 +42,8 @@ Sediment grain size (*meanphi*)        phi         S      sediment grain size (p
 &nbsp;
 
 Sea floor surface area:                N/A         S      ratio of sea floor surface area [calculated from bathymetry;  
-planimetric area (*SAR*)                                  @Jenness2004] to planimetric area
+planimetric area (*SAR*)                                  @Jenness2004] to planimetric area; estimate of the topographic 
+                                                          variability of the sea floor
 
 &nbsp;
 
