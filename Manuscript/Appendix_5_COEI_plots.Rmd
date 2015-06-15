@@ -57,7 +57,7 @@ influence on the additive predictor in each model (or model parameter for count 
 
 Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates 
 
-(and any abbreviations) are defined in detail in Appendix 2.
+(and any abbreviations) are defined in detail in Appendix 2. **_BH: Check strange figures for Winter 2005 and other categorical predictors. These don't look ok. They should not depict boxes but online horizontal lines (alternatively dots would be ok._**
 
 ## Occupancy
 ```{r occ, out.extra=sprintf('angle=%d', c(90, rep(0, 7)))}
