@@ -23,11 +23,11 @@ source("../R/create_new_data.R")
 
 ## Load sea duck data and relevant models
 source("../R/load_sea_duck_data.R")
-load("C:/Users/Graduate_Student/Documents/Adam's_Stuff/NanSound/Results_coei/zero.rda")
+load("C:/Users/Adam/OneDrive/NanSound/Results_coei/zero.rda")
 #load("../Results_coei/zero.Rda")
 COEIocc <- zero
 
-load("C:/Users/Graduate_Student/Documents/Adam's_Stuff/NanSound/Results_coei/hurdle.rda")
+load("C:/Users/Adam/OneDrive/NanSound/Results_coei/hurdle.rda")
 #load("../Results_coei/hurdle.Rda")
 COEIcc <- hurdle
 
@@ -57,21 +57,21 @@ influence on the additive predictor in each model (or model parameter for count 
 
 Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates 
 
-(and any abbreviations) are defined in detail in Appendix 2. **_BH: Check strange figures for Winter 2005 and other categorical predictors. These don't look ok. They should not depict boxes but online horizontal lines (alternatively dots would be ok._**
+(and any abbreviations) are defined in detail in Appendix 2. 
 
 ## Occupancy
-```{r occ, out.extra=sprintf('angle=%d', c(90, rep(0, 7)))}
+```{r occ, out.extra=sprintf('angle=%d', c(90, rep(0, 8)))}
 # xkm, ykm
 full_effect_plot(COEIocc, coei, var = "xkm, ykm", varType = "st", xlab = "Easting (km from center)",
                  ylab = "Northing (km from center")
 
-vars <- c("SSTm", "meanphi", "obs_window", "cdom", "SAR", "d2land", "y2005")
+vars <- c("SSTm", "meanphi", "obs_window", "cdom", "SAR", "d2land", "SBT", "y2005")
 xlabs <- c(expression(paste(SST, ", ", monthly~average~(degree*C))),
            "Sediment grain size (phi)", expression(Survey~effort~(transect~km^2)), 
            "Chromomorphic dissolved organic matter",
            "Sea floor surface area:planimetric area", "Distance to land (km)",
-           "Winter (2005)")
-types <- c(rep("uni", 6), "fac")
+           expression(paste(SBT, ", ", May~-~Oct~(degree*C))), "Winter (2005)")
+types <- c(rep("uni", 7), "fac")
 
 for (i in 1:length(vars)) {
   var <- vars[i]

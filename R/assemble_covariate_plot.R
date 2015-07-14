@@ -15,8 +15,21 @@ varTypes <- c("uni", "uni", "bi", "uni", "uni", "uni", "uni",
               "uni")
 
 ## OCCUPANCY
+## Load occupancy models for each species and rename to avoid repeatedly loading these models
+load("C:/Users/Adam/OneDrive/NanSound/Results_coei/zero.rda")
+#load("../Results_coei/zero.Rda")
+COEIocc <- zero
+
+load("C:/Users/Adam/OneDrive/NanSound/Results_scot/zero.rda")
+#load("../Results_scot/zero.Rda")
+SCOTocc <- zero
+
+load("C:/Users/Adam/OneDrive/NanSound/Results_ltdu/zero.rda")
+#load("../Results_ltdu/zero.Rda")
+LTDUocc <- zero
+
 # COEI
-keep <- c("SSTm", "d2land", "cdom", "meanphi", "SAR", "y2005", "xkm, ykm", "obs_window")
+keep <- c("SSTm", "SBT", "d2land", "cdom", "meanphi", "SAR", "y2005", "xkm, ykm", "obs_window")
 drop <- which(!(vars %in% keep))
 varTypes_coei <- varTypes
 varTypes_coei[drop] <- ""
@@ -24,7 +37,7 @@ coei_occ_plot <- ggplot_effects(COEIocc, data = coei, vars = vars, varTypes = va
                                 ylims=c(-2.4, 1.7))
 
 # SCOT
-keep <- c("time", "SSTw", "SSTm", "depth", "d2land", "cdom", "meanphi", "SAR", "xkm, ykm", "obs_window")
+keep <- c("time", "SSTw", "SSTm", "SSTrel", "depth", "d2land", "cdom", "meanphi", "SAR", "xkm, ykm", "obs_window")
 drop <- which(!(vars %in% keep))
 varTypes_scot <- varTypes
 varTypes_scot[drop] <- ""
@@ -32,14 +45,30 @@ scot_occ_plot <- ggplot_effects(SCOTocc, data = scot, vars = vars, varTypes = va
                                 ylims=c(-2.4, 1.7))
 
 # LTDU
-keep <- c("time", "time, depth", "SSTm", "d2land", "tidesd", "y2004", "xkm, ykm", "obs_window")
+keep <- c("time", "time, depth", "SSTm", "d2land", "meanphi", "tidesd", "y2004", "xkm, ykm", "obs_window")
 drop <- which(!(vars %in% keep))
 varTypes_ltdu <- varTypes
 varTypes_ltdu[drop] <- ""
 ltdu_occ_plot <- ggplot_effects(LTDUocc, data = ltdu, vars = vars, varTypes = varTypes_ltdu, 
                                 ylims=c(-2.4, 1.7))
 
+rm("zero", "COEIocc", "SCOTocc")
+gc(reset=TRUE)
+
 ## CONDITIONAL COUNT - MU & SIGMA FOR EACH SPECIES
+## Load conditional count models for each species and rename to avoid repeatedly loading these models
+load("C:/Users/Adam/OneDrive/NanSound/Results_coei/hurdle.rda")
+#load("../Results_coei/hurdle.Rda")
+COEIcc <- hurdle
+
+load("C:/Users/Adam/OneDrive/NanSound/Results_scot/hurdle.rda")
+#load("../Results_scot/hurdle.Rda")
+SCOTcc <- hurdle
+
+load("C:/Users/Adam/OneDrive/NanSound/Results_ltdu/hurdle.rda")
+#load("../Results_ltdu/hurdle.Rda")
+LTDUcc <- hurdle
+
 # COEI
 keep <- c("SSTrel", "depth", "cdom", "meanphi", "SAR", "ferry")
 drop <- which(!(vars %in% keep))
@@ -84,6 +113,9 @@ varTypes_ltdu <- varTypes
 varTypes_ltdu[drop] <- ""
 ltdu_sigma_plot <- ggplot_effects(LTDUcc, parameter = "sigma", vars = vars, varTypes = varTypes_ltdu, 
                                   ylims = c(-1.1, 1.35))
+
+rm("hurdle", "COEIcc", "SCOTcc", "LTDUcc", "LTDUocc")
+gc(reset=TRUE)
 
 ## CREATE "PLOTS" WITH ROW LABELS
 labels <- c("Day~of~season~(italic(scriptstyle(time)))",

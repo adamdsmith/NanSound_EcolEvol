@@ -6,22 +6,58 @@
 # into the data frame
 
 # COEI
+## Load occupancy and conditional count models models for each species and rename
+load("C:/Users/Adam/OneDrive/NanSound/Results_coei/zero.rda")
+#load("../Results_coei/zero.Rda")
+COEIocc <- zero
+
+load("C:/Users/Adam/OneDrive/NanSound/Results_coei/hurdle.rda")
+#load("../Results_coei/hurdle.Rda")
+COEIcc <- hurdle
+
 coei_pred$occ <- rowSums(predict(COEIocc, type="response", newdata = coei_pred))
 coei_pred$abund <- rowSums(predict(COEIcc, parameter = "mu", type="response", newdata = coei_pred))
 coei_pred$overd <- rowSums(predict(COEIcc, parameter = "sigma", type="response", newdata = coei_pred))
 coei_pred$ltabund <- exp(predict.gamlssHurdle(COEIocc, COEIcc, coei_pred)$add_pred)
 
+rm("zero", "hurdle", "COEIocc", "COEIcc")
+gc(reset = TRUE)
+
 # SCOT
+load("C:/Users/Adam/OneDrive/NanSound/Results_scot/zero.rda")
+#load("../Results_scot/zero.Rda")
+SCOTocc <- zero
+
+load("C:/Users/Adam/OneDrive/NanSound/Results_scot/hurdle.rda")
+#load("../Results_scot/hurdle.Rda")
+SCOTcc <- hurdle
+
 scot_pred$occ <- rowSums(predict(SCOTocc, type="response", newdata = scot_pred))
 scot_pred$abund <- rowSums(predict(SCOTcc, parameter = "mu", type="response", newdata = scot_pred))
 scot_pred$overd <- rowSums(predict(SCOTcc, parameter = "sigma", type="response", newdata = scot_pred))
 scot_pred$ltabund <- exp(predict.gamlssHurdle(SCOTocc, SCOTcc, scot_pred)$add_pred)
 
+rm("zero", "hurdle", "SCOTocc", "SCOTcc")
+gc(reset = TRUE)
+
+
 # LTDU
+load("C:/Users/Adam/OneDrive/NanSound/Results_ltdu/zero.rda")
+#load("../Results_ltdu/zero.Rda")
+LTDUocc <- zero
+
+load("C:/Users/Adam/OneDrive/NanSound/Results_ltdu/hurdle.rda")
+#load("../Results_ltdu/hurdle.Rda")
+LTDUcc <- hurdle
+
 ltdu_pred$occ <- rowSums(predict(LTDUocc, type="response", newdata = ltdu_pred))
 ltdu_pred$abund <- rowSums(predict(LTDUcc, parameter = "mu", type="response", newdata = ltdu_pred))
 ltdu_pred$overd <- rowSums(predict(LTDUcc, parameter = "sigma", type="response", newdata = ltdu_pred))
 ltdu_pred$ltabund <- exp(predict.gamlssHurdle(LTDUocc, LTDUcc, ltdu_pred)$add_pred)
+
+rm("zero", "hurdle", "LTDUocc", "LTDUcc")
+gc(reset = TRUE)
+
 
 # Calculate segment level medians and MADs
 # COEI
