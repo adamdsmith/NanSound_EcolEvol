@@ -32,7 +32,7 @@ The arguments of the `plot_covariate` function allow some flexibility in manipul
 args(plot_covariate)
 ```
 
-Only a few arguments are likely to be modified in the current context: `z` defines the covariate of interest, and can take any of the following values (see Appendix 2 for definitions): `r paste(paste(names(env.segs)[10:24], collapse = ", "), names(env.segs)[7], sep = ", or ")`.  `plotwind` and `segs` are logicals indicating whether the user would like to plot the permitted wind energy development area or segment boundaries (see Figure 1 in manuscript), respectively.  `agg.seg` allows temporally dynamic (i.e., varying within a winter or among winters) covariate values to be summarized (e.g., average, sum) within each segment; the default is to plot their dynamics, and not summarize, within the study area.  `legend.title` and `legend.size` permit the modification of the legend title and legend size, respectively.  The `scale` option standardizes `z` prior to plotting, and the `diverge` option changes the legend of a continuous covariate to divergent colors on either size of zero, a useful modification for visualizing standardized covariates.
+Only a few arguments are likely to be modified in the current context: `z` defines the covariate of interest, and can take any of the following values (see Appendix 2 for definitions): `r paste(paste(names(env.segs)[10:24], collapse = ", "), names(env.segs)[7], sep = ", or ")`.  `plotwind` and `segs` are logicals indicating whether the user would like to plot the permitted wind energy development area or segment boundaries (see Figure 1 in manuscript), respectively.  `agg.seg` allows temporally dynamic (i.e., varying within a winter or among winters) covariate values to be summarized (e.g., average, sum) within each segment; the default is to plot their dynamics, and not summarize, within the study area.  `legend.title` and `legend.size` permit the modification of the legend title and legend size, respectively.  The `scale` option standardizes `z` prior to plotting, and the `diverge` option changes the legend of a continuous covariate to divergent colors on either ~~size~~ **side (?)** of zero, a useful modification for visualizing standardized covariates.
 
 ## Spatial covariates
 
@@ -60,7 +60,7 @@ Figure 3.2.  Spatial and annual variation in standardized sea surface temperatur
 ```{r SSTrel, echo=TRUE, eval=TRUE, message=FALSE, fig.height=4.5, fig.width=9}
 plot_covariate("SSTrel", segs = FALSE, scale = TRUE, diverge = TRUE) # Figure 3.3
 ```
-Figure 3.3.  Spatial, monthly, and annual variation in standardized sea surface temperature relative to other segments (SSTrel) in Nantucket Sound. 
+Figure 3.3.  Spatial, monthly, and annual variation in standardized sea surface temperature relative to other segments (SSTrel) in Nantucket Sound. **I get a warning that "Non Lab interpolation is deprecated". Furthermore, I have plenty of empty panels. Is that correct? If so, state this and explain why this happens.**
 \elscape
 \newpage
 
