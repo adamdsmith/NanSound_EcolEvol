@@ -14,12 +14,12 @@ csl: ecology.csl
 
 # Appendix 2. Covariate details
 
-We evaluated biophysical covariates (Table 2.1) expected to influence the distribution, abundance, and movements of sea ducks or, more likely, the distribution and availability of their benthic prey (e.g., mollusks and crustaceans); we did not have information related directly to the distribution of preferred prey. *Biophysical covariates could be characterized as strictly spatial or temporal effects (i.e., varying only among segments or within or among winters, respectively) or as spatiotemporal effects (i.e., varying among segments and within or among winters).* **BH: The previous sentence is hard to understand. I first understood it when I had a look at the table. Perhaps we can either reference the table or add examples?** We allowed the effect of bathymetry and relative sea surface temperature to vary over time within a given winter via interactions with day of season.  We also included a survey effort covariate and covariates that were solely a function of segment geographic location, which we used to address potential spatial correlation in the data.  We standardized (i.e., mean centered and scaled) all continuous covariates.  Appendix 3 describes and illustrates the use of an R function to visualize the spatial and temporal distribution of these covariates in Nantucket Sound.
+We evaluated biophysical covariates (Table 2.1) expected to influence the distribution, abundance, and movements of sea ducks or, more likely, the distribution and availability of their benthic prey (e.g., mollusks and crustaceans); we did not have information related directly to the distribution of preferred prey. Biophysical covariates could be characterized as spatial (varying only among segments), temporal (varying within or among winters, but not among segments) or as spatiotemporal effects (varying among segments and within or among winters). We allowed the effect of bathymetry and relative sea surface temperature to vary over time within a given winter via interactions with day of season.  We also included a survey effort covariate and covariates that were solely a function of segment geographic location, which we used to address potential spatial correlation in the data.  We standardized (i.e., mean centered and scaled) all continuous covariates.  Appendix 3 describes and illustrates the use of an R function to visualize the spatial and temporal distribution of these covariates in Nantucket Sound.
 
 \newpage
 \blscape
 
-**Table 2.1** Biophysical and survey covariates used to evaluate the distribution and abundance of Common Eider, Black, Surf, and White-winged Scoter, and Long-tailed Duck in Nantucket Sound during winters 2003 - 2005. ~~Variable type indicates whether an effect was spatial (S), temporal (T), or spatiotemporal (ST) during the study period (see Covariates section of text).~~ **This is a duplicate of footnote 1. We should remove either one.**
+**Table 2.1** Biophysical and survey covariates used to evaluate the distribution and abundance of Common Eider, Black, Surf, and White-winged Scoter, and Long-tailed Duck in Nantucket Sound during winters 2003 - 2005. 
 
 ---------------------------------------------------------------------------------------------------------------------------
 Variable                              Units     Variable  Description
@@ -37,13 +37,13 @@ Bathymetry (*depth*)                    m          S      bottom depth relative 
                                            
 &nbsp;
 
-Sediment grain size (*meanphi*)        phi         S      sediment grain size (phi scale); @Poti2012 
+Sediment grain size (*meanphi*)        phi         S      sediment grain size [phi scale; @Poti2012] 
 
 &nbsp;
 
-Sea floor surface area:                N/A         S      ratio of sea floor surface area [calculated from bathymetry;  
-planimetric area (*SAR*)                                  @Jenness2004] to planimetric area; estimate of the topographic 
-**Change label? See manuscript.**                         variability of the sea floor
+Sea floor surface area                 N/A         S      ratio of sea floor surface area [calculated from bathymetry;  
+relative to planimetric                                   @Jenness2004] to planimetric area; estimate of the topographic 
+area (*SAR*)                                              variability of the sea floor
 
 &nbsp;
 
@@ -59,15 +59,14 @@ Epibenthic tidal velocity              m/s	       S	    standard deviation of ep
 
 &nbsp;                              
 
-Water column stratification         *h*/*u^3^*     S	  potential for seasonal thermal stratification of the water column, 
-potential (*strat*)			                              calculated ~~[@Simpson1974]~~ **BH: Strange place for reference** as the ratio of depth (*h*; from bathymetry) to 
+Water column stratification         s^3^/m^2^      S	    potential for seasonal thermal stratification of the water column [@Simpson1974], 
+potential (*strat*)			                                  calculated as the ratio of depth (*h*; from bathymetry) to 
                                                           the third power of surface tidal velocity [*u*; from monthly FVCOM 
-                                                          structured grids; @Chen2003; @Chen2011] **BH: is *u* tidebmean?**; we report log~10~(*h*/*u^3^*) for 
+                                                          structured grids; @Chen2003; @Chen2011]; we report log~10~(*h*/*u^3^*) for 
                                                           each segment.  Higher values indicate areas more prone to thermal 
                                                           stratification during the summer.  Although the numerical value of 
                                                           log~10~(*h*/*u^3^*) at which stratification occurs depends on the choice of
                                                           *u*, relative values among locations remain consistent [@Simpson2012]
-                                                          **BH: *h*/*u^3^* is not a unit!!**
 
 &nbsp;                              
 
@@ -101,8 +100,8 @@ Sea surface temperature	              ^o^C	      ST	    monthly sea surface temp
 
 &nbsp;
 
-Sea surface temperature               ^o^C	      ST	    average seasonal (November through March) sea surface temperature from monthly
-(Nov - Mar; *SST~w~*)			                                FVCOM structured grids [@Chen2003; @Chen2011] **BH: What does the ~w~ stand for? Winter? Explain.**
+Sea surface temperature               ^o^C	      ST	    average winter (November through March) sea surface temperature from monthly
+(Nov - Mar; *SST~w~*)			                                FVCOM structured grids [@Chen2003; @Chen2011] 
 
 &nbsp;
 
