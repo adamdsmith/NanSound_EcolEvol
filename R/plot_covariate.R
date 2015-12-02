@@ -59,7 +59,7 @@ plot_covariate <- function(z = "depth", data = env.segs, x = "x", y = "y",
   
   p <- 
     ggplot() + 
-    geom_polygon(data=MA, aes(long, lat, group=group), colour = element_blank(), fill="gray85") +
+    geom_polygon(data=MA, aes(long, lat, group=group), colour = NA, fill="gray85") +
     geom_tile(data=tmpDat, aes(x=x, y=y, fill=z)) +
     coord_equal() +
     coord_cartesian(xlim = xlims, ylim = ylims) + 
@@ -86,7 +86,7 @@ plot_covariate <- function(z = "depth", data = env.segs, x = "x", y = "y",
     }
   }
   
-  if (segs) p <- p + geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", alpha=0)
+  if (segs) p <- p + geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", fill = NA)
   
   if (plotwind) p <- p + geom_polygon(data=wind, aes(long, lat, group=group), 
                                       colour="black", size = 1.5, alpha=0)

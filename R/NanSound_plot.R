@@ -58,7 +58,7 @@ NanSound_plot <- function(data = NULL, x = "x", y = "y", z = "z",
   
   p <- 
     ggplot() + 
-    geom_polygon(data=MA, aes(long, lat, group=group), colour = element_blank(), fill="gray85") +
+    geom_polygon(data=MA, aes(long, lat, group=group), colour = NA, fill="gray85") +
     geom_tile(data=tmpDat, aes(x=x, y=y, fill=z)) +
     coord_equal() +
     coord_cartesian(xlim = xlims, ylim = ylims) + 
@@ -74,7 +74,7 @@ NanSound_plot <- function(data = NULL, x = "x", y = "y", z = "z",
     }
   
   # Overlay segment boundaries
-  if (segs) p <- p + geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", alpha=0)
+  if (segs) p <- p + geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", fill = NA)
   
   # Highlight hotspots, if requested
   if (!is.null(hotspot)) {
