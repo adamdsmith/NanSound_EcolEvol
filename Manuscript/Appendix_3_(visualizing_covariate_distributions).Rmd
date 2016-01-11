@@ -12,9 +12,7 @@ documentclass: article
 csl: ecology.csl
 ---
 ```{r load_necessaries, echo=FALSE, message=FALSE, warning=FALSE}
-# Aliases and functions
-devtools::source_gist(9216051) # Rprofile.R
-devtools::source_gist(9216061) # various.R
+source("../R/utils.R")
 
 # Environmental data
 if (!exists("env.segs")) load("../Data/ducks&environment.RData")
