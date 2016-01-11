@@ -6,15 +6,13 @@ geometry: margin=1in
 number_sections: true
 documentclass: article
 csl: ecology.csl
-graphics: yes
 ---
 
 ```{r load, echo=FALSE, message=FALSE, warning=FALSE}
-# Aliases and functions
-devtools::source_gist(9216051) # Rprofile.R
-devtools::source_gist(9216061) # various.R
+source("../R/utils.R")
 
-require(dplyr); require(ggplot2); require(lubridate)
+toLoad <- c("dplyr", "ggplot2", "lubridate")
+instant_pkgs(toLoad); rm(toLoad)
 
 ## load plotting function
 source("../R/full_effect_plot.R")
@@ -24,12 +22,10 @@ source("../R/create_new_data.R")
 
 ## Load sea duck data and relevant models
 source("../R/load_sea_duck_data.R")
-load("C:/Users/Adam/OneDrive/NanSound/Results_ltdu/zero.rda")
-#load("../Results_ltdu/zero.Rda")
+load("../Results_ltdu/zero.Rda")
 LTDUocc <- zero
 
-load("C:/Users/Adam/OneDrive/NanSound/Results_ltdu/hurdle.rda")
-#load("../Results_ltdu/hurdle.Rda")
+load("../Results_ltdu/hurdle.Rda")
 LTDUcc <- hurdle
 
 ## Set some graphic parameters
@@ -58,7 +54,9 @@ of their influence on the additive predictor in each model (or model parameter f
 
 models). Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  
 
-Covariates (and any abbreviations) are defined in detail in Appendix 2.
+Covariates (and any abbreviations) are defined in detail in Appendix 2; only effects selected
+
+to be stable (see Appendix 1) are depicted.
 
 ## Occupancy
 ```{r occ, out.extra=sprintf('angle=%d', c(90,0,0,0,0,90,0,0,0))}

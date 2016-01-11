@@ -9,11 +9,10 @@ csl: ecology.csl
 ---
 
 ```{r load, echo=FALSE, message=FALSE, warning=FALSE}
-# Aliases and functions
-devtools::source_gist(9216051) # Rprofile.R
-devtools::source_gist(9216061) # various.R
+source("../R/utils.R")
 
-require(dplyr); require(ggplot2); require(lubridate)
+toLoad <- c("dplyr", "ggplot2", "lubridate")
+instant_pkgs(toLoad); rm(toLoad)
 
 ## load plotting function
 source("../R/full_effect_plot.R")
@@ -23,12 +22,10 @@ source("../R/create_new_data.R")
 
 ## Load sea duck data and relevant models
 source("../R/load_sea_duck_data.R")
-load("C:/Users/Adam/OneDrive/NanSound/Results_coei/zero.rda")
-#load("../Results_coei/zero.Rda")
+load("../Results_coei/zero.rda")
 COEIocc <- zero
 
-load("C:/Users/Adam/OneDrive/NanSound/Results_coei/hurdle.rda")
-#load("../Results_coei/hurdle.Rda")
+load("../Results_coei/hurdle.Rda")
 COEIcc <- hurdle
 
 ## Set some graphic parameters
@@ -45,13 +42,21 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
 
 # Appendix 5. Common Eider stable covariate effects
 
-Marginal functional plots of the relationships between covariates (*controlling for all other
-variables; i.e., at their mean values* **BH: Did you do this?**) and the occupancy, conditional mean abundance, and 
+Marginal functional plots of the relationships between covariates (controlling for all other
+
+variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and 
+
 conditional overdispersion of abundance of Common Eider in Nantucket Sound, Massachusetts, 
+
 USA.  Covariate plots are ordered roughly in descending order of the magnitude of their 
+
 influence on the additive predictor in each model (or model parameter for count models).  
-Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates 
-(and any abbreviations) are defined in detail in Appendix 2. **Only effects which were selected to be stable (see Appendix 1) were depicted. [Add same for appendix 6 and 7]**
+
+Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates
+
+(and any abbreviations) are defined in detail in Appendix 2; only effects selected to be stable 
+
+(see Appendix 1) are depicted.
 
 ## Occupancy
 ```{r occ, out.extra=sprintf('angle=%d', c(90, rep(0, 8)))}
