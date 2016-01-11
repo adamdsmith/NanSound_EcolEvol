@@ -1,5 +1,3 @@
-instant_pkgs("lubridate")
-
 ## Create standardized (when appropriate) environmental data on which to predict from
 ## selected models for each species
 
@@ -80,15 +78,3 @@ pred_data <- left_join(pred_data, all_ssts)
 scot_anim <- pred_data
 
 
-load("C:/Users/Adam/OneDrive/NanSound/Results_scot/zero.rda")
-#load("../Results_scot/zero.Rda")
-load("C:/Users/Adam/OneDrive/NanSound/Results_scot/hurdle.rda")
-#load("../Results_scot/hurdle.Rda")
-SCOTocc <- zero
-SCOTcc <- hurdle
-
-scot_anim$occup <- predict(SCOTocc, newdata=scot_anim, type = "response")
-scot_anim$ltabund <- exp(predict.gamlssHurdle(SCOTocc, SCOTcc, scot_anim)$add_pred)
-
-rm("zero", "hurdle", "SCOTocc", "SCOTcc")
-gc(reset = TRUE)

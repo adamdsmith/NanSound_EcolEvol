@@ -15,8 +15,20 @@ documentclass: article
 To provide an example of the seasonal dynamics that can characterize sea duck occupancy and abundance in Nantucket Sound, we proovide an animation of predicted scoter occupancy and average abundance for every other day between 1 November 2005 and 31 March 2006.
 
 ```{r, echo=FALSE, eval=FALSE} 
+source("../R/utils.R")
+source("../R/predict.gamlssHurdle.R")
+
+instant_pkgs(c("plyr", "dplyr", "lubridate"))
+load("../Data/ducks&environment.RData")
+
 # Generate the semi-daily data for the animation
-source("../R/create_SCOT_animation_data.R")
+source("../R/create_SCOT_animation_data.R") # creates scot_anim
+
+load("../Results_scot/zero.Rda")
+scot_anim$occup <- mboost:::predict.mboost(zero, newdata=scot_anim, type = "response")
+
+load("../Results_scot/hurdle.rda")
+scot_anim$ltabund <- exp(predict.gamlssHurdle(zero, hurdle, scot_anim)$add_pred)
 
 # Compose the animation
 source("../R/create_SCOT_animation.R")

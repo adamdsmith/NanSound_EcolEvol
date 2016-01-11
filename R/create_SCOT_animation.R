@@ -1,4 +1,4 @@
-instant_pkgs("animation")
+instant_pkgs(c("animation", "ggplot2", "rgdal"))
 # A LaTex compiler must be installed
 
 theme_set(theme_bw(base_size = 19))
@@ -33,18 +33,18 @@ anim_occup <- function(tmpDat) {
   levels(tmpDat$occup) <- c("< 25%", "25 - 50%", "50 - 75%", "> 75%")
   
   p <- ggplot() + ggtitle("Scoter estimated occupancy: winter 2005-2006") +
-    geom_polygon(data=MA, aes(long, lat, group=group), colour = element_blank(), fill="gray85") +
+    geom_polygon(data=MA, aes(long, lat, group=group), colour = NA, fill="gray85") +
     geom_tile(data=tmpDat, aes(x=x, y=y, fill=occup)) +
     coord_equal() +
     coord_cartesian(xlim = xlims, ylim = ylims) + 
     theme(legend.justification=c(0,0.5), 
           legend.position=c((416000 - xlims[1])/diff(xlims), 0.5)) + # enter where legend should start
     scale_fill_brewer("Occupancy\n(predicted %)", palette = "OrRd") +
-    geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", alpha=0) +
+    geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", fill = NA) +
     geom_polygon(data=wind, aes(long, lat, group=group),
                  colour="black", size = 1.5, alpha=0) +
     geom_polygon(data = subset(seg_poly, seg %in% which_segs), 
-                 aes(long, lat, group=group), colour = "gray20", size=1.25, alpha=0) +
+                 aes(long, lat, group=group), colour = "gray20", size=1.25, fill = NA) +
     annotate("text", x = xlims[1] + 0.02*diff(xlims), y = ylims[2] - 0.02*diff(ylims), 
              label = format(unique(tmpDat$date), format = "%d %b %Y"), hjust=0, vjust=1, size=10)
   print(p)
@@ -61,18 +61,18 @@ anim_abund <- function(tmpDat) {
     levels(tmpDat$ltabund) <- c("< 10", "10 - 25", "26 - 100", "> 100")
     
     p <- ggplot() + ggtitle("Scoter estimated overall abundance: winter 2005-2006") +
-      geom_polygon(data=MA, aes(long, lat, group=group), colour = element_blank(), fill="gray85") +
+      geom_polygon(data=MA, aes(long, lat, group=group), colour = NA, fill="gray85") +
       geom_tile(data=tmpDat, aes(x=x, y=y, fill=ltabund)) +
       coord_equal() +
       coord_cartesian(xlim = xlims, ylim = ylims) + 
       theme(legend.justification=c(0,0.5), 
             legend.position=c((416000 - xlims[1])/diff(xlims), 0.5)) + # enter where legend should start
       scale_fill_brewer("Predicted\nabundance", palette = "OrRd") +
-      geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", alpha=0) +
+      geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", fill = NA) +
       geom_polygon(data=wind, aes(long, lat, group=group),
                    colour="black", size = 1.5, alpha=0) +
       geom_polygon(data = subset(seg_poly, seg %in% which_segs), 
-                   aes(long, lat, group=group), colour = "gray20", size=1.25, alpha=0) +
+                   aes(long, lat, group=group), colour = "gray20", size=1.25, fill = NA) +
       annotate("text", x = xlims[1] + 0.02*diff(xlims), y = ylims[2] - 0.02*diff(ylims), 
                label = format(unique(tmpDat$date), format = "%d %b %Y"), hjust=0, vjust=1, size=10)
     print(p)
