@@ -1,7 +1,7 @@
 instant_pkgs(c("animation", "ggplot2", "rgdal"))
 # A LaTex compiler must be installed
 
-theme_set(theme_bw(base_size = 19))
+theme_set(theme_bw(base_size = 18))
 theme_update(plot.margin = unit(c(0.25, 0.05, -0.85, -0.85),"line"),
              panel.grid.minor = element_blank(),
              panel.grid.major= element_blank(),
@@ -39,7 +39,7 @@ anim_occup <- function(tmpDat) {
     coord_cartesian(xlim = xlims, ylim = ylims) + 
     theme(legend.justification=c(0,0.5), 
           legend.position=c((416000 - xlims[1])/diff(xlims), 0.5)) + # enter where legend should start
-    scale_fill_brewer("Occupancy\n(predicted %)", palette = "OrRd") +
+    scale_fill_brewer("Occupancy", palette = "OrRd") +
     geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", fill = NA) +
     geom_polygon(data=wind, aes(long, lat, group=group),
                  colour="black", size = 1.5, alpha=0) +
@@ -67,7 +67,7 @@ anim_abund <- function(tmpDat) {
       coord_cartesian(xlim = xlims, ylim = ylims) + 
       theme(legend.justification=c(0,0.5), 
             legend.position=c((416000 - xlims[1])/diff(xlims), 0.5)) + # enter where legend should start
-      scale_fill_brewer("Predicted\nabundance", palette = "OrRd") +
+      scale_fill_brewer("Abundance", palette = "OrRd") +
       geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", fill = NA) +
       geom_polygon(data=wind, aes(long, lat, group=group),
                    colour="black", size = 1.5, alpha=0) +

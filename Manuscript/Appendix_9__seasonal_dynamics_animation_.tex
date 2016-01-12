@@ -24,29 +24,6 @@
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
 \usepackage[margin=1in]{geometry}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
-\newcommand{\RegionMarkerTok}[1]{{#1}}
-\newcommand{\ErrorTok}[1]{\textbf{{#1}}}
-\newcommand{\NormalTok}[1]{{#1}}
 \ifxetex
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
@@ -93,6 +70,7 @@
   \predate{}\postdate{}
 
 \usepackage{animate}
+\usepackage{float}
 
 
 \begin{document}
@@ -106,37 +84,11 @@ abundance}\label{appendix-9.-seasonal-animation-of-predicted-scoter-occupancy-an
 
 To provide an example of the seasonal dynamics that can characterize sea
 duck occupancy and abundance in Nantucket Sound, we proovide an
-animation of predicted scoter occupancy and average abundance for every
-other day between 1 November 2005 and 31 March 2006.
+animation of predicted scoter occupancy and overall abundance (scoter
+per 1.5 km x ca. 180 m) for every other day between 1 November 2005 and
+31 March 2006.
 
-The code associated with this appendix
-(\texttt{Appendix\_9\_(seasonal\_dynamics\_animation).Rmd}) produces two
-files which contain the final animations:
-\texttt{SCOT\_2005\_occup\_animation.pdf} and
-\texttt{SCOT\_2005\_abund\_animation.pdf}. However, here we manually
-appended them by incorporating the following code into the associated
-.tex file and recompiling (see
-\texttt{Appendix\_9\_\_seasonal\_dynamics\_animation\_.tex}).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# \textbackslash{}begin\{figure\}}
-\CommentTok{# \textbackslash{}begin\{center\}}
-\CommentTok{# \textbackslash{}animategraphics[controls, width=1\textbackslash{}linewidth]\{2\}\{occup_anim\}\{\}\{\}}
-\CommentTok{# \textbackslash{}end\{center\}}
-\CommentTok{# \textbackslash{}end\{figure\}}
-
-\CommentTok{# \textbackslash{}newpage}
-
-\CommentTok{# \textbackslash{}begin\{figure\}}
-\CommentTok{# \textbackslash{}begin\{center\}}
-\CommentTok{# \textbackslash{}animategraphics[controls, width=1\textbackslash{}linewidth]\{2\}\{abund_anim\}\{\}\{\}}
-\CommentTok{# \textbackslash{}end\{center\}}
-\CommentTok{# \textbackslash{}end\{figure\}}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \animategraphics[controls, width=1\linewidth]{2}{occup_anim}{}{}
 \end{center}
