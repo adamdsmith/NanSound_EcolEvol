@@ -8,7 +8,7 @@ documentclass: article
 csl: ecology.csl
 ---
 
-```{r load, echo=FALSE, message=FALSE, warning=FALSE}
+```{r load_coei, echo=FALSE, message=FALSE, warning=FALSE}
 source("../R/utils.R")
 
 toLoad <- c("dplyr", "ggplot2", "lubridate")
@@ -59,7 +59,7 @@ Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate 
 (see Appendix 1) are depicted.
 
 ## Occupancy
-```{r occ, out.extra=sprintf('angle=%d', c(90, rep(0, 8)))}
+```{r occ_coei, out.extra=sprintf('angle=%d', c(90, rep(0, 8)))}
 # xkm, ykm
 full_effect_plot(COEIocc, coei, var = "xkm, ykm", varType = "st", xlab = "Easting (km from center)",
                  ylab = "Northing (km from center")
@@ -81,7 +81,7 @@ for (i in 1:length(vars)) {
 ```
 
 ## Conditional mean
-```{r mu}
+```{r mu_coei}
 vars <- c("cdom", "SSTrel", "meanphi", "SAR", "depth", "ferry")
 xlabs <- c("Chromomorphic dissolved organic matter", 
             expression(paste(SST, ", ", relative~to~other~segments~(degree*C))),
@@ -97,7 +97,7 @@ for (i in 1:length(vars)) {
 ```
 
 ## Conditional overdispersion
-```{r sigma, out.extra=sprintf('angle=%d', c(90, rep(0, 5)))}
+```{r sigma_coei, out.extra=sprintf('angle=%d', c(90, rep(0, 5)))}
 full_effect_plot(COEIcc, parameter="sigma", var = "xkm, ykm", varType="bi", 
                  xlab = "Easting (km from center)",
                  ylab = "Northing (km from center)")

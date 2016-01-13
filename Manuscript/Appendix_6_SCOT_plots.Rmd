@@ -8,7 +8,7 @@ documentclass: article
 csl: ecology.csl
 ---
 
-```{r load, echo=FALSE, message=FALSE, warning=FALSE}
+```{r load_scot, echo=FALSE, message=FALSE, warning=FALSE}
 source("../R/utils.R")
 
 toLoad <- c("dplyr", "ggplot2", "lubridate")
@@ -59,7 +59,7 @@ observed covariate values.  Covariates (and any abbreviations) are defined in de
 Appendix 2; only effects selected to be stable (see Appendix 1) are depicted.
 
 ## Occupancy
-```{r occ, out.extra=sprintf('angle=%d', c(90,rep(0, 10)))}
+```{r occ_scot, out.extra=sprintf('angle=%d', c(90,rep(0, 10)))}
 # xkm, ykm
 full_effect_plot(SCOTocc, scot, "xkm, ykm", "st", xlab = "Easting (km from center)",
                  ylab = "Northing (km from center")
@@ -83,7 +83,7 @@ for (i in 1:length(vars)) {
 ```
 
 ## Conditional mean
-```{r mu, out.extra=sprintf('angle=%d', c(90,0,0,0,0))}
+```{r mu_scot, out.extra=sprintf('angle=%d', c(90,0,0,0,0))}
 # xkm, ykm
 full_effect_plot(SCOTcc, parameter = "mu", var = "xkm, ykm", varType = "st", 
                  xlab = "Easting (km from center)", ylab = "Northing (km from center")
@@ -102,7 +102,7 @@ for (i in 1:length(vars)) {
 ```
 
 ## Conditional overdispersion
-```{r sigma}
+```{r sigma_scot}
 vars <- c("meanphi", "tidesd", "SAR", "SSTrel", "y2004", "y2005")
 xlabs <- c("Sediment grain size (phi)", "Epibenthic tidal velocity (standard deviation; m/s)",
             "Sea floor surface area:planimetric area", 
