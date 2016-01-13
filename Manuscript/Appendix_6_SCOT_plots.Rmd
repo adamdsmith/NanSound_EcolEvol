@@ -42,27 +42,17 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
 
 # Appendix 6. Scoter stable covariate effects
 
-Marginal functional plots of the relationships between covariates (controlling for all other
+Marginal functional plots of the relationships between covariates (controlling for all other variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and conditional overdispersion of abundance of scoters (Black, Surf, and White-winged Scoter) in Nantucket Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending order of the magnitude of their influence on the additive predictor in each model (or model parameter for count models).  Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates (and any abbreviations) are defined in detail in Appendix 2; only effects selected to be stable (see Appendix 1) are depicted.
 
-variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and 
-
-conditional overdispersion of abundance of scoters (Black, Surf, and White-winged Scoter) in
-
-Nantucket Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending 
-
-order of the magnitude of their influence on the additive predictor in each model (or model 
-
-parameter for count models).  Vertical lines along the *x*-axis (i.e., rug plots) indicate 
-
-observed covariate values.  Covariates (and any abbreviations) are defined in detail in 
-
-Appendix 2; only effects selected to be stable (see Appendix 1) are depicted.
+\newpage
 
 ## Occupancy
+
 ```{r occ_scot, out.extra=sprintf('angle=%d', c(90,rep(0, 10)))}
 # xkm, ykm
 full_effect_plot(SCOTocc, scot, "xkm, ykm", "st", xlab = "Easting (km from center)",
                  ylab = "Northing (km from center")
+cat('\r\n\r\n')
 
 vars <- c("obs_window", "time", "SAR", "SSTm", "cdom", "SSTw", "meanphi", "d2land", "depth", "SSTrel")
 xlabs <- c(expression(Survey~effort~(transect~km^2)), "Days from 31 December", 
@@ -79,6 +69,7 @@ for (i in 1:length(vars)) {
   xlab <- xlabs[i]
   type <- types[i]
   print(full_effect_plot(SCOTocc, scot, var, type, xlab = xlab))
+  cat('\r\n\r\n')
 }
 ```
 
@@ -87,6 +78,7 @@ for (i in 1:length(vars)) {
 # xkm, ykm
 full_effect_plot(SCOTcc, parameter = "mu", var = "xkm, ykm", varType = "st", 
                  xlab = "Easting (km from center)", ylab = "Northing (km from center")
+cat('\r\n\r\n')
 
 vars <- c("SSTrel", "time", "d2land", "meanphi")
 xlabs <- c(expression(paste(SST, ", ", relative~to~other~segments~(degree*C))),
@@ -98,6 +90,7 @@ for (i in 1:length(vars)) {
   xlab <- xlabs[i]
   type <- types[i]
   print(full_effect_plot(SCOTcc, parameter = "mu", var = var, varType = type, xlab = xlab))
+  cat('\r\n\r\n')
 }
 ```
 
@@ -114,5 +107,6 @@ for (i in 1:length(vars)) {
   xlab <- xlabs[i]
   type <- types[i]
   print(full_effect_plot(SCOTcc, parameter = "sigma", var = var, varType = type, xlab = xlab))
+  cat('\r\n\r\n')
 }
 ```

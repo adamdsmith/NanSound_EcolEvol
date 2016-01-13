@@ -42,27 +42,16 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
 
 # Appendix 7. Long-tailed Duck stable covariate effects
 
-Marginal functional plots of the relationships between covariates (controlling for all other
+Marginal functional plots of the relationships between covariates (controlling for all other variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and conditional overdispersion of abundance of Long-tailed Duck in Nantucket Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending order of the magnitude of their influence on the additive predictor in each model (or model parameter for count models). Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates (and any abbreviations) are defined in detail in Appendix 2; only effects selected to be stable (see Appendix 1) are depicted.
 
-variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and 
-
-conditional overdispersion of abundance of Long-tailed Duck in Nantucket Sound, 
-
-Massachusetts, USA.  Covariate plots are ordered roughly in descending order of the magnitude 
-
-of their influence on the additive predictor in each model (or model parameter for count 
-
-models). Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  
-
-Covariates (and any abbreviations) are defined in detail in Appendix 2; only effects selected
-
-to be stable (see Appendix 1) are depicted.
+\newpage
 
 ## Occupancy
 ```{r occ_ltdu, out.extra=sprintf('angle=%d', c(90,0,0,0,0,90,0,0,0))}
 # xkm, ykm
 full_effect_plot(LTDUocc, ltdu, var = "xkm, ykm", varType = "st", xlab = "Easting (km from center)",
                  ylab = "Northing (km from center")
+cat('\r\n\r\n')
 
 vars <- c("SSTm", "time", "obs_window", "meanphi")
 xlabs <- c(expression(paste(SST, ", ", monthly~average~(degree*C))),
@@ -75,11 +64,13 @@ for (i in 1:length(vars)) {
   xlab <- xlabs[i]
   type <- types[i]
   print(full_effect_plot(LTDUocc, ltdu, var, type, xlab = xlab))
+  cat('\r\n\r\n')
 }
 
 full_effect_plot(LTDUocc, ltdu, var = "time, depth", varType = "bi",
                  xlab = "Days from 31 December", 
                  ylab = "Depth relative to mean sea level (m)")
+cat('\r\n\r\n')
 
 vars <- c("d2land", "tidesd", "y2004")
 xlabs <- c("Distance to land (km)",
@@ -92,6 +83,7 @@ for (i in 1:length(vars)) {
   xlab <- xlabs[i]
   type <- types[i]
   print(full_effect_plot(LTDUocc, ltdu, var, type, xlab = xlab))
+  cat('\r\n\r\n')
 }
 ```
 
@@ -100,17 +92,21 @@ for (i in 1:length(vars)) {
 # xkm, ykm
 full_effect_plot(LTDUcc, parameter = "mu", var = "xkm, ykm", varType = "st", 
                  xlab = "Easting (km from center)", ylab = "Northing (km from center")
+cat('\r\n\r\n')
 
 full_effect_plot(LTDUcc, parameter = "mu", var = "time, depth", varType = "bi", 
                  xlab = "Days from 31 December", 
                  ylab = "Depth relative to mean sea level (m)")
+cat('\r\n\r\n')
 
 full_effect_plot(LTDUcc, parameter = "mu", var = "SSTm", 
                  xlab = expression(paste(SST, ", ", monthly~average~(degree*C))))
+cat('\r\n\r\n')
 ```
 
 ## Conditional overdispersion
 ```{r sigma_ltdu}
 full_effect_plot(LTDUcc, parameter = "sigma", var = "strat", 
                  xlab = "Water column stratification potential (summer)")
+cat('\r\n\r\n')
 ```

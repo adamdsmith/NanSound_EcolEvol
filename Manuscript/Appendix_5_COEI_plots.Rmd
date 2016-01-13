@@ -42,28 +42,18 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
 
 # Appendix 5. Common Eider stable covariate effects
 
-Marginal functional plots of the relationships between covariates (controlling for all other
+Marginal functional plots of the relationships between covariates (controlling for all other variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and conditional overdispersion of abundance of Common Eider in Nantucket Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending order of the magnitude of their influence on the additive predictor in each model (or model parameter for count models).  Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates (and any abbreviations) are defined in detail in Appendix 2; only effects selected to be stable (see Appendix 1) are depicted.
 
-variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and 
-
-conditional overdispersion of abundance of Common Eider in Nantucket Sound, Massachusetts, 
-
-USA.  Covariate plots are ordered roughly in descending order of the magnitude of their 
-
-influence on the additive predictor in each model (or model parameter for count models).  
-
-Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates
-
-(and any abbreviations) are defined in detail in Appendix 2; only effects selected to be stable 
-
-(see Appendix 1) are depicted.
+\newpage
 
 ## Occupancy
+
 ```{r occ_coei, out.extra=sprintf('angle=%d', c(90, rep(0, 8)))}
 # xkm, ykm
 full_effect_plot(COEIocc, coei, var = "xkm, ykm", varType = "st", xlab = "Easting (km from center)",
                  ylab = "Northing (km from center")
-
+cat('\r\n\r\n')
+  
 vars <- c("SSTm", "meanphi", "obs_window", "cdom", "SAR", "d2land", "SBT", "y2005")
 xlabs <- c(expression(paste(SST, ", ", monthly~average~(degree*C))),
            "Sediment grain size (phi)", expression(Survey~effort~(transect~km^2)), 
@@ -77,6 +67,7 @@ for (i in 1:length(vars)) {
   xlab <- xlabs[i]
   type <- types[i]
   print(full_effect_plot(COEIocc, coei, var, type, xlab = xlab))
+  cat('\r\n\r\n')
 }
 ```
 
@@ -93,6 +84,7 @@ for (i in 1:length(vars)) {
   xlab <- xlabs[i]
   type <- types[i]
   print(full_effect_plot(COEIcc, parameter = "mu", var = var, varType = type, xlab = xlab))
+  cat('\r\n\r\n')
 }
 ```
 
@@ -101,6 +93,7 @@ for (i in 1:length(vars)) {
 full_effect_plot(COEIcc, parameter="sigma", var = "xkm, ykm", varType="bi", 
                  xlab = "Easting (km from center)",
                  ylab = "Northing (km from center)")
+cat('\r\n\r\n')
 
 vars <- c("tidebmean", "depth", "tidesd", "SSTm", "y2004")
 xlabs <- c("Epibenthic tidal velocity (mean; m/s)", "Depth relative to mean sea level (m)",
@@ -113,5 +106,6 @@ for (i in 1:length(vars)) {
   xlab <- xlabs[i]
   type <- types[i]
   print(full_effect_plot(COEIcc, parameter = "sigma", var = var, varType = type, xlab = xlab))
+  cat('\r\n\r\n')
 }
 ```
