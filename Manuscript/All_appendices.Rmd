@@ -1,0 +1,47 @@
+---
+header-includes:
+  - \usepackage{lscape}
+  - \usepackage{animate}
+  - \usepackage{float}
+  - \newcommand{\blscape}{\begin{landscape}}
+  - \newcommand{\elscape}{\end{landscape}}
+output: 
+  pdf_document:
+fontsize: 12pt
+geometry: margin=1in
+number_sections: true
+documentclass: article
+bibliography: NantucketMS.bib
+csl: ecology.csl
+---
+
+```{r child = "Appendix_1_(stability_selection)_nolit.Rmd"}
+```
+\newpage
+```{r child = "Appendix_2_(covariate_table)_nolit.Rmd"}
+```
+\newpage
+```{r child = "Appendix_3_(visualizing_covariate_distributions).Rmd"}
+```
+\newpage
+```{r child = "Appendix_4_(early_stopping)_nolit.Rmd"}
+```
+\newpage
+```{r child = "Appendix_5_COEI_plots.Rmd"}
+```
+\newpage
+```{r child = "Appendix_6_SCOT_plots.Rmd"}
+```
+\newpage
+```{r child = "Appendix_7_LTDU_plots.Rmd"}
+```
+\newpage
+```{r child = "Appendix_8_(conditional_overdispersion_figure).Rmd"}
+```
+\newpage
+```{r child = "Appendix_9_(seasonal_dynamics_animation).Rmd"}
+```
+
+\clearpage
+
+# Literature cited
