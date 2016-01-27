@@ -58,7 +58,7 @@ Figure 3.2.  Spatial and annual variation in standardized sea surface temperatur
 ```{r SSTrel, echo=TRUE, eval=TRUE, message=FALSE, fig.height=4.5, fig.width=9}
 plot_covariate("SSTrel", segs = FALSE, scale = TRUE, diverge = TRUE) # Figure 3.3
 ```
-Figure 3.3.  Spatial, monthly, and annual variation in standardized sea surface temperature relative to other segments (SSTrel) in Nantucket Sound. **I get a warning that "Non Lab interpolation is deprecated". Furthermore, I have plenty of empty panels. Is that correct? If so, state this and explain why this happens.**
+Figure 3.3.  Spatial, monthly, and annual variation in standardized sea surface temperature relative to other segments (SSTrel) in Nantucket Sound. Empty panels indicate that data are not available for a particular year and month combination.
 \elscape
 \newpage
 
