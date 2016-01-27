@@ -17,8 +17,8 @@ theme_update(line = element_blank(),
 # Detailed study area plot
 detail <- 
   ggplot() + 
-  geom_polygon(data=MA, aes(long, lat, group=group), colour = element_blank(), fill="gray85") +
-  geom_path(data=transects, aes(long, lat, group=group), colour = "gray50", alpha=0.5) + 
+  geom_polygon(data=MA, aes(long, lat, group=group), colour = NA, fill="gray85") +
+  geom_path(data=transects, aes(long, lat, group=group), colour = "gray50", alpha = 0.5) + 
   geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "black", alpha=0) +
   geom_polygon(data=wind, aes(long, lat, group=group), colour="black", size = 1.5, alpha=0) +
   coord_equal() +
@@ -56,12 +56,11 @@ inset <-
   theme(plot.background = element_rect(fill = "transparent", colour = NA))
   
 # Print (or save) it
-# tiff(file="../Figures/Nantucket_study_area.tif",w=6.5,h=6.5, res=900, units = "in", compression = "lzw")
-# png(file="./Figures/Nantucket_study_area.png",w=6.5,h=6.5, res=900, units = "in")
+png(file="./Figures/Nantucket_study_area.png",w=6.5,h=6.5, res=900, units = "in")
 grid.newpage()
 v1<-viewport() #plot area for the main map
 #plot area for the inset map
 v2<-viewport(w = 0.33, h = 0.33, x = 0, y = 1, just = c(0, 1), gp = gpar(fill=0)) 
 print(detail,vp=v1) 
 print(inset,vp=v2)
-#dev.off()
+dev.off()
