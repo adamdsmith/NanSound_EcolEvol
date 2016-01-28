@@ -9,13 +9,6 @@ pseudoR2 <- function(zero, hurdle, data, engine = c("both", "pscl", "glmmADMB"))
   zeros <- data$count == 0
   nonzeros <- data$count > 0
 
-#####  THIS IS NOT USED ANY FURTHER
-#####
-#####  # Fitted (additive predictor) values for final GAMLSS hurdle model
-#####  predictions <- predict.gamlssHurdle(zero, hurdle, data)$add_pred
-#####  #plot(exp(predictions), obs_count)
-#####  #abline(0,1)
-
   # Fit null, two ways available
   # Complete hurdle model using pscl package or separately using glmmADMB
   # Final log-likelihoods for null model differ very slightly
