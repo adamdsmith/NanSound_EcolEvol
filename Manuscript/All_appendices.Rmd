@@ -1,15 +1,9 @@
 ---
-header-includes:
-  - \usepackage{lscape}
-  - \usepackage{animate}
-  - \usepackage{float}
-  - \newcommand{\blscape}{\begin{landscape}}
-  - \newcommand{\elscape}{\end{landscape}}
 output: 
   pdf_document:
+    includes:
+      in_header: preamble.tex
 fontsize: 12pt
-geometry: margin=1in
-number_sections: true
 documentclass: article
 bibliography: NantucketMS.bib
 csl: ecology.csl

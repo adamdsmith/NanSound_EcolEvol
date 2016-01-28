@@ -1,8 +1,9 @@
+library(rgdal); library(ggplot2)
 seg_poly <- readOGR("../GIS/Ancillary", "seg_poly", verbose=FALSE)
 MA <- readOGR("../GIS/Ancillary", "MA_bg", verbose=FALSE)
 wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundary", verbose=FALSE), raster:::crs(MA))
 transects <- readOGR("../GIS/Ancillary", "transects", verbose=FALSE)
-ec <- readOGR("../GIS/Ancillary", "ec_lines", verbose=FALSE)
+ec <- readOGR("../GIS/Ancillary", "NE_US_poly", verbose=FALSE)
 
 theme_set(theme_bw())
 theme_update(line = element_blank(),
@@ -45,14 +46,16 @@ study_area <- data.frame(xmin=-70.63, xmax=-69.90, ymin=41.22, ymax=41.70)
 # Create inset plot
 inset <- 
   ggplot() + 
-  geom_rect(aes(xmin =-75.03, xmax = -68.55, ymin = 38.89, ymax = 45.37), fill = "white") +
-  geom_path(data=ec, aes(long, lat, group=group), colour = "black") +
+#  geom_rect(aes(xmin =-75.03, xmax = -68.55, ymin = 38.89, ymax = 45.37), 
+#            fill = "white") +
+  geom_polygon(data=ec, aes(long, lat, group=group), fill = "gray75", colour = "black") +
   coord_equal() +
-  scale_x_continuous(limits = c(-75.03, -68.55), expand = c(0, 0)) + 
-  scale_y_continuous(limits = c(38.89, 45.37), expand = c(0, 0)) +
+    coord_cartesian(xlim = c(-75.03, -68.55), ylim = c(38.89, 45.37)) +
+#  scale_x_continuous(limits = , expand = c(0, 0)) + 
+#  scale_y_continuous(limits = , expand = c(0, 0)) +
   geom_rect(data = study_area, 
             aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax), 
-            colour="black", alpha=0, size=1)  +
+            colour="red", fill = NA, size=1)  +
   theme(plot.background = element_rect(fill = "transparent", colour = NA))
   
 # Print (or save) it
