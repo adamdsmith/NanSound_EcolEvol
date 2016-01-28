@@ -166,3 +166,15 @@ cut2 <- function (x, cuts, m = 150, g, levels.mean = FALSE, digits, minmax = TRU
         label(y) <- xlab
     y
 }
+
+create_tex_frag <- function(rmd, newpage = TRUE) {
+    knitr::knit(rmd, 'tmp.md')
+    outtex <- paste0(tools::file_path_sans_ext(rmd), ".tex")
+    pandoc_cmd <- paste("pandoc -f markdown -t latex -p -o", shQuote(outtex), "tmp.md")
+    system(pandoc_cmd)
+    if (newpage) {
+        tmptex <- c("\\newpage", readLines(outtex))
+        writeLines(tmptex, outtex)
+    }
+    file.remove("tmp.md")
+}
