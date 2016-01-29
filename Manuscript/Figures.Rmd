@@ -1,14 +1,8 @@
 ---
-output: 
-  pdf_document:
-    includes:
-      in_header: preamble.tex
-fontsize: 12pt
-documentclass: article
+output: pdf_document
 ---
-```{r chunk-opts, echo=FALSE}
+```{r chunk-opts-figs, echo=FALSE}
 # Set some knitr chunk options
-options(width = 250, scipen=999)
 knitr::opts_chunk$set(eval = FALSE, include = FALSE)
 ```
 
@@ -17,13 +11,13 @@ knitr::opts_chunk$set(eval = FALSE, include = FALSE)
 
 **Figure 2.** Marginal functional plots for stably selected covariates in the occupancy (probability of presence) and conditional abundance (mean and overdispersion of count models) of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during three winters, 2003 - 2005. Plots illustrate the partial contribution to the additive predictor (Y-axis) of a covariate holding all other covariates at their mean. Within a model, univariate plots (i.e., lines) share a Y-axis scale, enabling direct comparisons of effect sizes among covariates and species. For bivariate plots, the Y-axis and X-axis reflect the first and second variables listed in the interaction, respectively; colors indicate the direction and magnitude of the partial contribution (blacks = negative, reds = positive; darker colors = larger effect) and are likewise comparable within a model. Northing by easting effects are given only at 31 December. For factor variables, only the general association (i.e., positive or negative) with the additive predictor is given. Covariate abbreviations correspond to Equation 1.
 
-**Figure 3.** Occupancy probability for Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during three winters, 2003 – 2005.  Occupancy probabilities (top row) represent the median expected probability of sea duck presence in a 1.5 km x ca. 180 m transect through a given segment predicted on 10 evenly-spaced dates from 15 November through 1 April in each winter.  Spatiotemporal variation in occupancy (%; bottom row) is indicated by the median absolute deviation, MAD, of occupancy probability relative to the median.  Predicted values are categorized based on their quartiles; segments with the highest occupancy or variability (values $\geq$ 98th percentile) are outlined in black.
+**Figure 3.** Occupancy probability for Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during three winters, 2003 - 2005.  Occupancy probabilities (top row) represent the median expected probability of sea duck presence in a 1.5 km x ca. 180 m transect through a given segment predicted on 10 evenly-spaced dates from 15 November through 1 April in each winter.  Spatiotemporal variation in occupancy (%; bottom row) is indicated by the median absolute deviation, MAD, of occupancy probability relative to the median.  Predicted values are categorized based on their quartiles; segments with the highest occupancy or variability (values $\geq$ 98th percentile) are outlined in black.
 
-**Figure 4.** Conditional abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during three winters, 2003 – 2005.  Conditional abundances (top row) represent the median expected number of sea ducks, assuming their presence, in a 1.5 km x ca. 180 m transect in each segment predicted on 10 evenly-spaced dates from 15 November through 1 April in each winter.  Spatiotemporal variation in conditional abundance (%; bottom row) is indicated by the median absolute deviation, MAD, relative to the median.  Predicted values are categorized based on their quartiles; segments with the highest conditional abundance or variability (values $\geq$ 98th percentile) are outlined in black.
+**Figure 4.** Conditional abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during three winters, 2003 - 2005.  Conditional abundances (top row) represent the median expected number of sea ducks, assuming their presence, in a 1.5 km x ca. 180 m transect in each segment predicted on 10 evenly-spaced dates from 15 November through 1 April in each winter.  Spatiotemporal variation in conditional abundance (%; bottom row) is indicated by the median absolute deviation, MAD, relative to the median.  Predicted values are categorized based on their quartiles; segments with the highest conditional abundance or variability (values $\geq$ 98th percentile) are outlined in black.
 
-**Figure 5.**  Unconditional abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during three winters, 2003 – 2005.  Median abundances (top row) represent the expected number of sea ducks along a 1.5 km x ca. 180 m transect within each segment predicted on 10 evenly-spaced dates from 15 November through 1 April in each winter.  Spatiotemporal variation in abundance (%; bottom row) is estimated from the median absolute deviation, MAD, relative to the median.  Predicted values are categorized based on their quartiles; segments with the highest abundance or variability (values $\geq$ 98th percentile) are outlined in black.
+**Figure 5.**  Unconditional abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during three winters, 2003 - 2005.  Median abundances (top row) represent the expected number of sea ducks along a 1.5 km x ca. 180 m transect within each segment predicted on 10 evenly-spaced dates from 15 November through 1 April in each winter.  Spatiotemporal variation in abundance (%; bottom row) is estimated from the median absolute deviation, MAD, relative to the median.  Predicted values are categorized based on their quartiles; segments with the highest abundance or variability (values $\geq$ 98th percentile) are outlined in black.
 
-**Figure 6.** Relationship between observed and predicted total abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) during 30 aerial surveys of Nantucket Sound over three winters, 2003-2005. The dashed line indicates a 1:1 relationship between predicted and observed abundances in surveyed segments; points below and above this line indicate underestimates and overestimates of predicted abundances, respectively.
+**Figure 6.** Relationship between observed and predicted total abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) during 30 aerial surveys of Nantucket Sound over three winters, 2003 - 2005. The dashed line indicates a 1:1 relationship between predicted and observed abundances in surveyed segments; points below and above this line indicate underestimates and overestimates of predicted abundances, respectively.
 
 \newpage
 
