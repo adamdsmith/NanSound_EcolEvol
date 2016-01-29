@@ -1,13 +1,11 @@
 ---
 output: 
   pdf_document:
+    includes:
+      in_header: preamble_app.tex
 fontsize: 12pt
-geometry: margin=1in
-number_sections: true
 documentclass: article
-csl: ecology.csl
 ---
-
 ```{r load_ltdu, echo=FALSE, message=FALSE, warning=FALSE}
 source("../R/utils.R")
 
@@ -42,7 +40,7 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
 
 # Appendix 7. Long-tailed Duck stable covariate effects
 
-Marginal functional plots of the relationships between covariates (controlling for all other variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and conditional overdispersion of abundance of Long-tailed Duck in Nantucket Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending order of the magnitude of their influence on the additive predictor in each model (or model parameter for count models). Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates (and any abbreviations) are defined in detail in Appendix 2; only effects selected to be stable (see Appendix 1) are depicted.
+Marginal functional plots of the relationships between covariates (controlling for all other variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and conditional overdispersion of abundance of Long-tailed Duck in Nantucket Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending order of the magnitude of their influence on the additive predictor in each model (or model parameter for count models). Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates (and any abbreviations) are defined in detail in Appendix S2; only effects selected to be stable (see Appendix S1) are depicted.
 
 \newpage
 

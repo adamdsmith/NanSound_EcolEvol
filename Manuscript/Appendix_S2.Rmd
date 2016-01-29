@@ -1,25 +1,22 @@
 ---
-header-includes:
-  - \usepackage{lscape}
-  - \newcommand{\blscape}{\begin{landscape}}
-  - \newcommand{\elscape}{\end{landscape}}
 output: 
   pdf_document:
+    includes:
+      in_header: preamble_app.tex
 fontsize: 12pt
-geometry: margin=1in
 documentclass: article
 bibliography: NantucketMS.bib
 csl: ecology.csl
 ---
 
-# Appendix 2. Covariate details
+# Appendix S2. Covariate details
 
-We evaluated biophysical covariates (Table 2.1) expected to influence the distribution, abundance, and movements of sea ducks or, more likely, the distribution and availability of their benthic prey (e.g., mollusks and crustaceans); we did not have information related directly to the distribution of preferred prey. Biophysical covariates could be characterized as spatial (varying only among segments), temporal (varying within or among winters, but not among segments) or as spatiotemporal effects (varying among segments and within or among winters). We allowed the effect of bathymetry and relative sea surface temperature to vary over time within a given winter via interactions with day of season.  We also included a survey effort covariate and covariates that were solely a function of segment geographic location, which we used to address potential spatial correlation in the data.  We standardized (i.e., mean centered and scaled) all continuous covariates.  Appendix 3 describes and illustrates the use of an R function to visualize the spatial and temporal distribution of these covariates in Nantucket Sound.
+We evaluated biophysical covariates (Table S2.1) expected to influence the distribution, abundance, and movements of sea ducks or, more likely, the distribution and availability of their benthic prey (e.g., mollusks and crustaceans); we did not have information related directly to the distribution of preferred prey. Biophysical covariates could be characterized as spatial (varying only among segments), temporal (varying within or among winters, but not among segments) or as spatiotemporal effects (varying among segments and within or among winters). We allowed the effect of bathymetry and relative sea surface temperature to vary over time within a given winter via interactions with day of season.  We also included a survey effort covariate and covariates that were solely a function of segment geographic location, which we used to address potential spatial correlation in the data.  We standardized (i.e., mean centered and scaled) all continuous covariates.  Appendix S3 describes and illustrates the use of an R function to visualize the spatial and temporal distribution of these covariates in Nantucket Sound.
 
 \newpage
 \blscape
 
-**Table 2.1** Biophysical and survey covariates used to evaluate the distribution and abundance of Common Eider, Black, Surf, and White-winged Scoter, and Long-tailed Duck in Nantucket Sound during winters 2003 - 2005. 
+**Table S2.1** Biophysical and survey covariates used to evaluate the distribution and abundance of Common Eider, Black, Surf, and White-winged Scoter, and Long-tailed Duck in Nantucket Sound during winters 2003 - 2005. 
 
 ---------------------------------------------------------------------------------------------------------------------------
 Variable                              Units     Variable  Description
@@ -164,3 +161,5 @@ Survey effort (*obs_window*)         km^2^	      ST      area of strip transect 
 \elscape
 
 ## Literature cited
+\setlength{\parindent}{0pt} 
+\hangparas{16pt}{1}

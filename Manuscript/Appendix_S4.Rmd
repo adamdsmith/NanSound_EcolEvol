@@ -1,0 +1,39 @@
+---
+output: 
+  pdf_document:
+    includes:
+      in_header: preamble_app.tex
+fontsize: 12pt
+documentclass: article
+bibliography: NantucketMS.bib
+csl: ecology.csl
+---
+# Appendix S4. Early stopping
+
+## Occupancy models
+
+All occupancy models converged to the maximum likelihood estimates (i.e., did not stop early; Figure S4.1).  Failure to stop early sometimes happens in data sets with many observations and strong effects [see comment of Kneib in @Buhlmann2014].  This suggests that the effects of the environmental variables on sea duck occupancy are rather complex.  
+
+```{r early_stopping_occupancy, echo=FALSE, eval=FALSE}
+# Figure S4.1 was created using the following script, although for nice formatting
+# (and time considerations) we simply link to the final PNG file, below
+source("../R/early_stopping_occupancy_plot.R")
+```
+![Occupancy early stopping](./Figures/early_stopping_occupancy.png)  
+**Figure S4.1** Bootstrapped out-of-bag empirical risk in sea duck occupancy models based on 25-fold subsampling.  Gray lines indicate the out-of-bag risk on each subsample and the black line indicates the average out-of-bag risk; the optimal iteration is indicated by the dashed vertical line.
+
+## Count models
+
+In contrast to occupancy model, bootstrapping prescribed early stopping for both parameters in all count models (Figure S4.2).
+
+```{r early_stopping_count, echo=FALSE, eval=FALSE}
+# Figure S4.2 was created using the following script, although for nice formatting
+# (and time considerations) we simply link to the final PNG file, below
+source("../R/early_stopping_count_plot.R")
+```
+![Conditional count early stopping](./Figures/early_stopping_count.png)  
+**Figure S4.2** Bootstrapped out-of-bag empirical risk in sea duck conditional count models based on 25-fold subsampling.  Lighter colors indicate lower average out-of-bag risk (over the 25 samples) for a given combination of *m*~stop~-values for $\mu$ and $\sigma$; the optimal combination is indicated by the red square. 
+
+## Literature Cited
+\setlength{\parindent}{0pt} 
+\hangparas{16pt}{1}

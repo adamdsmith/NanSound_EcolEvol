@@ -1,0 +1,18 @@
+---
+output: 
+  pdf_document:
+    includes:
+      in_header: preamble_app.tex
+fontsize: 12pt
+documentclass: article
+---
+# Appendix S8. Conditional overdispersion in sea duck abundance
+
+```{r conditional_overdispersion_maps, echo=FALSE, eval=FALSE}
+# Figure 8.1 was created using the following scripts.  However, for nice formatting in the 
+# pdf and Word output we simply link to a resized PNG file.
+source("../R/map_conditional_overdispersion.R")
+```
+![Sea duck conditional overdispersion](./Figures/conditional_overdispersion_maps_reduced.png)  
+
+**Figure S8.1.** Overdispersion in the conditional abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in Nantucket Sound during three winters, 2003 - 2005.  Higher median conditional overdispersion values (top row) indicate increased variance in excess of the mean in the negative binomial model in counts of sea ducks, assuming their presence, in a 1.5 km x ca. 180 m transect in each segment predicted on 10 evenly-spaced dates from 15 November through 1 April in each winter.  Spatiotemporal variation in conditional overdispersion (%; bottom row) is indicated by the median absolute deviation, MAD, relative to the median.  Predicted values are categorized based on their quartiles; segments with highest overdispersion or variability(values $\geq$ 98th percentile) are outlined in black.
