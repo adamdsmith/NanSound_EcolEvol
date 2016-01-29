@@ -59,19 +59,19 @@ pseudoR2 <- function(zero, hurdle, data, engine = c("both", "pscl", "glmmADMB"))
   }
 
   # Calculate observation level log-likelihoods for final zero models
-  llzero.final <- log(1 - predict(zero, type = "response"))
+  llzero.final <- log(1 - mboost:::predict.mboost(zero, type = "response"))
 
   # Calculate observation level log-likelihoods for final conditional count models
   # First, get mu and sigma from final boosted GAMLSS model
-  mu.final <- predict(hurdle, parameter="mu", type="response", newdata=data)
-  sigma.final <- predict(hurdle, parameter="sigma", type="response", newdata=data)
+  mu.final <- gamboostLSS:::predict.mboostLSS(hurdle, parameter="mu", type="response", newdata=data)
+  sigma.final <- gamboostLSS:::predict.mboostLSS(hurdle, parameter="sigma", type="response", newdata=data)
 
   llcount.final <- lgamma(data$count + 1/sigma.final) - lgamma(1/sigma.final) - lgamma(data$count + 1) + # NB ll
     data$count * log(sigma.final*mu.final) - (data$count + 1/sigma.final) * log(1 + sigma.final*mu.final) - # NB ll
     log(1 - (1 + sigma.final*mu.final)^(-1/sigma.final)) # adjustment for truncated distribution
 
   # Calculate total log-likelihoods for final (L.final) model
-  p1_zero.final <- predict(zero, type="response", newdata=data)
+  p1_zero.final <- mboost:::predict.mboost(zero, type="response", newdata=data)
   L.final <- sum(zeros * llzero.final + nonzeros * (log(p1_zero.final) + llcount.final))
 
   # Calculate pseudo-R2 sensu Nagelkerke (1991; Biometrika 78:691-692)
