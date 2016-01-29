@@ -1,6 +1,9 @@
 *.Rproj
 .Rproj.user
 *.Rhistory
-.gitignore
 Rpubs/
-All_appendices_files/
+README.Rmd
+Ecol_App_cover_letter.docx
+Ecol_App_cover_letter.pdf
+*.doc
+*.docx
