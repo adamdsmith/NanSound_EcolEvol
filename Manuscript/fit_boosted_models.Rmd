@@ -1,0 +1,48 @@
+```{r load-options-data, include = FALSE}
+source("../R/utils.R")
+
+# The following sections requires devtools package to be installed
+# You should also install Rtools (http://cran.r-project.org/bin/windows/Rtools/)
+#devtools::install_github("hofnerb/gamboostLSS/pkg")
+#devtools::install_github("hofnerb/stabs")
+
+# You'll also need an older version of the mboost package (2.4-2)
+# Download it here: https://cran.r-project.org/src/contrib/Archive/mboost/mboost_2.4-2.tar.gz
+# and install from local zip file
+
+# Necessary packages; other packages may be loaded as other files are sourced
+# Make sure these packages are installed first
+toLoad = c("dplyr") # "lubridate", "reshape", "plyr", "dplyr", "gamlss.tr", "gamboostLSS")
+instant_pkgs(toLoad); rm(toLoad)
+
+# Load sea duck data sets
+# This includes:
+#   env.segs - environmental data from all (504) segments on all (30) survey dates; includes
+#              field (length) that indicates the amount of survey effort (if any) on a given
+#              date
+#   obs.final - segment level count summaries for each species/group
+load("../Data/ducks&environment.RData")
+
+# For each group, load/create data sets for various analyses
+# This creates the (1) final survey data set (e.g., coei), (2) zero-truncated
+#   data set (i.e., at least 1 duck observed; e.g., coei_zerotrunc), and 
+#   (3) presence/absence data set (e.g., coei_zero) 
+source("../R/load_sea_duck_data.R")
+
+# Load predict function for combined occupancy/count models
+source("../R/predict.gamlssHurdle.R")
+```
+
+```{r get_predictions, eval=FALSE}
+# For each group, create data for prediction
+# This does two important things: (1) creates the final data set over which 
+#   model predictions are desired (e.g., coei_pred) and (2) calculates the average
+#   of relevant variables (covar_avgs) so that partial effect plots can be placed
+#   on their original scale for easier interpretation
+source("../R/create_new_data.R")
+source("../R/predict_from_new_data.R")
+
+# To save time, we alternatively provide the products of this process: 
+#   coei_final, scot_final, ltdu_final
+load("../Data/prediction_data.Rda")
+```
