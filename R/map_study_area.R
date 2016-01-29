@@ -55,7 +55,7 @@ inset <-
 #  scale_y_continuous(limits = , expand = c(0, 0)) +
   geom_rect(data = study_area, 
             aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax), 
-            colour="red", fill = NA, size=1)  +
+            colour="black", fill = NA, size=1)  +
   theme(plot.background = element_rect(fill = "transparent", colour = NA))
   
 # Print (or save) it
