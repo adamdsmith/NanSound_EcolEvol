@@ -20,8 +20,8 @@ detail <-
   ggplot() + 
   geom_polygon(data=MA, aes(long, lat, group=group), colour = NA, fill="gray85") +
   geom_path(data=transects, aes(long, lat, group=group), colour = "gray50", alpha = 0.5) + 
-  geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "black", alpha=0) +
-  geom_polygon(data=wind, aes(long, lat, group=group), colour="black", size = 1.5, alpha=0) +
+  geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "black", fill = NA) +
+  geom_polygon(data=wind, aes(long, lat, group=group), colour="red", size = 1.5, fill = NA) +
   coord_equal() +
   scale_x_continuous("", limits = c(363350, 423200), expand = c(0, 0)) + 
   scale_y_continuous("", limits = c(4565650, 4625100), expand = c(0, 0)) + 

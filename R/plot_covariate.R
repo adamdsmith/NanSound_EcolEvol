@@ -1,10 +1,11 @@
 # Install (if necessary) and load required packages
 toLoad <- c("reshape2", "plyr", "dplyr", "rgdal", 
             "grid", "lubridate", "ggplot2")
-instant_pkgs(toLoad); rm(toLoad)
+sapply(toLoad, require, character.only = TRUE); rm(toLoad)
 
 # Requires raster
-# Load required shapefiles
+# Load required data shapefiles
+if (!exists("env.segs")) load("../Data/ducks&environment.RData")
 if (!exists("seg_poly")) seg_poly <- readOGR("../GIS/Ancillary", "seg_poly", verbose=FALSE)
 if (!exists("MA")) MA <- readOGR("../GIS/Ancillary", "MA_bg", verbose=FALSE)
 if (!exists("wind")) wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundary", verbose=FALSE),
@@ -89,7 +90,7 @@ plot_covariate <- function(z = "depth", data = env.segs, x = "x", y = "y",
   if (segs) p <- p + geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "gray30", fill = NA)
   
   if (plotwind) p <- p + geom_polygon(data=wind, aes(long, lat, group=group), 
-                                      colour="black", size = 1.5, alpha=0)
+                                      colour="black", size = 1.5, fill=NA)
   
   if(dynamic & is.na(agg.seg)) {
     if(varybywinter) {
