@@ -1,8 +1,8 @@
 This repository contains the data and code necessary to reproduce the
 analysis in the manuscript "Modeling the spatiotemporal abundance of
-wintering sea ducks in Nantucket Sound, USA: implications for marine
-spatial planning" by Smith et al. (in review at *Ecological
-Applications*).
+wintering sea ducks: implications for marine
+spatial planning" by Smith et al. (in review at the *Journal of Applied
+Ecology*).
 
 Authors (affiliation):  
 - Adam D. Smith<sup>1</sup> (Department of Natural Resources Science,
