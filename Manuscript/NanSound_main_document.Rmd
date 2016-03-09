@@ -8,7 +8,7 @@ output:
 fontsize: 12pt
 documentclass: article
 bibliography: NantucketMS.bib
-csl: ecology.csl
+csl: journal-of-applied-ecology.csl
 ---
 
 ```{r chunk-opts, echo=FALSE}
@@ -22,6 +22,7 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 source("../R/utils.R")
 
 # Necessary packages; other packages may be loaded as other files are sourced
+library(plyr)
 library(dplyr)
 
 # Load sea duck data sets
@@ -31,18 +32,14 @@ library(dplyr)
 #   (3) presence/absence data set (e.g., coei_zero) 
 source("../R/load_sea_duck_data.R")
 ```
+\doublespacing
 
-RUNNING HEAD: Model-based distribution and abundance
-\
-\
-\
-Spatiotemporal modeling of winter sea duck abundance in Nantucket Sound, USA: implications for marine spatial planning 
-\
-\
-<span style="font-variant: small-caps">
+Spatiotemporal modeling of sea duck abundance: implications for marine spatial planning  
+
+\bigskip
+
 Adam D. Smith^1,^\footnotemark[6], Benjamin Hofner^2^, Jason E. Osenkowski^3^, Taber Allison^4^, Giancarlo Sadoti^5^, Scott R. McWilliams^1^, and Peter W. C. Paton^1^
-</span>\
-\
+
 ^1^Department of Natural Resources Science, University of Rhode Island, Kingston, Rhode Island 02881 USA
 
 ^2^Department of Medical Informatics, Biometry and Epidemiology, Friedrich-Alexander-University Erlangen-Nuremberg, Waldstraße 6, 91054 Erlangen, Germany
@@ -53,14 +50,39 @@ Adam D. Smith^1,^\footnotemark[6], Benjamin Hofner^2^, Jason E. Osenkowski^3^, T
 
 ^5^Department of Geography, University of Nevada, Reno, Nevada, 89557 USA
 
+\bigskip
+
+RUNNING HEAD: Model-based distribution and abundance  
+
+\bigskip
+
+\singlespacing
+
+WORD COUNT: 8726 \newline
+\quad Summary: 383 \newline
+\quad Main text: 5373 \newline
+\quad Acknowledgements: 111 \newline
+\quad References: 2100 \newline
+\quad Figure legends: 598 \newline
+NUMBER OF FIGURES: 6 \newline
+NUMBER OF REFERENCES: 76 \newline
+
 \footnotetext[6]{Present address: United States Fish and Wildlife Service, National Wildlife Refuge System, Inventory and Monitoring Branch, 135 Phoenix Rd., Athens, GA 30605 USA; avianmigration@gmail.com}
 
 \newpage
+\doublespacing
 
-*Abstract*. Effective marine spatial plans require ecologically meaningful estimates of the distribution and abundance of biological resources that could be affected by anthropogenic change.  In North America, there is a pressing need to develop spatially-explicit abundance estimates of marine birds to help assess potential impacts of planned offshore wind energy developments (OWED). Sea ducks are especially important to consider in the context of marine spatial planning because populations of most North American species are below historic levels, and studies conducted in western Europe suggest that OWED could negatively impact sea duck populations.  Developers have proposed constructing 130 3.6-MW turbines in Nantucket Sound, Massachusetts where some of the largest concentrations of sea ducks occur during winter in eastern North America. We conducted aerial surveys from 2003 to 2005 to assess spatiotemporal variation in the abundance of sea ducks (Common Eider [*Somateria mollissima*], Black Scoter [*Melanitta americana*], Surf Scoter [*M. perspicillata*], White-winged Scoter [*M. deglandi*], and Long-tailed Duck [*Clangula hyemalis*]) in Nantucket Sound. We related spatiotemporal variation in sea duck occupancy and conditional abundance to potentially relevant biophysical and spatiotemporal covariates. We applied a negative binomial hurdle model that modelled occupancy using a generalized additive model (GAM), and generalized additive models for location, scale, and shape (GAMLSS) to estimate the conditional species abundance. Spatiotemporal effects (i.e., geographic location and time of season) were the dominant explanatory feature in occupancy and conditional abundance estimates.  Biophysical covariates also affected occupancy estimates, with occupancy greatest at intermediate monthly sea surface temperatures and in areas with coarser sediments; the effects of biophysical covariates on conditional abundance were less consistent among species. Resulting fine-scale, spatially- explicit models suggested that a planned OWED in Nantucket Sound could displace some sea ducks from potential foraging habitat; however, the largest concentrations of sea ducks were in areas away from the proposed OWED.  Our flexible, model-based approach can be used by local and regional planners to prioritize key habitats and areas used by marine birds and other fauna that should be protected from anthropogenic stressors such as OWED.  
+**Summary**
+
+1. Effective marine spatial plans require ecologically meaningful estimates of the distribution and abundance of biological resources that could be affected by anthropogenic change.  In North America, there is a pressing need to develop spatially-explicit abundance estimates of marine birds to help assess potential impacts of planned offshore wind energy developments (OWED). Sea ducks are particularly relevant in the context of marine spatial planning as populations of most North American species are below historic levels and studies from western Europe suggest negative consequences for sea duck populations due to OWED.
+
+2. We implemented a flexible model-based approach that modelled species occupancy using a generalized additive model (GAM), and generalized additive models for location, scale, and shape (GAMLSS) to estimate conditional species abundance. The models were subsequently combined to generate estimates of unconditional abundance.  We demonstrate the approach using aerial transect survey data of sea ducks (Common Eider [*Somateria mollissima*], Black Scoter [*Melanitta americana*], Surf Scoter [*M. perspicillata*], White-winged Scoter [*M. deglandi*], and Long-tailed Duck [*Clangula hyemalis*]) in Nantucket Sound, Massachusetts, USA, which supports some of the largest concentrations of wintering sea ducks in eastern North America and where developers propose to construct 130 3.6-MW turbines.  
+
+3. Spatiotemporal effects (i.e., geographic location and time of season) were the dominant explanatory feature in occupancy and conditional abundance estimates of sea ducks.  Biophysical covariates also affected occupancy estimates, with occupancy greatest at intermediate monthly sea surface temperatures and in areas with coarser sea floor sediments; the effects of biophysical covariates on conditional abundance were less consistent among species. Resulting fine-scale, spatially- explicit models suggested that a planned OWED in Nantucket Sound could displace some sea ducks from potential foraging habitat; however, the largest concentrations of sea ducks were in areas away from the proposed OWED.  
+
+4. *Synthesis and application*. Our approach to species distribution and abundance modeling offers several useful features including (1) the ability to model all parameters of the conditional distribution as a function of covariates, (2) integrated variable reduction and selection among many covariates, (3) integrated model selection, and (4) the efficient incorporation of smooth effects to capture spatiotemporal trends poorly explained by other covariates. This approach should prove useful in marine spatial planning for identifying key habitats and areas used by marine birds and other fauna that warrant protection from anthropogenic stressors such as OWED.  
 \
-\
-*Key words*.  abundance, distribution, Common Eider, generalized additive models, gradient boosting, marine spatial planning, Long-tailed Duck, Nantucket Sound, scoter, sea ducks, wind energy 
+*Key words*.  abundance, distribution, generalized additive models, gradient boosting, Nantucket Sound, stability selection, wind energy 
 
 \newpage
 
@@ -74,7 +96,7 @@ Model-based approaches are a useful framework to generate spatially-explicit est
 
 We demonstrate a model-based approach to predict animal distribution and abundance using aerial transect survey data of sea ducks in Nantucket Sound, Massachusetts, USA.  We implemented generalized additive models [GAMs; @Hastie1990; @Wood2006] and their recent extension [GAMLSS - GAMs for location, scale, and shape; @Rigby2005] in a gradient descent boosting framework [@Friedman2001]. GAMLSS methods extend GAMs to allow all parameters of the conditional response distribution to be modeled as a function of relevant covariates [@Rigby2005].  This approach provides spatially-explicit insights into the covariates associated with sea duck abundance and its variability. The boosting algorithm accommodates the inclusion of various effect types [e.g., linear, smooth, spatial, spatiotemporal, and random effects; @Hofner2014] and correlated covariates (i.e., parameter estimates are regularized), identifies the most relevant subset among potentially many covariates (i.e., variable selection), and evaluates competing representations of continuous covariates [e.g., linear vs. nonlinear effects of covariates; @Kneib2009; @Maloney2012]. Our specific objectives were to demonstrate a flexible, model-based approach that (1) provides spatially- and temporally-explicit estimates of sea duck abundance and distribution while accommodating many of the challenges inherent in animal survey data; and (2) describes the associations between biophysical features and sea duck distribution and abundance in one of the most important migrating and wintering areas for sea ducks in the western Atlantic.
 
-## Methods
+## Materials and methods
 
 *Study area and species.*---We conducted fieldwork throughout Nantucket Sound in Massachusetts, USA (Figure 1). Our study area encompassed ca. 1,500 km^2^, was relatively shallow (generally < 20 m deep), and included some of the most important sea duck wintering habitat in the western Atlantic [@White2009; @Silverman2013].  The primary species of sea ducks found in Nantucket Sound were Common Eider (*Somateria  mollissima*; hereafter eider), Black Scoter (*M. americana*), Surf Scoter (*M. perspicillata*), and White-winged Scoter (*Melanitta deglandi*), and Long-tailed Duck (*Clangula hyemalis*).  Additionally, approximately 62 km^2^ of of Horseshoe Shoal in northwestern Nantucket Sound is fully permitted for OWED [Figure 1; @Santora2004], which could affect sea duck use of this important wintering area [@Drewitt2006; @Langston2013; @Winiarski2014].  
 
@@ -117,7 +139,7 @@ In our occupancy models, $g(\cdot)$ is $g(\pi_{\text{sea ducks}})$, the occupanc
 
 Subsequent to their independent fitting, we consolidated occupancy and conditional count models [see, e.g., Equation 6 in @Zeileis2008] to generate spatially-explicit estimates of unconditional sea duck abundance.  These estimates were used to evaluate the approximate explanatory power of our final models using a pseudo *R*^2^ measure of the explained variation [@Nagelkerke1991; @Maloney2012]. 
 
-All analyses were conducted in R [Version 3.1.3; @RCoreTeam2014] with the add-on packages gamboostLSS [@Hofner2015a; @Hofner2015b], mboost [@Hothorn2010; @Hothorn2015], and stabs [@HofHoth2015].  The data and code for reproducing this manuscript and analyses are given as an online electronic supplement at [http://github.com/adamdsmith/NanSound_EcolApp](http://github.com/adamdsmith/NanSound_EcolApp).
+All analyses were conducted in R [Version 3.1.3; @RCoreTeam2014] with the add-on packages gamboostLSS [@Hofner2015a; @Hofner2015b], mboost [@Hothorn2010; @Hothorn2015], and stabs [@HofHoth2015].  The data and code for reproducing this manuscript and analyses are given as an online electronic supplement at [http://github.com/adamdsmith/NanSound_JAppEcol](http://github.com/adamdsmith/NanSound_JAppEcol).
 
 ## Results
 
@@ -166,9 +188,9 @@ The unexplained variation in our models and the predominance of marginal spatiot
 
 *Marine Spatial Planning: where to place a wind farm in Nantucket Sound given these estimates of the distribution and abundance of sea ducks?*---In the past decade, ecosystem-based marine spatial plans have become a reality because comprehensive land use planning is a central component of development plans in North America and Europe [@Douvere2008]. One of the biggest challenges facing marine spatial planners is the paucity of relevant information on the spatial distribution and abundance of biological resources including marine birds [@Bradbury2014; @Flanders2015].  We developed fine-scale, spatially- and temporally-explicit maps of the estimated distribution and abundance of sea ducks in Nantucket Sound that could assist marine spatial planners during the zoning process.  At a continental scale, Nantucket Sound regularly supports one of the largest concentrations of wintering sea ducks in eastern North America [@White2009; @Zipkin2010; @Silverman2013], therefore if any OWEDs are constructed in Nantucket Sound then steps should be taken to minimize impacts to this key wintering habitat.  @Bradbury2014 developed a sensitivity index that suggested that sea ducks were particularly vulnerable to habitat displacement from foraging sites, while they are less vulnerable to collision risk from OWED.  Our models suggest that the permitted OWED zone on Horseshoe Shoal is not located in prime foraging habitat for most species of sea ducks in the Sound, although large numbers of eiders can use this area [see also @Flanders2015].  Potential vulnerability to OWED has been incorporated into some recent spatially-explicit planning efforts for seabirds [@Garthe2004; @Bradbury2014; @Winiarski2014] though to our knowledge not yet for sea ducks. 
 
-## Acknowledgments
+## Acknowledgements
 
 We especially thank Simon Perkins, who had the primary role in coordinating field logistics, and John Ambroult, who piloted the majority of flights (and owned the plane).  Special thanks to Andrea Jones and Ellen Jedrey for their contributions to project design and field work.  Thanks also to Jack O'Brien and Phillip Kibler for piloting flights as needed, and to Jasmine Smith-Gillen and numerous volunteer observers and data recorders.  Funding was provided by Foundation M, The Island Foundation, Mass Audubon, Massachusetts Environmental Trust, the State of Rhode Island, the U.S. Fish and Wildlife Service Sea Duck Joint Venture, and the U.S. Fish and Wildlife Service Wildlife and Sport Fish Restoration Program.
 
-## Literature cited
+## References
 \hangparas{16pt}{1}
