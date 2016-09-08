@@ -1,8 +1,5 @@
 This repository contains the data and code necessary to reproduce the
-analysis in the manuscript "Modeling the spatiotemporal abundance of
-wintering sea ducks: implications for marine
-spatial planning" by Smith et al. (in review at the *Journal of Applied
-Ecology*).
+analysis in the manuscript "Modeling spatiotemporal animal abundance using boosted GAMLSS hurdle models: a case study of wintering sea ducks" by Smith et al. (to be submitted to *Methods in Ecology and Evolution*).
 
 Authors (affiliation):  
 - Adam D. Smith<sup>1</sup> (Department of Natural Resources Science,
