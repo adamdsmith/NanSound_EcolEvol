@@ -1,0 +1,111 @@
+---
+output: 
+  pdf_document:
+    includes:
+      in_header: preamble_app.tex
+fontsize: 12pt
+documentclass: article
+---
+
+```{r load_scot, echo=FALSE, message=FALSE, warning=FALSE}
+source("../R/utils.R")
+
+toLoad <- c("dplyr", "ggplot2", "lubridate")
+instant_pkgs(toLoad); rm(toLoad)
+
+## load plotting function
+source("../R/full_effect_plot.R")
+
+## Get covariate means and SDs
+source("../R/create_new_data.R")
+
+## Load sea duck data and relevant models
+source("../R/load_sea_duck_data.R")
+load("../Results_scot/zero.Rda")
+SCOTocc <- zero
+
+load("../Results_scot/hurdle.Rda")
+SCOTcc <- hurdle
+
+## Set some graphic parameters
+theme_set(theme_bw(base_size = 18))
+theme_update(panel.grid.minor = element_blank(),
+  panel.grid.major= element_blank(),
+  panel.border=element_rect(fill=NA),
+  panel.background= element_blank(),
+  legend.position = 'none')
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
+                      fig.width=6.5, fig.height=6.5)
+```
+
+# Appendix S6. Scoter stable covariate effects
+
+Marginal functional plots of the relationships between covariates (controlling for all other variables; i.e., at their mean values) and the occupancy, conditional mean abundance, and conditional overdispersion of abundance of scoters (Black, Surf, and White-winged Scoter) in Nantucket Sound, Massachusetts, USA.  Covariate plots are ordered roughly in descending order of the magnitude of their influence on the additive predictor in each model (or model parameter for count models).  Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates (and any abbreviations) are defined in detail in Appendix S2; only effects selected to be stable (see Appendix S1) are depicted.
+
+\newpage
+
+## Occupancy
+
+```{r occ_scot, out.extra=sprintf('angle=%d', c(90,rep(0, 10)))}
+# xkm, ykm
+full_effect_plot(SCOTocc, scot, "xkm, ykm", "st", xlab = "Easting (km from center)",
+                 ylab = "Northing (km from center")
+cat('\r\n\r\n')
+
+vars <- c("obs_window", "time", "SAR", "SSTm", "cdom", "SSTw", "meanphi", "d2land", "depth", "SSTrel")
+xlabs <- c(expression(Survey~effort~(transect~km^2)), "Days from 31 December", 
+           "Sea floor surface area:planimetric area", 
+           expression(paste(SST, ", ", monthly~average~(degree*C))), "Chromomorphic dissolved organic matter", 
+           expression(paste(SST, ", ", Nov~-~Mar~(degree*C))),
+           "Sediment grain size (phi)", "Distance to land (km)", 
+           "Depth relative to mean sea level (m)",
+           expression(paste(SST, ", ", relative~to~other~segments~(degree*C))))
+types <- rep("uni", 10)
+
+for (i in 1:length(vars)) {
+  var <- vars[i]
+  xlab <- xlabs[i]
+  type <- types[i]
+  print(full_effect_plot(SCOTocc, scot, var, type, xlab = xlab))
+  cat('\r\n\r\n')
+}
+```
+
+## Conditional mean
+```{r mu_scot, out.extra=sprintf('angle=%d', c(90,0,0,0,0))}
+# xkm, ykm
+full_effect_plot(SCOTcc, parameter = "mu", var = "xkm, ykm", varType = "st", 
+                 xlab = "Easting (km from center)", ylab = "Northing (km from center")
+cat('\r\n\r\n')
+
+vars <- c("SSTrel", "time", "d2land", "meanphi")
+xlabs <- c(expression(paste(SST, ", ", relative~to~other~segments~(degree*C))),
+            "Days from 31 December", "Distance to land (km)",
+            "Sediment grain size (phi)")
+types <- rep("uni", 4)
+for (i in 1:length(vars)) {
+  var <- vars[i]
+  xlab <- xlabs[i]
+  type <- types[i]
+  print(full_effect_plot(SCOTcc, parameter = "mu", var = var, varType = type, xlab = xlab))
+  cat('\r\n\r\n')
+}
+```
+
+## Conditional overdispersion
+```{r sigma_scot}
+vars <- c("meanphi", "tidesd", "SAR", "SSTrel", "y2004", "y2005")
+xlabs <- c("Sediment grain size (phi)", "Epibenthic tidal velocity (standard deviation; m/s)",
+            "Sea floor surface area:planimetric area", 
+            expression(paste(SST, ", ", relative~to~other~segments~(degree*C))),
+            "Winter (2004)", "Winter (2005)")
+types <- c(rep("uni", 4), "fac", "fac")
+for (i in 1:length(vars)) {
+  var <- vars[i]
+  xlab <- xlabs[i]
+  type <- types[i]
+  print(full_effect_plot(SCOTcc, parameter = "sigma", var = var, varType = type, xlab = xlab))
+  cat('\r\n\r\n')
+}
+```

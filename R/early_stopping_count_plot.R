@@ -10,7 +10,7 @@ cvr_LTDUcc <- cvr_hurdle
 
 rm(cvr_hurdle)
 
-png(file="./Figures/early_stopping_count.png",w=6.5, h=2, res=1200, units = "in")
+png(file="./Figures/early_stopping_count.png",w=6.5, h=2, res=150, units = "in")
 par(mar = c(3.5, 3, 1.5, 1))
 layout(matrix(1:3, nrow=1))
 plot(cvr_COEIcc, main = "Common Eider", xlab="", ylab="")

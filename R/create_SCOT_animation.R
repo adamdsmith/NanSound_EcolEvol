@@ -12,12 +12,14 @@ theme_update(plot.margin = unit(c(0.25, 0.05, -0.85, -0.85),"line"),
              axis.title.y=element_blank(),
              axis.text.x=element_blank(),
              axis.text.y=element_blank(),
-             legend.position = 'none')
+             legend.position = 'none',
+             plot.title = element_text(hjust=0.1))
 
 ## Load polygons if necessary
-if (!exists("seg_poly")) seg_poly <- readOGR("../GIS/Ancillary", "seg_poly")
-if (!exists("MA")) MA <- readOGR("../GIS/Ancillary", "MA_bg")
-if (!exists("wind")) wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundary"), raster:::crs(MA))
+if (!exists("seg_poly")) seg_poly <- readOGR("../GIS/Ancillary", "seg_poly", verbose = FALSE)
+if (!exists("MA")) MA <- readOGR("../GIS/Ancillary", "MA_bg", verbose = FALSE)
+if (!exists("wind")) wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundary", verbose = FALSE), 
+                                         raster:::crs(MA))
 
 # Set map x and y limits
 xlims <- c(374500, 425700)

@@ -1,0 +1,11 @@
+\documentclass{article}
+\usepackage[margin=0.5in,landscape]{geometry}
+                \usepackage{animate}
+                \begin{document}
+                \begin{figure}
+                \begin{center}
+                \animategraphics[controls, width=0.5\linewidth]{3.33333333333333}{occup_anim}{}{}
+                \end{center}
+                \end{figure}
+                \end{document}
+                 

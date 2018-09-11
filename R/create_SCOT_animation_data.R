@@ -38,7 +38,7 @@ standardized.segs$ferry <- as.factor(standardized.segs$ferry)
 
 # Set dates
 pred_dates <- mdy("11012005") 
-yday(pred_dates) <- 305 + seq(0, 150, 2)
+yday(pred_dates) <- 305 + seq(0, 150, 7)
 
 # Add winter and month to associate with temporally-changing variables
 pred_data <- data.frame(date = pred_dates,
