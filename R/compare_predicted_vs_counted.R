@@ -93,6 +93,6 @@ p <- ggplot(all_ducks, aes(x=total_count, y=est_count)) +
           axis.line.y = element_line(color="black")) 
 
 ## CREATE FILE
-#png(file = "./Figures/Predicted_abundance_observed_abundance.png", height = 107/1.25, width = 107, units = "mm", res = 600)
+png(file = "./Figures/Predicted_abundance_observed_abundance.png", height = 107/1.25, width = 107, units = "mm", res = 600)
 p
 dev.off()
