@@ -18,10 +18,12 @@ source("../R/utils.R")
 source("../R/predict.gamlssHurdle.R")
 
 instant_pkgs(c("plyr", "dplyr", "lubridate"))
-load("../Data/ducks&environment.RData")
 
-# Generate the semi-daily data for the animation
-source("../R/create_SCOT_animation_data.R") # creates scot_anim
+# Generate weekly data for the animation
+source("../R/create_study_area_data.R")
+pred_dates <- mdy("11012005") 
+yday(pred_dates) <- 305 + seq(0, 150, 7)
+scot_anim <- create_sa_data(pred_dates)
 
 load("../Results_scot/zero.Rda")
 scot_anim$occup <- mboost:::predict.mboost(zero, newdata=scot_anim, type = "response")

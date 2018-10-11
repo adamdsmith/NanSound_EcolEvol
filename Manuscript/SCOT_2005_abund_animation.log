@@ -1,52 +1,53 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.13)  6 MAR 2018 19:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.8.21)  10 OCT 2018 11:05
 entering extended mode
-**./SCOT_2005_abund_animation
-(SCOT_2005_abund_animation
-LaTeX2e <2016/03/31> patch level 3
-Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.cls
-"
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**SCOT_2005_abund_animation
+(./SCOT_2005_abund_animation
+LaTeX2e <2018-04-01> patch level 5
+
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size10.clo"
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
-\c@part=\count79
-\c@section=\count80
-\c@subsection=\count81
-\c@subsubsection=\count82
-\c@paragraph=\count83
-\c@subparagraph=\count84
-\c@figure=\count85
-\c@table=\count86
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometr
-y.sty"
-Package: geometry 2010/09/12 v5.6 Page Geometry
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometr
+y.sty
+Package: geometry 2018/04/16 v5.8 Page Geometry
 
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.
-sty"
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.
+sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifpdf
-.sty"
-Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/ifpdf
+.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifvte
-x.sty"
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/ifvte
+x.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxete
-x.sty"
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ifxetex/ifxete
+x.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count87
-\Gm@cntv=\count88
-\c@Gm@tempcnt=\count89
+\Gm@cnth=\count88
+\Gm@cntv=\count89
+\c@Gm@tempcnt=\count90
 \Gm@bindingoffset=\dimen103
 \Gm@wd@mp=\dimen104
 \Gm@odd@mp=\dimen105
@@ -56,76 +57,67 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen109
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
-
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometr
-y.cfg")) (animate.sty
+) (./animate.sty
 Package: animate 2010/09/28 PDF animations from files and inline graphics
 
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\ifdraft
-.sty"
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/ifdraft
+.sty
 Package: ifdraft 2016/05/16 v1.4 Detect class options draft and final (HO)
 )
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\calc.sty"
-Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count90
-\calc@Bcount=\count91
+(c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count91
+\calc@Bcount=\count92
 \calc@Adimen=\dimen111
 \calc@Bdimen=\dimen112
 \calc@Askip=\skip43
 \calc@Bskip=\skip44
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count92
+\calc@Ccount=\count93
 \calc@Cskip=\skip45
-) (animfp.sty
+)
+(./animfp.sty
 Package: animfp 2009/07/23 fixed point addition for animate.sty
-\afp@xs=\count93
-\afp@xia=\count94
-\afp@xib=\count95
-\afp@xfa=\count96
-\afp@xfb=\count97
-\afp@rega=\count98
-\afp@regb=\count99
-\afp@regs=\count100
+\afp@xs=\count94
+\afp@xia=\count95
+\afp@xib=\count96
+\afp@xfa=\count97
+\afp@xfb=\count98
+\afp@rega=\count99
+\afp@regb=\count100
+\afp@regs=\count101
 )
-("C:\Users\adsmith\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.
-mkii"
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count101
-\scratchdimen=\dimen113
-\scratchbox=\box26
-\nofMPsegments=\count102
-\nofMParguments=\count103
-\everyMPshowfont=\toks16
-\MPscratchCnt=\count104
-\MPscratchDim=\dimen114
-\MPnumerator=\count105
-\makeMPintoPDFobject=\count106
-\everyMPtoPDFconversion=\toks17
-)
-\@anim@@fields=\count107
-\@anim@@ocgs=\count108
-\@anim@@posterocgs=\count109
-\@anim@box=\box27
-\@anim@tmpdima=\dimen115
-\@anim@tmpdimb=\dimen116
-\@anim@num=\count110
-\@anim@curframe=\count111
-\@anim@curframe@zb=\count112
-\@anim@resize=\count113
-\@anim@skipfram=\count114
-\@anim@mulframecnt=\count115
+
+Package animate Warning: Neither of the files `supp-pdf.mkii' and `supp-pdf.tex
+',
+(animate)                which are part of ConTeXt, could be found.
+(animate)                Therefore, MetaPost generated PS files cannot
+(animate)                be embedded using pdfTeX.
+
+\@anim@@fields=\count102
+\@anim@@ocgs=\count103
+\@anim@@posterocgs=\count104
+\@anim@box=\box26
+\@anim@tmpdima=\dimen113
+\@anim@tmpdimb=\dimen114
+\@anim@num=\count105
+\@anim@curframe=\count106
+\@anim@curframe@zb=\count107
+\@anim@resize=\count108
+\@anim@skipfram=\count109
+\@anim@mulframecnt=\count110
 \@anim@@tmlnfile=\read1
-\@anim@tmpcnt=\count116
-\c@@anim@tmpcnt=\count117
-\@anim@curlayer=\count118
-\@anim@lineno=\count119
-\@anim@begin=\toks18
-\@anim@end=\toks19
-) (SCOT_2005_abund_animation.aux)
+\@anim@tmpcnt=\count111
+\c@@anim@tmpcnt=\count112
+\@anim@curlayer=\count113
+\@anim@lineno=\count114
+\@anim@begin=\toks16
+\@anim@end=\toks17
+) (./SCOT_2005_abund_animation.aux)
 \openout1 = `SCOT_2005_abund_animation.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
@@ -185,21 +177,22 @@ m.pdf> <14> <./abund_anim.pdf> <15> <./abund_anim.pdf> <16> <./abund_anim.pdf>
 
 LaTeX Warning: Float too large for page by 29.86295pt on input line 9.
 
-[1{C:/Users/adsmith/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(SCOT_2005_abund_animation.aux) ) 
+[1{c:/Users/adsmith/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/p
+dftex.map}] (./SCOT_2005_abund_animation.aux) ) 
 Here is how much of TeX's memory you used:
- 1682 strings out of 493334
- 25009 string characters out of 3129355
- 97956 words of memory out of 3000000
- 5253 multiletter control sequences out of 15000+200000
- 3640 words of font info for 14 fonts, out of 3000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 25i,4n,32p,203b,225s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/adsmith/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on SCOT_2005_abund_animation.pdf (1 page, 1013805 bytes).
+ 1392 strings out of 494587
+ 21036 string characters out of 6176278
+ 96051 words of memory out of 5000000
+ 5074 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 25i,4n,32p,200b,225s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/Users/adsmith/AppData/Roamin
+g/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on SCOT_2005_abund_animation.pdf (1 page, 1006174 bytes).
 PDF statistics:
- 179 PDF objects out of 1000 (max. 8388607)
+ 181 PDF objects out of 1000 (max. 8388607)
+ 94 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  464 words of extra memory for PDF output out of 10000 (max. 10000000)
 
