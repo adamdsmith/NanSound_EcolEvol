@@ -19,6 +19,8 @@ knitr::opts_chunk$set(eval = FALSE, include = FALSE)
 
 **Figure 6.** Relationship between observed and predicted total abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) during 30 aerial surveys of Nantucket Sound over three winters, 2003 - 2005. The dashed line indicates a 1:1 relationship between predicted and observed abundances in surveyed segments; points below and above this line indicate underestimates and overestimates of predicted abundances, respectively.
 
+**Figure 7.** Estimated weekly total abundance of Common Eider (COEI), scoter (SCOT), and Long-tailed Duck (LTDU) in the entire study area over three winters, 2003 - 2005. 
+
 \newpage
 
 ```{r Fig1}
@@ -77,3 +79,12 @@ source("../R/compare_predicted_vs_counted.R")
 ```
 ![Compare_abundance](./Figures/Predicted_abundance_observed_abundance.png)  
 **Figure 6**
+
+\newpage
+```{r Fig7}
+# Figures 7 was created using the following script.  However, for nice formatting in the 
+# pdf and Word output we simply link to a resized PNG file.
+source("../R/predict_weekly_total_abundance.R")
+```
+![Study_area_abundance](./Figures/Predicted_weekly_abundance.png)  
+**Figure 7**
