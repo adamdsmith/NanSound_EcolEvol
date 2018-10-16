@@ -1,4 +1,4 @@
-library(rgdal); library(ggplot2)
+library(rgdal); library(ggplot2); library(grid)
 seg_poly <- readOGR("../GIS/Ancillary", "seg_poly", verbose=FALSE)
 MA <- readOGR("../GIS/Ancillary", "MA_bg", verbose=FALSE)
 wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundary", verbose=FALSE), raster:::crs(MA))
@@ -21,7 +21,7 @@ detail <-
   geom_polygon(data=MA, aes(long, lat, group=group), colour = NA, fill="gray85") +
   geom_path(data=transects, aes(long, lat, group=group), colour = "gray50", alpha = 0.5) + 
   geom_polygon(data=seg_poly, aes(long, lat, group=group), colour = "black", fill = NA) +
-  geom_polygon(data=wind, aes(long, lat, group=group), colour="red", size = 1.5, fill = NA) +
+  geom_polygon(data=wind, aes(long, lat, group=group), colour="black", size = 1.5, fill = NA) +
   coord_equal() +
   scale_x_continuous("", limits = c(363350, 423200), expand = c(0, 0)) + 
   scale_y_continuous("", limits = c(4565650, 4625100), expand = c(0, 0)) + 
@@ -36,9 +36,31 @@ detail <- detail +
 
 
 # Add scale bar and orientation arrow
-source("../R/add_scale_bar.R")
-detail <- add_scale_bar(detail, legend.placement = "bottom left")
-               
+all_bins <- data.frame(bin = rep(1L:3L, each = 4),
+                       x = c(375320, 375320, 385320, 385320, 370320, 370320, 375320, 375320, 
+                             365320, 365320, 370320, 370320),
+                       y = c(4568622.5, 4569622.5, 4569622.5, 4568622.5, 4568622.5, 4569622.5, 
+                             4569622.5, 4568622.5, 4568622.5, 4569622.5, 4569622.5, 4568622.5),
+                       fill = rep(c("white", "black", "white"), each = 4))
+bin_text <- data.frame(x = c(375320, 370320, 365320, 385320),
+                       y = c(4568422.5, 4568422.5, 4568422.5, 4568422.5),
+                       label = c("10", "5", "0", "20 km"), stringsAsFactors = FALSE)
+detail <- detail + geom_polygon(data = all_bins, aes(x, y, group = bin, fill = fill), colour = "black") +
+  scale_fill_manual(values = c("black", "white")) +
+  geom_text(data = bin_text, aes(x, y, label = label), vjust = 1, size = 5)
+
+# Get arrow start and end coordinates
+arrow_df <- data.frame(arrowx = 375320, xend = 375320,
+                       arrowy = 4570623, yend = 4575623,
+                       ymid = 4573123)
+
+detail <- detail + geom_segment(data = arrow_df,
+                      aes(x = arrowx, xend = xend, y = arrowy, yend = yend),
+                      arrow = arrow(length = unit(0.25, "cm")),
+                                    size = 1) +
+  annotate("text", x = arrow_df$arrowx, y = arrow_df$ymid,
+           label = "N", size = 6)
+
 # Inset
 # Define study area boundary
 study_area <- data.frame(xmin=-70.63, xmax=-69.90, ymin=41.22, ymax=41.70)
@@ -59,7 +81,7 @@ inset <-
   theme(plot.background = element_rect(fill = "transparent", colour = NA))
   
 # Print (or save) it
-png(file="./Figures/Nantucket_study_area.png",w=6.5,h=6.5, res=900, units = "in")
+png(file="./Figures/Nantucket_study_area.png",w=6.5,h=6.5, res=600, units = "in")
 grid.newpage()
 v1<-viewport() #plot area for the main map
 #plot area for the inset map

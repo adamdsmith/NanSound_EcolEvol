@@ -87,12 +87,12 @@ p <- ggplot(all_ducks, aes(x=total_count, y=est_count)) +
     scale_x_log10("Observed abundance", limits = c(40, 10^5), breaks = 10^(2:5), expand = c(0,0)) + 
     scale_y_log10("Predicted abundance", limits = c(40, 10^5), breaks = 10^(2:5), expand = c(0,0)) +
     theme_classic() + 
-    theme(legend.position = c(0, 1), legend.justification = c(0.1, 0.75),
+    theme(legend.position = c(0.025, 1), legend.justification = c(0, 0.75),
           legend.direction = "vertical",
           axis.line.x = element_line(color="black"), # These two lines are workaround for ggplot2 bug
           axis.line.y = element_line(color="black")) 
 
 ## CREATE FILE
-png(file = "./Figures/Predicted_abundance_observed_abundance.png", height = 107/1.25, width = 107, units = "mm", res = 600)
+png(file = "./Figures/Predicted_abundance_observed_abundance.png", w=6.5,h=6.5/1.25, res=600, units = "in")
 p
 dev.off()

@@ -1,6 +1,7 @@
 # Assumes the first two code chunkls from NanSound_main_document.Rmd have been sourced
 library(ggplot2)
 library(viridis)
+library(lubridate)
 
 theme_set(theme_classic(base_size = 15))
 theme_update(legend.position = "top",
@@ -22,6 +23,9 @@ label_dates <- format(plot_dates, format = "%d %b")
 label_dates[setdiff(seq_along(plot_dates), seq(1, length(plot_dates), by = 3))] <- ""
 std_plot_dates <- as.integer(plot_dates - mdy("12-31-2004"))
 
+conv_factor <- (1.5 * 1.5) / (1.5 * 91.44/1000 * 2)
+#### NEED TO EXPOSE COVAR_SDS and COVAR_AVGS
+
 # Load occupancy and conditional count models models for each species and rename
 ## COEI
 load("../Results_coei/zero.Rda")
@@ -31,7 +35,7 @@ load("../Results_coei/hurdle.Rda")
 COEIcc <- hurdle
 
 coei_wkly <- weekly_data
-coei_wkly$ltabund <- exp(predict.gamlssHurdle(COEIocc, COEIcc, weekly_data)$add_pred)
+coei_wkly$ltabund <- exp(predict.gamlssHurdle(COEIocc, COEIcc, weekly_data)$add_pred) * conv_factor
 coei_plot <- coei_wkly %>% group_by(date, winter, time) %>%
     summarize(totalN = sum(ltabund)) %>%
     ungroup() %>%
@@ -55,7 +59,7 @@ load("../Results_scot/hurdle.Rda")
 SCOTcc <- hurdle
 
 scot_wkly <- weekly_data
-scot_wkly$ltabund <- exp(predict.gamlssHurdle(SCOTocc, SCOTcc, weekly_data)$add_pred)
+scot_wkly$ltabund <- exp(predict.gamlssHurdle(SCOTocc, SCOTcc, weekly_data)$add_pred) * conv_factor
 scot_plot <- scot_wkly %>% group_by(date, winter, time) %>%
     summarize(totalN = sum(ltabund)) %>%
     ungroup() %>%
@@ -79,7 +83,7 @@ load("../Results_ltdu/hurdle.Rda")
 LTDUcc <- hurdle
 
 ltdu_wkly <- weekly_data
-ltdu_wkly$ltabund <- exp(predict.gamlssHurdle(LTDUocc, LTDUcc, weekly_data)$add_pred)
+ltdu_wkly$ltabund <- exp(predict.gamlssHurdle(LTDUocc, LTDUcc, weekly_data)$add_pred) * conv_factor
 ltdu_plot <- ltdu_wkly %>% group_by(date, winter, time) %>%
     summarize(totalN = sum(ltabund)) %>%
     ungroup() %>%
@@ -108,7 +112,7 @@ legend <- cowplot::get_legend(scot_p)
 p <- cowplot::plot_grid(legend, p, ncol = 1, rel_heights = c(0.3, 3))
 
 ## CREATE FILE
-# png(file = "./Figures/Predicted_weekly_abundance.png", height = 9, width = 6.5, units = "in", res = 600)
+png(file = "./Figures/Predicted_weekly_abundance.png", height = 8, width = 6.5, units = "in", res = 600)
 p
-# dev.off()
+dev.off()
 
