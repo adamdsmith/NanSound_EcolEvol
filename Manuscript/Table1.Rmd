@@ -1,0 +1,121 @@
+---
+output: pdf_document
+---
+
+\blscape
+
+**Table 1.** Biophysical and survey covariates used to evaluate the distribution and abundance of Common Eider, Black, Surf, and White-winged Scoter, and Long-tailed Duck in Nantucket Sound during winters 2003 - 2005. 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Variable                           Abbreviation                        Units       Type^1^   Description                                                       Previous studies^2^
+---------------------------------- ----------------------------------- ----------- --------- ----------------------------------------------------------------- ------------------------------------
+Bathymetry                         *depth*                             m           S         bottom depth relative to mean high water; lower values = deeper   @GuillemetteEtAl1993; @LewisEtAl2008
+                                                                                             water [@EakinsEtAl2009;                                           @WiniarskiEtAl2014; @FlandersEtAl2015
+                                                                                             @NationalOceanicandAtmosphericAdministration2008]
+
+&nbsp;
+
+Sediment grain size                *meanphi*                           phi         S         sediment grain size [phi scale; @PotiEtAl2012]; larger values =   @GoudieAnkney1988; @LovvornEtAl2009
+                                                                                             smaller grain sizes                                               @LoringEtAl2013
+                                                                    
+&nbsp;
+
+Ration of sea floor surface area   *SAR*                               N/A         S         topographic variability of the sea floor [calculated from         @LegendreEtAl1997; @KnightsEtAl2006
+                                                                                             bathymetry; @Jenness2004]
+
+&nbsp;
+
+Epibenthic tidal velocity          mean: *tidebmean*                   m/s         S         epibenthic tidal velocity during 2003-2005 based on monthly       @LegendreEtAl1997; @KnightsEtAl2006    
+(mean and standard deviation)      standard deviation: *tidesd*                              Finite-Volume Community Ocean Model [FVCOM; @ChenEtAl2003;
+                                                                                             @ChenEtAl2011; @MarineEcosystemDynamicsModelingLab2006]
+
+&nbsp;
+
+Water column stratification        *strat*                             s^3^/m^2^   S         potential for seasonal thermal stratification of the water        @TremblaySinclair1990; @RabyEtAl1994;
+potential			                                                                         column [@SimpsonHunter1974]; ratio of depth (from bathymetry) to  @WitbaardBergman2003
+                                                                                             the third power of surface tidal velocity [@SimpsonSharples2012]
+
+&nbsp;                              
+
+Chlorophyll-a                      *chla*                              mg/m^3^	   S         geometric mean of monthly composite chlorophyll-a levels from     @ZipkinEtAl2010; @FlandersEtAl2015
+                                                                                             July 2002 (first available) to March 2006 
+                                                                                             [@ProjectCoastWatch2012]
+
+&nbsp;                              
+
+Chromophoric dissolved             *cdom*                              N/A	       S         geometric mean of monthly composite chromophoric dissolved 
+                                                                                             organic material levels (measured based on absorbance values)
+                                                                                             from July 2002 (first available) to March 2006 
+                                                                                             [@ProjectCoastWatch2012a]
+
+&nbsp;                              
+
+Sea bottom temperature             *SBT*      	                       ^o^C	       ST	     epibenthic temperature averaged from May to October (bivalve      @FayEtAl1983; @Newell1989;
+                                                                                             settling period) in 2003-2005 from monthly FVCOM structured       @EvansEtAl2011
+                                                                                             grids
+
+&nbsp;                                                                                        
+
+Sea surface temperature	           monthly: *SST~m~*                   ^o^C	       ST	     sea surface temperature from monthly FVCOM structured grids.      @ZipkinEtAl2010; @FlandersEtAl2015
+                                   winter: *SST~w~*                                          We included three SST values: monthly average, winter average
+                                   relative: *SST~rel~*                                      (November through March), and relative (difference between a
+                                                                                             segment's monthly temperature and the overall study area 
+                                                                                             average)
+
+&nbsp;
+
+North Atlantic Oscillation         *NAO~w~*                            N/A         T         winter (December through March) North Atlantic Oscillation        @ZipkinEtAl2010
+(Dec - Mar)                                                                                  index based on the sea level pressure anomalies over the 
+                                                                                             Atlantic sector [@Hurrell1995; @HurrellDeser2010; 
+                                                                                             @NationalCenterforAtmosphericResearch2018]
+
+&nbsp;
+
+Distance to land                   *d2land*                            km          S	     distance to the nearest location of zero depth (from              @GuillemetteEtAl1993; @LewisEtAl2008;
+                                                                                             bathymetry)                                                       @WiniarskiEtAl2014; @FlandersEtAl2015
+
+&nbsp;
+
+Ferry route within 1 km            *ferry* 	                           N/A	       S         indicator (yes/no) of whether a ferry route (Massachusetts        @LarsenLaubek2005; @DeLaCruzEtAl2014
+                                                                                             Department of Transportation, Office of Transportation 
+                                                                                             Planning) passed within 1 km of a given segment. Ferries 
+                                                                                             traversed this route approximately 16 times per day during 
+                                                                                             the study period.
+                                                         
+&nbsp;
+
+Day of year                        *time*                              day         T         number of days before (negative) or after (positive) 31 
+                                                                                             December
+                                                                                             
+&nbsp;
+
+Winter                             2004: *y2004* $\nl$                 N/A	       T	     study year indicator
+                                   2005: *y2005*
+
+&nbsp;
+
+Easting                            *xkm*                               km          S	     distance west (negative) or east (positive) from the median
+                                                                                             longitude of all segments in the study area
+
+&nbsp;
+
+Northing                           *ykm*                               km          S	     distance south (negative) or north (positive) from the median
+                                                                                             latitude of all segments in the study area
+
+&nbsp;
+
+Survey effort                      *obs_window*                        km^2^	   ST        area surveyed in a given segment on a given date; calculated 
+                                                                                             as the product of the length and width of the strip transect
+
+&nbsp;
+
+Spatiotemporal                     *xkm* $\cdot$ *ykm* $\nl$           N/A         ST	     interaction terms representing relationships between spatial
+                                   *xkm* $\cdot$ *time* $\nl$                                distribution variables and day of year
+                                   *ykm* $\cdot$ *time* $\nl$  
+                                   *xkm* $\cdot$ *ykm* $\cdot$ *time*
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+^1^Variable type: S (spatial; varying only among segments); T (temporal; varying only over time); ST (spatiotemporal; varying both among segments and over time)
+
+^2^Studies suggesting a relationship of the variable to the distribution of sea ducks or their benthic prey
+
+\elscape
