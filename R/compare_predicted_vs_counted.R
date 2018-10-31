@@ -1,6 +1,5 @@
 # Assumes the first two code chunkls from NanSound_main_document.Rmd have been sourced
-library(ggplot2)
-library(viridis)
+pacman::p_load(ggplot2, viridis)
 source("../R/predict.gamlssHurdle.R")
 
 if (!exists("env.segs")) load("../Data/ducks&environment.RData")

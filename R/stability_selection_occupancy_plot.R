@@ -1,6 +1,6 @@
 source("../R/tidy_baselearner_functions.R")
 
-## Load occupancy models to get baselearner names
+## Load an occupancy model to get baselearner names
 load("../Results_coei/zero.Rda")
 
 labels <- tidy_baselearner_names_plot(zero, which = "")

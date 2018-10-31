@@ -2,16 +2,14 @@
 output: 
   pdf_document:
     includes:
-      in_header: preamble_app.tex
+      in_header: preamble.tex
 fontsize: 12pt
 documentclass: article
 bibliography: NantucketMS.bib
 csl: methods-in-ecology-and-evolution.csl
 ---
 ```{r occ_stabsel_results, echo=FALSE, message=FALSE, warning=FALSE}
-if (!requireNamespace("gamboostLSS", quietly = TRUE))
-    install.packages("gamboostLSS")
-library(gamboostLSS)
+pacman::p_load(mboost, gamboostLSS)
 load("../Results_coei/stabs_zero_q35.Rda")
 stabs_zero_q35 <- stabsel(stabs_zero_q35, PFER = 3, assumption = "unimodal")
 coei_stabs_zero <- stabs_zero_q35
@@ -42,7 +40,7 @@ ltdu_stabs_hurdle <- stabs_hurdle_q35
 # S.1 Stability selection
 
 ## Methods
-We applied stability selection [@Meinshausen2010; @Shah2013; see also @Hofner2015 for details in the context of boosting] to identify base-learners, and thus covariates, that were commonly selected in the majority of randomly drawn subsamples of size $\lfloor n/2 \rfloor$ of the data. As proposed by @Shah2013, we used *B* = 50 complementary pairs subsamples (i.e., we randomly split the data into two halves and used both to independently fit the model). This resulted in 100 total subsamples.  We set the number of selected base-learners per boosting model (*q*) to 35 and established upper bounds of three and six for the occupancy and count model per-family error rates (PFER), respectively. These error bounds corresponded to an upper bound of $\alpha$ = `r round(3/48, 3)` for the per-comparison error rate  in both models.  The different thresholds reflect the different number of base-learners in the two models; occupancy models contained 48 base-learners while the count models contained twice as many base-learners (i.e., 48 each for the mean and overdispersion parameter). The choice of *q* is somewhat arbitrary; it is chosen to be large enough to incorporate all important variables in the model [@Hofner2015]. We used the unimodality assumption for the computation of the error bounds in the occupancy and count models [@Shah2013; @Hofner2015].
+We applied stability selection [@MeinshausenBuhlmann2010; @ShahSamworth2013; see also @HofnerEtAl2015a for details in the context of boosting] to identify base-learners, and thus covariates, that were commonly selected in the majority of randomly drawn subsamples of size $\lfloor n/2 \rfloor$ of the data. As proposed by @ShahSamworth2013, we used *B* = 50 complementary pairs subsamples (i.e., we randomly split the data into two halves and used both to independently fit the model). This resulted in 100 total subsamples.  We set the number of selected base-learners per boosting model (*q*) to 35 and established upper bounds of three and six for the occupancy and count model per-family error rates (PFER), respectively. These error bounds corresponded to an upper bound of $\alpha$ = `r round(3/48, 3)` for the per-comparison error rate  in both models.  The different thresholds reflect the different number of base-learners in the two models; occupancy models contained 48 base-learners while the count models contained twice as many base-learners (i.e., 48 each for the mean and overdispersion parameter). The choice of *q* is somewhat arbitrary; it is chosen to be large enough to incorporate all important variables in the model [@HofnerEtAl2015a]. We used the unimodality assumption for the computation of the error bounds in the occupancy and count models [@ShahSamworth2013; @HofnerEtAl2015a].
 
 ## Results
 
@@ -70,6 +68,6 @@ source("../R/stability_selection_count_plot.R")
 
 \elscape
 
-## References
+## Literature Cited
 \setlength{\parindent}{0pt} 
 \hangparas{16pt}{1}

@@ -1,5 +1,3 @@
-dir.create("../Results_ltdu/", showWarnings = FALSE)
-
 pdf("../Results_ltdu/ltdu.pdf", width = 12)
 mc.cores <- 25
 mc.cores2 <- 5
@@ -8,12 +6,16 @@ mc.cores2 <- 5
 ## Load libraries and data
 ################################################################################
 
-## install and load the development version of gamboostLSS
-# install.packages("gamboostLSS", source = "http://r-forge.r-project.org",
-#                  type = "source")
-library("gamboostLSS")
-library("mboost")
-library("stabs")
+pacman::p_load(devtools)
+if (!requireNamespace("mboost", quietly = TRUE))
+  devtools::install_version("mboost", version = "2.4-2", repos = "http://cran.us.r-project.org")
+if (packageVersion("mboost") != "2.4.2")
+  devtools::install_version("mboost", version = "2.4-2", repos = "http://cran.us.r-project.org")
+if (!requireNamespace("gamboostLSS", quietly = TRUE))
+  devtools::install_version("gamboostLSS", version = "1.2-0", repos = "http://cran.us.r-project.org")
+if (packageVersion("gamboostLSS") != "1.2.0")
+  devtools::install_version("gamboostLSS", version = "1.2-0", repos = "http://cran.us.r-project.org")
+pacman::p_load(stabs)
 
 if (!file.exists("../Data/data_ltdu.Rda")) {
     # Bring in final data
@@ -44,7 +46,7 @@ if (!file.exists("../Data/data_ltdu.Rda")) {
     ltdu$obs_window <- ltdu$length * 91.44/1000 * 2
 
     # Overview of all variables in data set
-    library(papeR)
+    pacman::p_load(papeR)
     ltdu <- as.labeled.data.frame(ltdu)
     #pdf("../Output/Exploratory/ltdu_variables.pdf")
     #plot(ltdu)
@@ -88,8 +90,7 @@ source("../R/model_formula_decomp.R", echo = TRUE, max.deparse.length = 10000)
 ##################
 ## Hurdle Part
 
-# install.packages("gamlss.tr")
-library("gamlss.tr")
+pacman::p_load(gamlss.tr)
 ## generates: dNBItr pNBItr qNBItr rNBItr NBItr
 gen.trun(0, family = "NBI")
 
@@ -195,33 +196,6 @@ if (!file.exists("../Results_ltdu/stabs_zero_q35.Rda")) {
     save("stabs_zero_q35", file = "../Results_ltdu/stabs_zero_q35.Rda")
 } else {
     load("../Results_ltdu/stabs_zero_q35.Rda", verbose=TRUE)
-}
-
-if (FALSE) {
-    ## define predict function for hurdle models fitted using mboost/gamboostLSS
-    predict.gamlssHurdle <- function(zero, hurdle, data) {
-        lin_pred_mu <- predict(hurdle, parameter = "mu", newdata = data)
-        log_p0_zero <- log(predict(zero, type = "response"))
-        pMu <- predict(hurdle, type = "response", parameter = "mu", newdata = data)
-        pSigma <- predict(hurdle, type = "response", parameter = "sigma", newdata = data)
-        log_p0_count <- pNBI(0, mu = pMu, sigma = pSigma, lower.tail = FALSE, log.p = TRUE)
-        return(exp(lin_pred_mu + log_p0_zero - log_p0_count))
-    }
-
-    if (!file.exists("../Results_ltdu/preds_twostage.Rda")) {
-        preds <- predict.gamlssHurdle(zero, hurdle, ltdu)
-        save("preds", file = "../Results_ltdu/preds.Rda")
-    } else {
-        load("../Results_ltdu/preds.Rda", verbose = TRUE)
-    }
-
-    ## doesn't look to good at the moment:
-    plot(ltdu$count, preds)
-    plot(log(ltdu$count + 1), log(preds + 1), xlab = "log(count + 1)", ylab = "log(prediction + 1)")
-    abline(0,1)
-    abline(lm(log(preds + 1) ~ log(ltdu$count + 1)), col = "red")
-
-    plot(0.5 * (ltdu$count + preds), ltdu$count - preds)
 }
 
 dev.off()

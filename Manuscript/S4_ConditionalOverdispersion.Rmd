@@ -2,7 +2,7 @@
 output: 
   pdf_document:
     includes:
-      in_header: preamble_app.tex
+      in_header: preamble.tex
 fontsize: 12pt
 documentclass: article
 ---

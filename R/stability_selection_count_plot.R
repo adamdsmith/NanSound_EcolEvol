@@ -1,6 +1,6 @@
 source("../R/tidy_baselearner_functions.R")
 
-## Load occupancy models to get baselearner names
+## Load a count model to get baselearner names
 load("../Results_coei/hurdle.Rda")
 
 labels <- sapply(hurdle, function(x) tidy_baselearner_names_plot(x, which = ""))

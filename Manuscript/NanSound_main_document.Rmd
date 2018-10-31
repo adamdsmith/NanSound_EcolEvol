@@ -19,9 +19,11 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 
 
 ```{r load-data, include = FALSE}
+if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman")
 source("../R/utils.R")
-# source("../R/predict.gamlssHurdle.R")
-instant_pkgs(c("plyr", "dplyr", "lubridate"))
+pacman::p_load(plyr, dplyr, lubridate)
+# Need a function from Hmisc but don't want it masking fxns in other packages
+if (!requireNamespace("Hmisc", quietly = TRUE)) install.packages("Hmisc")
 
 # Load sea duck data sets
 # For each species/species group, load data sets for various analyses
@@ -152,7 +154,7 @@ Overdispersion in conditional sea duck abundance also varied with biophysical co
 
 ```{r evaluate_models, eval=FALSE}
 # Need specific versions of packages for the saved models to run
-instant_pkgs("devtools")
+pacman::p_load(devtools)
 if (!requireNamespace("mboost", quietly = TRUE))
       devtools::install_version("mboost", version = "2.4-2", repos = "http://cran.us.r-project.org")
 if (packageVersion("mboost") != "2.4.2")

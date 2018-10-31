@@ -13,9 +13,7 @@ documentclass: article
 
 ```{r load_coei, echo=FALSE, message=FALSE, warning=FALSE}
 source("../R/utils.R")
-
-toLoad <- c("dplyr", "ggplot2", "lubridate")
-instant_pkgs(toLoad); rm(toLoad)
+pacman::p_load(dplyr, ggplot2, lubridate)
 
 ## load plotting function
 source("../R/full_effect_plot.R")
@@ -54,7 +52,7 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
 &nbsp;
 &nbsp;
 
-Here we provide marginal functional plots of the relationships between stable covariates and the occupancy, conditional mean abundance, and conditional overdispersion of abundance of sea ducks in Nantucket Sound, Massachusetts, USA.  By 'marginal' we mean holding all other variables at their mean or reference values. Covariate plots are ordered roughly in descending order of the magnitude of their influence on the additive predictor in each model (or model parameter for count models).  Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates (and any abbreviations) are defined in detail in Table 1 on the manuscript; only effects selected to be stable are depicted (see Supplemental Information S1).
+Here we provide marginal functional plots of the relationships between stable covariates and the occupancy, conditional mean abundance, and conditional overdispersion of abundance of sea ducks in Nantucket Sound, Massachusetts, USA.  By 'marginal' we mean holding all other variables at their mean or reference values. Covariate plots are ordered roughly in descending order of the magnitude of their influence on the additive predictor in each model (or model parameter for count models).  Vertical lines along the *x*-axis (i.e., rug plots) indicate observed covariate values.  Covariates (and any abbreviations) are defined in detail in Table 1 in the manuscript; only effects selected to be stable are depicted (see Supplemental Information S1).
 
 \newpage
 

@@ -1,11 +1,10 @@
 # Load some useful aliases and functions
-devtools::source_gist(9216051) # Rprofile.R
 devtools::source_gist(9216061) # various.R
 
 # Loading required packages
-toLoad = c("plyr", "lubridate", "reshape", "sp", "maptools", "raster", 
-           "rgdal", "foreign", "parallel", "psych", "ggplot2")
-instant_pkgs(toLoad); rm(toLoad)
+if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman")
+pacman::p_load(plyr, lubridate, reshape, sp, maptools, raster, 
+               rgdal, foreign, parallel, psych, ggplot2)
 
 # Load segments, Massachusetts outline, Cape Wind project boundary and 'plotvar' function
 source("../R/plotvar.R")
@@ -57,7 +56,7 @@ ns_d2land <- raster("../GIS/Environmental/Final/ns_d2land.tif")
 
 # The loop iterates through geographically-associated subsets of segments,
 # which lessens the raster extent to be loaded, reducing processing time
-# This takes about 22 min to run on 4 cores (Intel® Xeon® Processor E5520, 12GB RAM)
+# This takes about 22 min to run on 4 cores (Intel? Xeon? Processor E5520, 12GB RAM)
 
 # Set up parallelization
 beginCluster()

@@ -1,8 +1,6 @@
 # Install (if necessary) and load required packages
-toLoad <- c("reshape2", "plyr", "dplyr", "rgdal", 
-            "grid", "lubridate", "ggplot2")
-sapply(toLoad, require, character.only = TRUE); rm(toLoad)
-
+pacman::p_load(reshape2, plyr, dplyr, rgdal, grid, lubridate, ggplot2)
+if (!requireNamespace("raster")) install.packages("raster")
 # Requires raster
 # Load required data shapefiles
 if (!exists("env.segs")) load("../Data/ducks&environment.RData")

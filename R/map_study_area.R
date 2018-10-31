@@ -1,4 +1,4 @@
-library(rgdal); library(ggplot2); library(grid)
+pacman::p_load(rgdal, ggplot2, grid)
 seg_poly <- readOGR("../GIS/Ancillary", "seg_poly", verbose=FALSE)
 MA <- readOGR("../GIS/Ancillary", "MA_bg", verbose=FALSE)
 wind <- spTransform(readOGR("../GIS/Ancillary", "CW_boundary", verbose=FALSE), raster:::crs(MA))

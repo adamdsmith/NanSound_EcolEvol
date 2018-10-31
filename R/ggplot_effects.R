@@ -1,7 +1,7 @@
 ggplot_effects <- function(mod, data = NULL, vars, varTypes = rep("uni", length(vars)), 
                            parameter = NULL, ylims = NULL) {
   
-  require(ggplot2); require(grid); require("RColorBrewer")
+  pacman::p_load(ggplot2, grid, RColorBrewer)
   
   theme_set(theme_bw(base_size = 18))
   theme_update(plot.margin = unit(c(0, 0.05, -0.85, -0.85),"line"),

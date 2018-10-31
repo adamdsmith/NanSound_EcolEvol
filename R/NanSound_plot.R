@@ -6,8 +6,7 @@ NanSound_plot <- function(data = NULL, x = "x", y = "y", z = "z",
   
   ## effort is not used at this point; may use it to "scale up" results
   ## from overall mean abundance to the whole segment
-  
-  instant_pkgs("scales")
+  pacman::p_load(scales)
   
   theme_set(theme_bw(base_size = 15))
   theme_update(plot.margin = unit(c(0, 0.05, -0.85, -0.85),"line"),
@@ -48,7 +47,7 @@ NanSound_plot <- function(data = NULL, x = "x", y = "y", z = "z",
     }
     if(grepl("mad_m", z)) digits <- 0 # Round MAD/median to nearest whole regardless
     
-    tmpDat$z <- cut2(tmpDat$z, cuts = breaks, digits = digits)
+    tmpDat$z <- Hmisc::cut2(tmpDat$z, cuts = breaks, digits = digits)
     levels(tmpDat$z) <- gsub(",", ", ", gsub(" ", "", levels(tmpDat$z)))
   }
   

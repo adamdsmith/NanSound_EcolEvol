@@ -2,11 +2,9 @@
 output: 
   pdf_document:
     includes:
-      in_header: preamble_app.tex
+      in_header: preamble.tex
 fontsize: 12pt
 documentclass: article
-bibliography: NantucketMS.bib
-csl: methods-in-ecology-and-evolution.csl
 ---
 
 # S.5 Seasonal animation of predicted scoter occupancy and abundance
@@ -16,8 +14,7 @@ To provide an example of the seasonal dynamics that can characterize sea duck oc
 ```{r, echo=FALSE, message=FALSE, warning=FALSE} 
 source("../R/utils.R")
 source("../R/predict.gamlssHurdle.R")
-
-instant_pkgs(c("plyr", "dplyr", "lubridate"))
+pacman::p_load(plyr, dplyr, lubridate)
 
 # Generate weekly data for the animation
 source("../R/create_study_area_data.R")

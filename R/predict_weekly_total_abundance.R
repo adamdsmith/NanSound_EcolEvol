@@ -1,7 +1,5 @@
 # Assumes the first two code chunkls from NanSound_main_document.Rmd have been sourced
-library(ggplot2)
-library(viridis)
-library(lubridate)
+pacman::p_load(ggplot2, viridis, lubridate)
 
 theme_set(theme_classic(base_size = 15))
 theme_update(legend.position = "top",

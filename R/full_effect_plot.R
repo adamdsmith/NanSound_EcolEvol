@@ -2,9 +2,8 @@ full_effect_plot <- function(mod, data = NULL, var, varType = c("uni", "bi", "st
                              parameter = NULL, ylims = NULL,
                              xlab = "", ylab = "") {
   
-  toLoad <- c("ggplot2", "grid", "RColorBrewer", "lubridate", "gamboostLSS")
-  instant_pkgs(toLoad); rm(toLoad)
-  
+  pacman::p_load(ggplot2, grid, RColorBrewer, lubridate, gamboostLSS)
+
   varType <- match.arg(varType)
   
   if (is.null(data)) data <- attr(mod, "data")

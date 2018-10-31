@@ -1,7 +1,6 @@
 pseudoR2 <- function(zero, hurdle, data) {
     
-    if (!requireNamespace("pscl", quietly = TRUE))
-        install.packages("pscl", quiet = TRUE)
+    pacman::p_load(pscl)
     
     # Get observered counts
     obs_count <- data$count

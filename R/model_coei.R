@@ -8,12 +8,17 @@ mc.cores2 <- 5
 ## Load libraries and data
 ################################################################################
 
-## install and load the development version of gamboostLSS
-# install.packages("gamboostLSS", source = "http://r-forge.r-project.org",
-#                  type = "source")
-library("gamboostLSS")
-library("mboost")
-library("stabs")
+# Need specific versions of packages for the saved models to run
+pacman::p_load(devtools)
+if (!requireNamespace("mboost", quietly = TRUE))
+  devtools::install_version("mboost", version = "2.4-2", repos = "http://cran.us.r-project.org")
+if (packageVersion("mboost") != "2.4.2")
+  devtools::install_version("mboost", version = "2.4-2", repos = "http://cran.us.r-project.org")
+if (!requireNamespace("gamboostLSS", quietly = TRUE))
+  devtools::install_version("gamboostLSS", version = "1.2-0", repos = "http://cran.us.r-project.org")
+if (packageVersion("gamboostLSS") != "1.2.0")
+  devtools::install_version("gamboostLSS", version = "1.2-0", repos = "http://cran.us.r-project.org")
+pacman::p_load(stabs)
 
 if (!file.exists("../Data/data_coei.Rda")) {
     # Bring in final data
@@ -44,7 +49,7 @@ if (!file.exists("../Data/data_coei.Rda")) {
     coei$obs_window <- coei$length * 91.44/1000 * 2
 
     # Overview of all variables in data set
-    library(papeR)
+    pacman::p_load(papeR)
     coei <- as.labeled.data.frame(coei)
     #pdf("../Output/Exploratory/coei_variables.pdf")
     #plot(coei)
@@ -87,8 +92,7 @@ source("../R/model_formula_decomp.R", echo = TRUE, max.deparse.length = 10000)
 ##################
 ## Hurdle Part
 
-# install.packages("gamlss.tr")
-library("gamlss.tr")
+pacman::p_load(gamlss.tr)
 ## generates: dNBItr pNBItr qNBItr rNBItr NBItr
 gen.trun(0, family = "NBI")
 
@@ -239,60 +243,4 @@ if (!file.exists("../Results_coei/stabs_zero_q35.Rda")) {
     load("../Results_coei/stabs_zero_q35.Rda", verbose=TRUE)
 }
 
-if (FALSE) {
-    require("gamlss.tr")
-    ## generates: dNBItr pNBItr qNBItr rNBItr NBItr
-    gen.trun(0, family = "NBI")
-
-    ## define predict function for hurdle models fitted using mboost/gamboostLSS
-    predict.gamlssHurdle <- function(zero, hurdle, newdata) {
-        ## make binary data for zero part
-        data_zero <- newdata
-        ## note that the binary response must be called "count" as well (which
-        ## is true for our model)
-        data_zero$count <- factor(data_zero$count > 0, labels = c("0", ">0"))
-        lin_pred_mu <- predict(hurdle, parameter = "mu", newdata = newdata)
-        log_p0_zero <- log(predict(zero, type = "response", newdata = data_zero))
-        pMu <- predict(hurdle, type = "response", parameter = "mu", newdata = newdata)
-        pSigma <- predict(hurdle, type = "response", parameter = "sigma", newdata = newdata)
-        log_p0_count <- pNBI(0, mu = pMu, sigma = pSigma, lower.tail = FALSE, log.p = TRUE)
-        return(exp(lin_pred_mu + log_p0_zero - log_p0_count))
-    }
-
-    if (!file.exists("../Results_coei/preds.Rda")) {
-        preds <- predict.gamlssHurdle(zero, hurdle, coei)
-        cor(preds, coei$count)
-        save("preds", file = "../Results_coei/preds.Rda")
-    } else {
-        load("../Results_coei/preds.Rda", verbose = TRUE)
-    }
-
-    ## doesn't look too good at the moment:
-    plot(coei$count, preds)
-    plot(log(coei$count + 1), log(preds + 1), xlab = "log(count + 1)", ylab = "log(prediction + 1)")
-    abline(0,1)
-    abline(lm(log(preds + 1) ~ log(coei$count + 1)), col = "red")
-
-    plot(0.5 * (coei$count + preds), coei$count - preds)
-}
-
-## ## CHECK:
-## library("pscl")
-## ## data
-## data("bioChemists", package = "pscl")
-## ## logit-poisson
-## fm_hp1 <- hurdle(art ~ ., data = bioChemists)
-## preds1 <- predict(fm_hp1)
-## ## same with boosting
-## data1 <- bioChemists[bioChemists$art > 0, ]
-## hurdle <- glmboostLSS(art ~ ., data = data1, control = ctrl,
-##                       families = as.families("NBItr"))
-## data2 <- bioChemists
-## data2$art <- factor(data2$art > 0, labels = c("0", ">0"))
-## zero <- glmboost(art ~ ., data = data2, control = ctrl,
-##                  family = Binomial())
-## preds2 <- predict.gamlssHurdle(zero, hurdle, bioChemists)
-##
-## plot(preds1, preds2)
-## abline(0, 1)
 dev.off()

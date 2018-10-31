@@ -1,6 +1,6 @@
 ## Function to generate the overall mean regression relationship for
 ## the hurdle model fitted using mboost/gamboostLSS
-instant_pkgs(c("gamboostLSS", "gamlss.tr"))
+pacman::p_load(gamboostLSS, gamlss.tr)
 
 ## generates: dNBItr pNBItr qNBItr rNBItr NBItr
 capture.output(gen.trun(0, family = "NBI"), file="NUL")

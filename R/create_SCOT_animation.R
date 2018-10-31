@@ -1,4 +1,5 @@
-instant_pkgs(c("animation", "ggplot2", "rgdal"))
+pacman::p_load(animation, ggplot2, rgdal)
+
 # A LaTex compiler must be installed
 
 theme_set(theme_bw(base_size = 18))
@@ -31,7 +32,7 @@ anim_occup <- function(tmpDat) {
   threshold <- quantile(tmpDat$occup, probs = 0.98)
   which_segs <- tmpDat$seg[which(tmpDat$occup >= threshold)]
   
-  tmpDat$occup <- cut2(tmpDat$occup, cuts = c(0, 0.25, 0.5, 0.75, 1), digits = 2)
+  tmpDat$occup <- Hmisc::cut2(tmpDat$occup, cuts = c(0, 0.25, 0.5, 0.75, 1), digits = 2)
   levels(tmpDat$occup) <- c("< 25%", "25 - 50%", "50 - 75%", "> 75%")
   
   p <- ggplot() + ggtitle("Scoter estimated occupancy: winter 2005-2006") +
@@ -59,7 +60,7 @@ anim_abund <- function(tmpDat) {
     threshold <- quantile(tmpDat$ltabund, probs = 0.98)
     which_segs <- tmpDat$seg[which(tmpDat$ltabund >= threshold)]
     
-    tmpDat$ltabund <- cut2(tmpDat$ltabund, cuts = c(0, 10, 25, 100, 500000), digits = 0)
+    tmpDat$ltabund <- Hmisc::cut2(tmpDat$ltabund, cuts = c(0, 10, 25, 100, 500000), digits = 0)
     levels(tmpDat$ltabund) <- c("< 10", "10 - 25", "26 - 100", "> 100")
     
     p <- ggplot() + ggtitle("Scoter estimated overall abundance: winter 2005-2006") +
